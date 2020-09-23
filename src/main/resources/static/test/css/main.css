@@ -1,3 +1,4 @@
+
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 
 body {
@@ -11,6 +12,7 @@ button {
 
 /*화면 전체*/
 .container {
+
     background: linear-gradient(to bottom, #3d43ae, #3ca3de);
     display: flex;
     flex-direction: column;
@@ -57,6 +59,7 @@ button {
 
 /*메인 화면*/
 #levelBox {
+
     /*font-size: 3vh;*/
     position: absolute;
     left: 2vw;

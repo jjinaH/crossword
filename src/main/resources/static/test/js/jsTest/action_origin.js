@@ -1,10 +1,8 @@
 
-import {Common} from "./common.js";
-
+//
 function stepLock(step) {
     const totalStep = 10;
     if (step > 12) {
-
         const nextPage = document.createElement("div");
         nextPage.setAttribute("id", "nextPage");
         const nextIcon = document.createElement("i");
@@ -114,7 +112,6 @@ const Timer = (function () {
     };
 })();
 
-
 function main() {
     window.canvas.sendTextQuery("play");
 }
@@ -174,18 +171,14 @@ function hardGame() {
  * This class is used as a wrapper for Google Assistant Canvas Action class
  * along with its callbacks.
  */
-
-export class Action {
-
+class Action {
 
     /**
      * @param {*} scene which serves as a container of all visual elements
      */
     constructor(scene) {
-        console.log("Action Constructor");
 
-        //        if (navigator.userAgent.match(/Android/i)) { //안드로이드일 때만 가로화면 고정시키기
-
+//        if (navigator.userAgent.match(/Android/i)) { //안드로이드일 때만 가로화면 고정시키기
 //            const orientation = window.orientation;
 //            if(orientation != undefined) {
 //                if(orientation == 0) {
@@ -214,12 +207,6 @@ export class Action {
         });
         container.setAttribute("class", "container");
 
-
-        /**
-         *
-         * User Info
-         */
-
         //main, stageselect, difficultyselect에서 사용
         let level = 0;
         let exp = 0;
@@ -238,11 +225,6 @@ export class Action {
         //main -> 공통 화면
         let userEmail = "";
 
-
-        /**
-         * for audio setting
-         * @type {HTMLAudioElement}
-         */
 
         const correctAudio = document.createElement("audio");
         correctAudio.setAttribute("src", "https://actions.o2o.kr/devsvr1/audio/correct_sound.mp3");
@@ -266,12 +248,6 @@ export class Action {
         failAudio.volume = 1.0;
 
 
-
-        /**
-         * Display Class Variable
-         */
-        const common = new Common(container);
-
         this.canvas = window.interactiveCanvas;
         this.scene = scene;
         this.commands = {
@@ -284,9 +260,7 @@ export class Action {
             },
             MAIN: function (data) {
                 console.log("실행 : main");
-
                 if (document.querySelector("#coinBox") != null)
-
                     document.querySelector("#coinBox").style.visibility = "visible";
 
                 while (container.hasChildNodes()) {
@@ -312,32 +286,38 @@ export class Action {
                 if (data.fullExp != null) {
                     fullExp = data.fullExp;
                 }
+
                 /**
-                 *
-                 * Display Setting
+                 * 좌측 사용자 레벨, 경험치
+                 * @type {HTMLDivElement}
                  */
-                common.init();
+                const levelBox = document.createElement("div");
+                levelBox.setAttribute("id", "levelBox");
+                container.appendChild(levelBox);
 
-                common.userLevel.textContent = "Lv." + level;
+                const userLevel = document.createElement("div");
+                userLevel.setAttribute("id", "userLevel");
+                userLevel.textContent = "Lv." + level;
+                levelBox.appendChild(userLevel);
 
-                common.userMail.textContent = userEmail;
+                const userMail = document.createElement("div");
+                userMail.setAttribute("id", "userMail");
+                //userMail.textContent = userEmail;
+                levelBox.appendChild(userMail);
 
-                common.userExp.setAttribute("value", exp);
-                common.userExp.setAttribute("max", fullExp);
-                common.userExpText.textContent = exp + "/" + fullExp;
+                const userExpBox = document.createElement("div");
+                levelBox.appendChild(userExpBox);
 
-                common.hintIcon.onclick = shop;
+                const userExp = document.createElement("progress");
+                userExp.setAttribute("id", "progress");
+                userExp.setAttribute("value", exp);
+                userExp.setAttribute("max", fullExp);
+                userExpBox.appendChild(userExp);
 
-                common.hintText.textContent = myHint;
-
-                common.coinIcon.onclick = shop;
-
-                common.mainButton.onclick = home;
-
-                common.rankingButton.onclick = ranking;
-
-                common.settingButton.onclick = setting;
-
+                const userExpText = document.createElement("div");
+                userExpText.setAttribute("id", "userExpText");
+                userExpText.textContent = exp + "/" + fullExp;
+                userExpBox.appendChild(userExpText);
 
 
                 /**
@@ -363,118 +343,6 @@ export class Action {
                 stageText.textContent = "SELECT STAGE";
                 stageButton.appendChild(stageText);
                 continue_stageButton.appendChild(stageButton);
-
-                /**
-                 * 좌측 사용자 레벨, 경험치
-                 * @type {HTMLDivElement}
-                 */
-
-                const levelBox = document.createElement("div");
-                levelBox.setAttribute("id", "levelBox");
-                container.appendChild(levelBox);
-
-                const backCircle = document.createElement("div");
-                backCircle.setAttribute("id", "backCircle");
-                levelBox.appendChild(backCircle);
-
-                const levelText = document.createElement("div");
-                levelText.setAttribute("id", "levelText");
-                levelText.textContent = "Level";
-                levelBox.appendChild(levelText);
-
-                const userLevel = document.createElement("div");
-                userLevel.setAttribute("id", "userLevel");
-                userLevel.textContent = level;
-                levelBox.appendChild(userLevel);
-
-                // 원형 progress bar 달기
-
-                // const progressBar = document.createElement("div");
-                // progressBar.setAttribute("id", "progress");
-                // levelBox.appendChild(progressBar);
-                //
-                // $('#progress').circleProgress({
-                //     size:101,
-                //     //그래프 크기
-                //     startAngle: -Math.PI/2 ,
-                //     //시작지점 (기본값 Math.PI)
-                //     value: 0.3,
-                //     //그래프에 표시될 값
-                //     animation: false,
-                //     //그래프가 그려지는 애니메이션 동작 여부
-                //     fill: {gradient: ['#f9d118', '#7cbf5a']},
-                //     // emptyFill: "rgba(0,0,0,0.0)",
-                //     lineCap: 'round'
-                // });
-
-                const expBox = document.createElement("div");
-                expBox.setAttribute("id", "expBox");
-                levelBox.appendChild(expBox);
-
-                const userExp = document.createElement("span");
-                userExp.setAttribute("id", "userExp");
-                userExp.textContent = exp;
-                expBox.appendChild(userExp);
-
-                const expBar = document.createElement("span");
-                expBar.setAttribute("id", "expBar");
-                expBox.appendChild(expBar);
-
-                const levelFullExp = document.createElement("span");
-                levelFullExp.setAttribute("id", "levelFullExp");
-                levelFullExp.textContent = fullExp;
-                expBox.appendChild(levelFullExp);
-
-
-
-                // const userLevel = document.createElement("div");
-                // userLevel.setAttribute("id", "userLevel");
-                // userLevel.textContent = "Lv." + level;
-                // levelBox.appendChild(userLevel);
-                //
-                // const userMail = document.createElement("div");
-                // userMail.setAttribute("id", "userMail");
-                // userMail.textContent = userEmail;
-                // levelBox.appendChild(userMail);
-                //
-                // const userExpBox = document.createElement("div");
-                // levelBox.appendChild(userExpBox);
-                //
-                // const userExp = document.createElement("progress");
-                // userExp.setAttribute("id", "progress");
-                // userExp.setAttribute("value", exp);
-                // userExp.setAttribute("max", fullExp);
-                // userExpBox.appendChild(userExp);
-                //
-                // const userExpText = document.createElement("div");
-                // userExpText.setAttribute("id", "userExpText");
-                // userExpText.textContent = exp + "/" + fullExp;
-                // userExpBox.appendChild(userExpText);
-
-
-                /**
-                 * 중앙에 이어하기, 단계 선택 버튼
-                 * @type {HTMLDivElement}
-                 */
-                // const continue_stageButton = document.createElement("div");
-                // continue_stageButton.setAttribute("id", "continue_stageButton");
-                // container.appendChild(continue_stageButton);
-                //
-                // const continueButton = document.createElement("div");
-                // continueButton.setAttribute("id", "continueButton");
-                // continueButton.onclick = continuebutton;
-                // const continueText = document.createElement("p");
-                // continueText.textContent = "CONTINUE";
-                // continueButton.appendChild(continueText);
-                // continue_stageButton.appendChild(continueButton);
-                //
-                // const stageButton = document.createElement("div");
-                // stageButton.setAttribute("id", "stageButton");
-                // stageButton.onclick = viewallButton;
-                // const stageText = document.createElement("p");
-                // stageText.textContent = "SELECT STAGE";
-                // stageButton.appendChild(stageText);
-                // continue_stageButton.appendChild(stageButton);
                 /**
                  * 우측 상단에
                  * 힌트와 코인
@@ -728,9 +596,8 @@ export class Action {
                 const gameBoard = document.createElement("div");
                 gameBoard.setAttribute("id", "gameBoard");
                 gameBoardBox.appendChild(gameBoard);
-
-                const gameBoardHeight = gameBoard.clientHeight - (boardRow*4);
-                const gameBoardWidth = gameBoard.clientWidth - (boardCol*4);
+                const gameBoardHeight = gameBoard.clientHeight - (boardRow * 4);
+                const gameBoardWidth = gameBoard.clientWidth - (boardCol * 4);
                 //게임판 안에 넣을 n x n 배열
                 for (let col = 0; col < boardCol; col++) {
                     const rowBox = document.createElement("div");
@@ -1133,7 +1000,6 @@ export class Action {
             SETTINGSELECT: function (data) {
                 console.log("실행: settingselect");
                 document.querySelector("#coinBox").style.visibility = "visible";
-
                 let sound = data.sound; //1. soundEffect 2.background sound
                 let onoff = data.onoff; //1.  0오면 off/1오면 on
                 if ((onoff == "0") && (sound == "SoundEffect")) {
@@ -1343,6 +1209,4 @@ export class Action {
         this.canvas.ready(callbacks);
         console.log("setCallbacks READY");
     }
-
-}//class Action
-
+}
