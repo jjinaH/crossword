@@ -12,11 +12,8 @@ import java.io.Serializable;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-<<<<<<< HEAD
-public class    testController implements Serializable {
-=======
+
 public class testController implements Serializable {
->>>>>>> 8cd2bc2d34d9baebc16312416ba35a8aa89c9417
     private static final Logger LOGGER = LoggerFactory.getLogger(testController.class);
     private final Main main;
 
