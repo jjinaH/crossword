@@ -11,9 +11,7 @@ button {
 
 /*화면 전체*/
 .container {
-    background: #000046;
-    background: -webkit-linear-gradient(to bottom, #000046, #1cb5e0);
-    background: linear-gradient(to bottom, #000046, #1cb5e0);
+    background: linear-gradient(to bottom, #3d43ae, #3ca3de);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -110,15 +108,54 @@ button {
     top: 25vh;
 }
 
-#progress {
-    -webkit-appearance: none;
+#expBox {
+    position: absolute;
+    top: 2vh;
 }
 
-#userExpText{
-    position: relative;
-    bottom : 3.5vh;
-    text-align : center;
+#userExp {
+    width: 50px;
+    height: 15px;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 19.5px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: right;
+    color: #a1cf79;
+    position: absolute;
+    left: 3.4vw;
+    top: 35.4vh;
 }
+
+#expBar {
+    width: 2px;
+    height: 15px;
+    background-color: white;
+    position: absolute;
+    left: 7.8vw;
+    top: 35.8vh;
+}
+
+#levelFullExp {
+    width: 50px;
+    height: 15px;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 19.5px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #2e3f82;
+    position: absolute;
+    left: 8.2vw;
+    top: 35.4vh;
+}
+
 
 #continue_stageButton{
     display : flex;

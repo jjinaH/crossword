@@ -307,6 +307,46 @@ class Action {
                 userLevel.textContent = level;
                 levelBox.appendChild(userLevel);
 
+                // 원형 progress bar 달기
+
+                // const progressBar = document.createElement("div");
+                // progressBar.setAttribute("id", "progress");
+                // levelBox.appendChild(progressBar);
+                //
+                // $('#progress').circleProgress({
+                //     size:101,
+                //     //그래프 크기
+                //     startAngle: -Math.PI/2 ,
+                //     //시작지점 (기본값 Math.PI)
+                //     value: 0.3,
+                //     //그래프에 표시될 값
+                //     animation: false,
+                //     //그래프가 그려지는 애니메이션 동작 여부
+                //     fill: {gradient: ['#f9d118', '#7cbf5a']},
+                //     // emptyFill: "rgba(0,0,0,0.0)",
+                //     lineCap: 'round'
+                // });
+
+                const expBox = document.createElement("div");
+                expBox.setAttribute("id", "expBox");
+                levelBox.appendChild(expBox);
+
+                const userExp = document.createElement("span");
+                userExp.setAttribute("id", "userExp");
+                userExp.textContent = exp;
+                expBox.appendChild(userExp);
+
+                const expBar = document.createElement("span");
+                expBar.setAttribute("id", "expBar");
+                expBox.appendChild(expBar);
+
+                const levelFullExp = document.createElement("span");
+                levelFullExp.setAttribute("id", "levelFullExp");
+                levelFullExp.textContent = fullExp;
+                expBox.appendChild(levelFullExp);
+
+
+
                 // const userLevel = document.createElement("div");
                 // userLevel.setAttribute("id", "userLevel");
                 // userLevel.textContent = "Lv." + level;
@@ -336,25 +376,25 @@ class Action {
                  * 중앙에 이어하기, 단계 선택 버튼
                  * @type {HTMLDivElement}
                  */
-                const continue_stageButton = document.createElement("div")
-                continue_stageButton.setAttribute("id", "continue_stageButton")
-                container.appendChild(continue_stageButton);
-
-                const continueButton = document.createElement("div");
-                continueButton.setAttribute("id", "continueButton");
-                continueButton.onclick = continuebutton;
-                const continueText = document.createElement("p");
-                continueText.textContent = "CONTINUE";
-                continueButton.appendChild(continueText);
-                continue_stageButton.appendChild(continueButton);
-
-                const stageButton = document.createElement("div");
-                stageButton.setAttribute("id", "stageButton");
-                stageButton.onclick = viewallButton;
-                const stageText = document.createElement("p");
-                stageText.textContent = "SELECT STAGE";
-                stageButton.appendChild(stageText);
-                continue_stageButton.appendChild(stageButton);
+                // const continue_stageButton = document.createElement("div");
+                // continue_stageButton.setAttribute("id", "continue_stageButton");
+                // container.appendChild(continue_stageButton);
+                //
+                // const continueButton = document.createElement("div");
+                // continueButton.setAttribute("id", "continueButton");
+                // continueButton.onclick = continuebutton;
+                // const continueText = document.createElement("p");
+                // continueText.textContent = "CONTINUE";
+                // continueButton.appendChild(continueText);
+                // continue_stageButton.appendChild(continueButton);
+                //
+                // const stageButton = document.createElement("div");
+                // stageButton.setAttribute("id", "stageButton");
+                // stageButton.onclick = viewallButton;
+                // const stageText = document.createElement("p");
+                // stageText.textContent = "SELECT STAGE";
+                // stageButton.appendChild(stageText);
+                // continue_stageButton.appendChild(stageButton);
                 /**
                  * 우측 상단에
                  * 힌트와 코인
