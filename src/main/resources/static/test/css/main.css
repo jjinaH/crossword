@@ -60,9 +60,7 @@ button {
 /*메인 화면*/
 #levelBox {
     /*font-size: 3vh;*/
-    position: absolute;
-    left: 2vw;
-    top: 2vh;
+    position: relative;
 }
 
 #backCircle {
@@ -73,7 +71,7 @@ button {
     border-radius: 40px;
     position: absolute;
     left: 4.14vw;
-    top: 21.625vh;
+    top: 7.8vh;
 }
 
 #levelText {
@@ -90,7 +88,7 @@ button {
     color: #066666;
     position: absolute;
     left: 6vw;
-    top: 23.5vh;
+    top: 9.5vh;
 }
 
 #userLevel {
@@ -107,12 +105,12 @@ button {
     color: #324091;
     position: absolute;
     left: 6vw;
-    top: 25vh;
+    top: 11vh;
 }
 
 #expBox {
-    position: absolute;
-    top: 2vh;
+    position: relative;
+    /*top: 2vh;*/
 }
 
 #userExp {
@@ -129,7 +127,7 @@ button {
     color: #a1cf79;
     position: absolute;
     left: 3.4vw;
-    top: 35.4vh;
+    top: 23.5vh;
 }
 
 #expBar {
@@ -138,7 +136,7 @@ button {
     background-color: white;
     position: absolute;
     left: 7.8vw;
-    top: 35.8vh;
+    top: 23.8vh;
 }
 
 #levelFullExp {
@@ -155,7 +153,7 @@ button {
     color: #2e3f82;
     position: absolute;
     left: 8.4vw;
-    top: 35.4vh;
+    top: 23.5vh;
 }
 
 
@@ -310,6 +308,53 @@ button {
     line-height: normal;
     letter-spacing: normal;
     color: #7cbf5a;
+}
+
+#inGameHintBox {
+    width: 81px;
+    height: 80px;
+    box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
+    background-color: #7cbf5a;
+    border-radius: 50%;
+    position: absolute;
+    top: 45vh;
+    left: 4.14vw;
+}
+
+#inGameHintIcon {
+    font-size: 42px;
+    position: relative;
+    top: 19px;
+    left: 18px;
+}
+
+#inGameHintNumBox {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: -2.8px 4.1px 10px 0 rgba(33, 68, 93, 0.4);
+    background-color: #ffba00;
+    position: relative;
+    bottom: 49px;
+    left: 50px;
+}
+
+#inGameHintNumText {
+    width: 13px;
+    height: 18px;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 23.5px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
 }
 
 #ranking, #setting, #main, #welcomeback {

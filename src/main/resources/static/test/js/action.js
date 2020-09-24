@@ -333,7 +333,7 @@ class Action {
 
                 const userExp = document.createElement("span");
                 userExp.setAttribute("id", "userExp");
-                userExp.textContent = exp;
+                userExp.textContent = "1000";
                 expBox.appendChild(userExp);
 
                 const expBar = document.createElement("span");
@@ -410,7 +410,7 @@ class Action {
 
                 const coinIcon = document.createElement("img");
                 coinIcon.setAttribute("id", "coinIcon");
-                coinIcon.setAttribute("src", "../../image/coin_icon.png");
+                coinIcon.setAttribute("src", "../image/coin_icon.png");
                 coinBox.appendChild(coinIcon);
 
                 const coinText = document.createElement("div");
@@ -438,6 +438,24 @@ class Action {
                 accountText.setAttribute("id", "accountText");
                 accountText.textContent = userEmail;
                 accountBox.appendChild(accountText);
+
+                const inGameHintBox = document.createElement("div");
+                inGameHintBox.setAttribute("id", "inGameHintBox");
+                container.appendChild(inGameHintBox);
+
+                const inGameHintIcon = document.createElement("i");
+                inGameHintIcon.setAttribute("id", "inGameHintIcon");
+                inGameHintIcon.setAttribute("class", "fa fa-search");
+                inGameHintBox.appendChild(inGameHintIcon);
+
+                const inGameHintNumBox = document.createElement("div");
+                inGameHintNumBox.setAttribute("id", "inGameHintNumBox");
+                inGameHintBox.appendChild(inGameHintNumBox);
+
+                const inGameHintNumText = document.createElement("div");
+                inGameHintNumText.setAttribute("id", "inGameHintNumText");
+                inGameHintNumText.textContent = myHint;
+                inGameHintNumBox.appendChild(inGameHintNumText);
 
 
                 /**
