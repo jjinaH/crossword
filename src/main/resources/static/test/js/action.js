@@ -264,25 +264,24 @@ export class Action {
                  */
                 common.doDisplay();
 
-                common.userLevel.textContent = "Lv." + level;
-
-                common.userMail.textContent = userEmail;
-
-                common.userExp.setAttribute("value", exp);
-                common.userExp.setAttribute("max", fullExp);
-                common.userExpText.textContent = exp + "/" + fullExp;
-
-                common.hintIcon.onclick = shop;
-
+                //set TextContent
+                common.userLevel.textContent = level;
+                common.userExp.textContent = exp;
+                common.levelFullExp.textContent = fullExp;
                 common.hintText.textContent = myHint;
+                common.coinText.textContent = myCoin;
+                common.accountText.textContent = userEmail;
+                common.inGameHintNumText.textContent = myHint;
 
-                common.coinIcon.onclick = shop;
-
+                //set onClick Function
+                common.hintPlus.onclick = shop;
+                common.hintPlusIcon.onclick = shop;
+                common.coinPlus.onclick = shop;
+                common.coinPlusIcon.onclick = shop;
                 common.mainButton.onclick = home;
-
                 common.rankingButton.onclick = ranking;
-
                 common.settingButton.onclick = setting;
+
                 /**
                  * 중앙에 이어하기, 단계 선택 버튼
                  * @type {HTMLDivElement}
@@ -292,189 +291,6 @@ export class Action {
                 mainFrame.continueButton.onclick = continuebutton;
 
                 mainFrame.stageButton.onclick = viewallButton;
-                /**
-                 * 좌측 사용자 레벨, 경험치
-                 * @type {HTMLDivElement}
-                 */
-
-                const levelBox = document.createElement("div");
-                levelBox.setAttribute("id", "levelBox");
-                container.appendChild(levelBox);
-
-                const backCircle = document.createElement("div");
-                backCircle.setAttribute("id", "backCircle");
-                levelBox.appendChild(backCircle);
-
-                const levelText = document.createElement("div");
-                levelText.setAttribute("id", "levelText");
-                levelText.textContent = "Level";
-                levelBox.appendChild(levelText);
-
-                const userLevel = document.createElement("div");
-                userLevel.setAttribute("id", "userLevel");
-                userLevel.textContent = level;
-                levelBox.appendChild(userLevel);
-
-                // 원형 progress bar 달기
-
-                // const progressBar = document.createElement("div");
-                // progressBar.setAttribute("id", "progress");
-                // levelBox.appendChild(progressBar);
-                //
-                // $('#progress').circleProgress({
-                //     size:101,
-                //     //그래프 크기
-                //     startAngle: -Math.PI/2 ,
-                //     //시작지점 (기본값 Math.PI)
-                //     value: 0.3,
-                //     //그래프에 표시될 값
-                //     animation: false,
-                //     //그래프가 그려지는 애니메이션 동작 여부
-                //     fill: {gradient: ['#f9d118', '#7cbf5a']},
-                //     // emptyFill: "rgba(0,0,0,0.0)",
-                //     lineCap: 'round'
-                // });
-
-                const expBox = document.createElement("div");
-                expBox.setAttribute("id", "expBox");
-                levelBox.appendChild(expBox);
-
-                const userExp = document.createElement("span");
-                userExp.setAttribute("id", "userExp");
-                userExp.textContent = exp;
-                expBox.appendChild(userExp);
-
-                const expBar = document.createElement("span");
-                expBar.setAttribute("id", "expBar");
-                expBox.appendChild(expBar);
-
-                const levelFullExp = document.createElement("span");
-                levelFullExp.setAttribute("id", "levelFullExp");
-                levelFullExp.textContent = fullExp;
-                expBox.appendChild(levelFullExp);
-
-                /**
-                 * 우측 상단에
-                 * 힌트와 코인
-                 * @type {HTMLDivElement}
-                 */
-                const userInfoBox = document.createElement("div");
-                userInfoBox.setAttribute("id", "userInfoBox");
-                container.appendChild(userInfoBox);
-
-                const hintBox = document.createElement("div");
-                hintBox.setAttribute("id", "hintBox");
-                userInfoBox.appendChild(hintBox);
-
-                const hintIcon = document.createElement("i");
-                hintIcon.setAttribute("class", "fa fa-search");
-                hintIcon.setAttribute("id", "hintIcon");
-                hintBox.appendChild(hintIcon);
-
-                const hintText = document.createElement("div");
-                hintText.setAttribute("id", "hintText");
-                hintText.textContent = myHint;
-                hintBox.appendChild(hintText);
-
-                const hintPlus = document.createElement("div");
-                hintPlus.setAttribute("id", "hintPlus");
-                hintBox.appendChild(hintPlus);
-                hintPlus.onclick = shop;
-
-                const hintPlusIcon = document.createElement("i");
-                hintPlusIcon.setAttribute("class", "fa fa-plus");
-                hintPlusIcon.setAttribute("id", "hintPlusIcon");
-                hintPlus.appendChild(hintPlusIcon);
-                hintPlusIcon.onclick = shop;
-
-
-                const coinBox = document.createElement("div");
-                coinBox.setAttribute("id", "coinBox");
-                userInfoBox.appendChild(coinBox);
-
-                const coinIcon = document.createElement("img");
-                coinIcon.setAttribute("id", "coinIcon");
-                coinIcon.setAttribute("src", "../image/coin_icon.png");
-                coinBox.appendChild(coinIcon);
-
-                const coinText = document.createElement("div");
-                coinText.setAttribute("id", "coinText");
-                coinText.textContent = myCoin;
-                coinBox.appendChild(coinText);
-
-                const coinPlus = document.createElement("div");
-                coinPlus.setAttribute("id", "coinPlus");
-                coinBox.appendChild(coinPlus);
-                coinPlus.onclick = shop;
-
-                const coinPlusIcon = document.createElement("i");
-                coinPlusIcon.setAttribute("class", "fa fa-plus");
-                coinPlusIcon.setAttribute("id", "coinPlusIcon");
-                coinPlus.appendChild(coinPlusIcon);
-                coinPlusIcon.onclick = shop;
-
-
-                const accountBox = document.createElement("div");
-                accountBox.setAttribute("id", "accountBox");
-                userInfoBox.appendChild(accountBox);
-
-                const accountText = document.createElement("div");
-                accountText.setAttribute("id", "accountText");
-                accountText.textContent = userEmail;
-                accountBox.appendChild(accountText);
-
-                const inGameHintBox = document.createElement("div");
-                inGameHintBox.setAttribute("id", "inGameHintBox");
-                container.appendChild(inGameHintBox);
-
-                const inGameHintIcon = document.createElement("i");
-                inGameHintIcon.setAttribute("id", "inGameHintIcon");
-                inGameHintIcon.setAttribute("class", "fa fa-search");
-                inGameHintBox.appendChild(inGameHintIcon);
-
-                const inGameHintNumBox = document.createElement("div");
-                inGameHintNumBox.setAttribute("id", "inGameHintNumBox");
-                inGameHintBox.appendChild(inGameHintNumBox);
-
-                const inGameHintNumText = document.createElement("div");
-                inGameHintNumText.setAttribute("id", "inGameHintNumText");
-                inGameHintNumText.textContent = myHint;
-                inGameHintNumBox.appendChild(inGameHintNumText);
-
-
-                /**
-                 * 우측 하단에
-                 * 메인, 랭킹, 설정
-                 * @type {HTMLDivElement}
-                 */
-
-                const bottomCommon = document.createElement("div");
-                bottomCommon.setAttribute("id", "bottomCommon");
-                container.appendChild(bottomCommon);
-
-                const mainButton = document.createElement("img");
-                mainButton.setAttribute("src", "../image/home_icon.png");
-                mainButton.setAttribute("onmouseover", "this.src='../image/home_hvicon.png';");
-                mainButton.setAttribute("onmouseout", "this.src='../image/home_icon.png';");
-                mainButton.setAttribute("id", "main");
-                mainButton.onclick = home;
-                bottomCommon.appendChild(mainButton);
-
-                const rankingButton = document.createElement("img");
-                rankingButton.setAttribute("src", "../image/rank_icon.png");
-                rankingButton.setAttribute("onmouseover", "this.src='../image/rank_hvicon.png';");
-                rankingButton.setAttribute("onmouseout", "this.src='../image/rank_icon.png';");
-                rankingButton.setAttribute("id", "ranking");
-                rankingButton.onclick = ranking;
-                bottomCommon.appendChild(rankingButton);
-
-                const settingButton = document.createElement("img");
-                settingButton.setAttribute("src", "../image/setting_icon.png");
-                settingButton.setAttribute("onmouseover", "this.src='../image/setting_hvicon.png';");
-                settingButton.setAttribute("onmouseout", "this.src='../image/setting_icon.png';");
-                settingButton.setAttribute("id", "setting");
-                settingButton.onclick = setting;
-                bottomCommon.appendChild(settingButton);
 
             },
             STAGESELECT: function (data) {
