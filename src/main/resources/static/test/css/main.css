@@ -1,3 +1,4 @@
+
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 
 body {
@@ -153,7 +154,7 @@ button {
     text-align: left;
     color: #2e3f82;
     position: absolute;
-    left: 8.2vw;
+    left: 8.4vw;
     top: 35.4vh;
 }
 
@@ -201,7 +202,8 @@ button {
     box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
     background-color: #7cbf5a;
     position: relative;
-    left: 55vw;
+    /*left: 55vw;*/
+    left: 705px;
     top: 6vh;
 }
 
@@ -261,12 +263,11 @@ button {
     box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
     background-color: #7cbf5a;
     position: relative;
-    left: 63.7vw;
+    left: 56vw;
     top: 6vh;
 }
 
 #coinIcon {
-    /*background-image: url("../../image/coin_icon.png");*/
     width: 25px;
     height: 25px;
     position: absolute;
@@ -292,7 +293,7 @@ button {
     border-radius: 15px;
     background-color: #324091;
     position: relative;
-    left: 76.2vw;
+    left: 57vw;
     top: 6vh;
 }
 
