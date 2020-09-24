@@ -470,18 +470,24 @@ class Action {
 
                 const mainButton = document.createElement("img");
                 mainButton.setAttribute("src", "../image/home_icon.png");
+                mainButton.setAttribute("onmouseover", "this.src='../image/home_hvicon.png';");
+                mainButton.setAttribute("onmouseout", "this.src='../image/home_icon.png';");
                 mainButton.setAttribute("id", "main");
                 mainButton.onclick = home;
                 bottomCommon.appendChild(mainButton);
 
                 const rankingButton = document.createElement("img");
                 rankingButton.setAttribute("src", "../image/rank_icon.png");
+                rankingButton.setAttribute("onmouseover", "this.src='../image/rank_hvicon.png';");
+                rankingButton.setAttribute("onmouseout", "this.src='../image/rank_icon.png';");
                 rankingButton.setAttribute("id", "ranking");
                 rankingButton.onclick = ranking;
                 bottomCommon.appendChild(rankingButton);
 
                 const settingButton = document.createElement("img");
                 settingButton.setAttribute("src", "../image/setting_icon.png");
+                settingButton.setAttribute("onmouseover", "this.src='../image/setting_hvicon.png';");
+                settingButton.setAttribute("onmouseout", "this.src='../image/setting_icon.png';");
                 settingButton.setAttribute("id", "setting");
                 settingButton.onclick = setting;
                 bottomCommon.appendChild(settingButton);
