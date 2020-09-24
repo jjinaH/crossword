@@ -18,7 +18,9 @@ export class Scene {
         const playButton = document.createElement("div");
         playButton.setAttribute("id", "playbutton");
         playButton.onclick = function(){
-            window.canvas.sendTextQuery("play");
+            let playReturnMessage  = window.canvas.sendTextQuery("play");
+            console.log(playReturnMessage);
+            //alert("click play button!")
         };
         const playText = document.createElement("p");
         playText.textContent = "PLAY";

@@ -36,10 +36,23 @@ export class Common{
 
     constructor(container) {
         this.container = container;
-        console.log("됏냐")
+        console.log("Common Constructor");
     }//constructor
 
+    doDisplay(){
+        console.log("Common DoDisplay");
+        const pages=document.querySelectorAll("#hint_coinBox,#levelBox,#bottomCommon");
+        for (let page of pages){
+            if(page.style.display =='none') {
+                page.style.display = 'flex';
+            }else{
+                page.style.display = 'none';
+            }
+        }
+    }
+
     init(){
+        console.log("Common init()");
         /**
          * 좌측 사용자 레벨, 경험치
          * @type {HTMLDivElement}
