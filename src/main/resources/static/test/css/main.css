@@ -12,12 +12,12 @@ button {
 
 /*화면 전체*/
 .container {
-
-    background: linear-gradient(to bottom, #3d43ae, #3ca3de);
+    /*background: linear-gradient(to bottom, #3d43ae, #3ca3de);*/
+    background-image: url("../../image/default_bg.png");
+    background-repeat : no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     color : white;
 }
 
@@ -59,11 +59,8 @@ button {
 
 /*메인 화면*/
 #levelBox {
-
     /*font-size: 3vh;*/
-    position: absolute;
-    left: 2vw;
-    top: 2vh;
+    position: relative;
 }
 
 #backCircle {
@@ -74,7 +71,7 @@ button {
     border-radius: 40px;
     position: absolute;
     left: 4.14vw;
-    top: 21.625vh;
+    top: 7.8vh;
 }
 
 #levelText {
@@ -91,7 +88,7 @@ button {
     color: #066666;
     position: absolute;
     left: 6vw;
-    top: 23.5vh;
+    top: 9.5vh;
 }
 
 #userLevel {
@@ -108,12 +105,12 @@ button {
     color: #324091;
     position: absolute;
     left: 6vw;
-    top: 25vh;
+    top: 11vh;
 }
 
 #expBox {
-    position: absolute;
-    top: 2vh;
+    position: relative;
+    /*top: 2vh;*/
 }
 
 #userExp {
@@ -130,7 +127,7 @@ button {
     color: #a1cf79;
     position: absolute;
     left: 3.4vw;
-    top: 35.4vh;
+    top: 23.5vh;
 }
 
 #expBar {
@@ -139,7 +136,7 @@ button {
     background-color: white;
     position: absolute;
     left: 7.8vw;
-    top: 35.8vh;
+    top: 23.8vh;
 }
 
 #levelFullExp {
@@ -155,8 +152,8 @@ button {
     text-align: left;
     color: #2e3f82;
     position: absolute;
-    left: 8.2vw;
-    top: 35.4vh;
+    left: 8.4vw;
+    top: 23.5vh;
 }
 
 
@@ -192,45 +189,190 @@ button {
     border : 1px solid rgba(255,255,255,0.6);
 }
 
-#hint_coinBox {
+#userInfoBox {
     display: flex;
-    position: absolute;
-    right: 2vw;
-    top: 18vh;
 }
 
-#hintBox, #coinBox{
-    display: flex;
-    flex-direction: row;
-    margin : 1.5vw;
-}
-
-#hintIcon, #coinIcon {
-    font-size: 6vh;
+#hintBox {
+    width: 100px;
+    height: 40px;
+    border-radius: 15px;
+    box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
+    background-color: #7cbf5a;
+    position: relative;
+    /*left: 55vw;*/
+    left: 705px;
+    top: 6vh;
 }
 
 #hintIcon {
-    transform: rotate(-30deg);
+    font-size: 25px;
+}
+
+#hintIcon {
+    position: absolute;
+    left: 11px;
+    top: 9px;
 }
 
 #hintText, #coinText {
-    margin-left: 1vw;
-    font-size: 4vh;
-    position: relative;
-    top: 0.1vh;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
 }
 
-#ranking, #setting, #main, #welcomeback {
+#hintText {
+    position: absolute;
+    left: 44px;
+    top: 10px;
+}
+
+#hintPlus, #coinPlus {
+    width: 31px;
+    height: 31px;
+    box-shadow: 0px 5px 15px 0 rgba(0, 0, 0, 0.35);
+    background-color: #ffba00;
+    border-radius: 50%;
+}
+
+#hintPlus {
+    position: absolute;
+    left: 69px;
+    bottom: 17px;
+}
+
+#hintPlusIcon, #coinPlusIcon {
+    font-size: 19px;
+    position: absolute;
+    top: 6px;
+    left: 7px;
+}
+
+#coinBox {
+    width: 150px;
+    height: 40px;
+    border-radius: 15px;
+    box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
+    background-color: #7cbf5a;
+    position: relative;
+    left: 56vw;
+    top: 6vh;
+}
+
+#coinIcon {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 10px;
+    top: 8px;
+}
+
+#coinText {
+    position: absolute;
+    left: 44px;
+    top: 10px;
+}
+
+#coinPlus {
+    position: absolute;
+    left: 119px;
+    bottom: 17px;
+}
+
+#accountBox {
+    width: 265px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: #324091;
+    position: relative;
+    left: 57vw;
+    top: 6vh;
+}
+
+#accountText {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #7cbf5a;
+}
+
+#inGameHintBox {
+    width: 81px;
+    height: 80px;
+    box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
+    background-color: #7cbf5a;
+    border-radius: 50%;
+    position: absolute;
+    top: 45vh;
+    left: 4.14vw;
+}
+
+#inGameHintIcon {
+    font-size: 42px;
+    position: relative;
+    top: 19px;
+    left: 18px;
+}
+
+#inGameHintNumBox {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: -2.8px 4.1px 10px 0 rgba(33, 68, 93, 0.4);
+    background-color: #ffba00;
+    position: relative;
+    bottom: 49px;
+    left: 50px;
+}
+
+#inGameHintNumText {
+    width: 13px;
+    height: 18px;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 23.5px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+}
+
+#ranking, #setting, #main{
     display: flex;
-    flex-direction: column;
-    margin : 2vh;
-    font-size: 6vh;
+    object-fit: contain;
+    width: 50px;
+    position: relative;
+    left: 5.46vw;
+    top: 56.25vh;
+    padding: 0 0 20px 0;
+}
+
+#main:hover {
+
 }
 
 #bottomCommon {
     position: absolute;
-    right : 1vw;
-    bottom : 1vh;
 }
 
 

@@ -1,4 +1,5 @@
 
+
 import {Common} from "./common.js";
 import {MainFrame} from "./mainFrame.js";
 import {StageSelect} from "./stageSelect.js";
@@ -70,7 +71,6 @@ const Timer = (function () {
     };
 })();
 
-
 function main() {
     window.canvas.sendTextQuery("play");
 }
@@ -139,9 +139,7 @@ function remove_welcome(){
  * This class is used as a wrapper for Google Assistant Canvas Action class
  * along with its callbacks.
  */
-
-export class Action {
-
+class Action {
 
     /**
      * @param {*} scene which serves as a container of all visual elements
@@ -163,11 +161,11 @@ export class Action {
             console.log(window.innerWidth);
         });
         container.setAttribute("class", "container");
+
         /**
          *
          * User Info
          */
-
         //main, stageselect, difficultyselect에서 사용
         let level = 0;
         let exp = 0;
@@ -186,11 +184,6 @@ export class Action {
         //main -> 공통 화면
         let userEmail = "";
 
-
-        /**
-         * for audio setting
-         * @type {HTMLAudioElement}
-         */
 
         const correctAudio = document.createElement("audio");
         correctAudio.setAttribute("src", "https://actions.o2o.kr/devsvr1/audio/correct_sound.mp3");
@@ -212,7 +205,6 @@ export class Action {
         failAudio.canPlayType("audio/mp3");
         failAudio.setAttribute("src", "https://actions.o2o.kr/devsvr1/audio/fail_sound.mp3");
         failAudio.volume = 1.0;
-
 
 
         /**
@@ -267,6 +259,7 @@ export class Action {
                 if (data.fullExp != null) {
                     fullExp = data.fullExp;
                 }
+
                 /**
                  *
                  * Display Setting
@@ -367,66 +360,120 @@ export class Action {
                  * 힌트와 코인
                  * @type {HTMLDivElement}
                  */
-                const hint_coinBox = document.createElement("div");
-                hint_coinBox.setAttribute("id", "hint_coinBox");
-                container.appendChild(hint_coinBox);
+                const userInfoBox = document.createElement("div");
+                userInfoBox.setAttribute("id", "userInfoBox");
+                container.appendChild(userInfoBox);
 
                 const hintBox = document.createElement("div");
                 hintBox.setAttribute("id", "hintBox");
+                userInfoBox.appendChild(hintBox);
+
                 const hintIcon = document.createElement("i");
-                hintIcon.setAttribute("class", "fa fa-neuter");
+                hintIcon.setAttribute("class", "fa fa-search");
                 hintIcon.setAttribute("id", "hintIcon");
-                hintIcon.onclick = shop;
                 hintBox.appendChild(hintIcon);
-                hint_coinBox.appendChild(hintBox);
 
                 const hintText = document.createElement("div");
                 hintText.setAttribute("id", "hintText");
                 hintText.textContent = myHint;
                 hintBox.appendChild(hintText);
 
+                const hintPlus = document.createElement("div");
+                hintPlus.setAttribute("id", "hintPlus");
+                hintBox.appendChild(hintPlus);
+                hintPlus.onclick = shop;
+
+                const hintPlusIcon = document.createElement("i");
+                hintPlusIcon.setAttribute("class", "fa fa-plus");
+                hintPlusIcon.setAttribute("id", "hintPlusIcon");
+                hintPlus.appendChild(hintPlusIcon);
+                hintPlusIcon.onclick = shop;
+
+
                 const coinBox = document.createElement("div");
                 coinBox.setAttribute("id", "coinBox");
-                const coinIcon = document.createElement("i");
-                coinIcon.setAttribute("class", "fa fa-eur");
+                userInfoBox.appendChild(coinBox);
+
+                const coinIcon = document.createElement("img");
                 coinIcon.setAttribute("id", "coinIcon");
-                coinIcon.onclick = shop;
+                coinIcon.setAttribute("src", "../image/coin_icon.png");
                 coinBox.appendChild(coinIcon);
-                hint_coinBox.appendChild(coinBox);
 
                 const coinText = document.createElement("div");
                 coinText.setAttribute("id", "coinText");
                 coinText.textContent = myCoin;
                 coinBox.appendChild(coinText);
 
+                const coinPlus = document.createElement("div");
+                coinPlus.setAttribute("id", "coinPlus");
+                coinBox.appendChild(coinPlus);
+                coinPlus.onclick = shop;
+
+                const coinPlusIcon = document.createElement("i");
+                coinPlusIcon.setAttribute("class", "fa fa-plus");
+                coinPlusIcon.setAttribute("id", "coinPlusIcon");
+                coinPlus.appendChild(coinPlusIcon);
+                coinPlusIcon.onclick = shop;
+
+
+                const accountBox = document.createElement("div");
+                accountBox.setAttribute("id", "accountBox");
+                userInfoBox.appendChild(accountBox);
+
+                const accountText = document.createElement("div");
+                accountText.setAttribute("id", "accountText");
+                accountText.textContent = userEmail;
+                accountBox.appendChild(accountText);
+
+                const inGameHintBox = document.createElement("div");
+                inGameHintBox.setAttribute("id", "inGameHintBox");
+                container.appendChild(inGameHintBox);
+
+                const inGameHintIcon = document.createElement("i");
+                inGameHintIcon.setAttribute("id", "inGameHintIcon");
+                inGameHintIcon.setAttribute("class", "fa fa-search");
+                inGameHintBox.appendChild(inGameHintIcon);
+
+                const inGameHintNumBox = document.createElement("div");
+                inGameHintNumBox.setAttribute("id", "inGameHintNumBox");
+                inGameHintBox.appendChild(inGameHintNumBox);
+
+                const inGameHintNumText = document.createElement("div");
+                inGameHintNumText.setAttribute("id", "inGameHintNumText");
+                inGameHintNumText.textContent = myHint;
+                inGameHintNumBox.appendChild(inGameHintNumText);
+
+
                 /**
                  * 우측 하단에
                  * 메인, 랭킹, 설정
                  * @type {HTMLDivElement}
                  */
+
                 const bottomCommon = document.createElement("div");
                 bottomCommon.setAttribute("id", "bottomCommon");
                 container.appendChild(bottomCommon);
 
-                const mainButton = document.createElement("i");
-                mainButton.setAttribute("class", "fa fa-home");
+                const mainButton = document.createElement("img");
+                mainButton.setAttribute("src", "../image/home_icon.png");
+                mainButton.setAttribute("onmouseover", "this.src='../image/home_hvicon.png';");
+                mainButton.setAttribute("onmouseout", "this.src='../image/home_icon.png';");
                 mainButton.setAttribute("id", "main");
                 mainButton.onclick = home;
                 bottomCommon.appendChild(mainButton);
 
-                // const welcomeback = document.createElement("i");
-                // welcomeback.setAttribute("class", "fa fa-reply");
-                // welcomeback.setAttribute("id", "welcomeback");
-                // bottomCommon.appendChild(welcomeback);
-
-                const rankingButton = document.createElement("i");
-                rankingButton.setAttribute("class", "fa fa-star");
+                const rankingButton = document.createElement("img");
+                rankingButton.setAttribute("src", "../image/rank_icon.png");
+                rankingButton.setAttribute("onmouseover", "this.src='../image/rank_hvicon.png';");
+                rankingButton.setAttribute("onmouseout", "this.src='../image/rank_icon.png';");
                 rankingButton.setAttribute("id", "ranking");
                 rankingButton.onclick = ranking;
                 bottomCommon.appendChild(rankingButton);
 
-                const settingButton = document.createElement("i");
-                settingButton.setAttribute("class", "fa fa-cog");
+                const settingButton = document.createElement("img");
+                settingButton.setAttribute("src", "../image/setting_icon.png");
+                settingButton.setAttribute("onmouseover", "this.src='../image/setting_hvicon.png';");
+                settingButton.setAttribute("onmouseout", "this.src='../image/setting_icon.png';");
                 settingButton.setAttribute("id", "setting");
                 settingButton.onclick = setting;
                 bottomCommon.appendChild(settingButton);
@@ -611,7 +658,6 @@ export class Action {
                 const gameBoard = document.createElement("div");
                 gameBoard.setAttribute("id", "gameBoard");
                 gameBoardBox.appendChild(gameBoard);
-
                 const gameBoardHeight = gameBoard.clientHeight - (boardRow*4);
                 const gameBoardWidth = gameBoard.clientWidth - (boardCol*4);
                 //게임판 안에 넣을 n x n 배열
@@ -713,39 +759,39 @@ export class Action {
                 gameBoard.classList.add("shake");
             },
             OPENHINT: function (data) {
-                console.log("실행 : openHint");
-                /**
-                 * hint = data.hint -> fulfillment에서 보내주는 hint
-                 * 게임판을 가리고 힌트를 보여줌
-                 * 타이머가 잠시 멈춤
-                 */
-                const hint = data.hint;
-                //힌트를 열면 타이머를 잠시 멈춤
-                // Timer.stop(); //demo를 위함
-                const backgroundModal = document.createElement("div");
-                backgroundModal.setAttribute("class", "backgroundModal");
-                backgroundModal.setAttribute("id", "backgroundModal");
-                container.appendChild(backgroundModal);
-                const contentModal = document.createElement("div");
-                contentModal.setAttribute("class", "contentModal");
-                contentModal.style.height = document.querySelector("#gameBoard").clientHeight + "px";
-                contentModal.style.width = document.querySelector("#gameBoard").clientWidth + "px";
-                backgroundModal.appendChild(contentModal);
-                const hintModalText = document.createElement("p");
-                hintModalText.textContent = "HINT";
-                contentModal.appendChild(hintModalText);
-                contentModal.appendChild(document.createElement("br"));
-                contentModal.appendChild(document.createElement("hr"));
-                contentModal.appendChild(document.createElement("br"));
-                //사용자의 힌트 개수가 1개 이상인지 체크
-                if (myHint >= 1) {
-                    if (hint.length == 1) {
-                        backgroundModal.style.display = "none";
-                        console.log(hint);
-                        for (let i = 0; i < document.getElementsByName(hint).length; i++)
-                            document.getElementsByName(hint)[i].style.textShadow = "0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18";
-                        /*setTimeout(function () { //demo를 위해 주석처리
-                            *//*글자가 다시 원상태로 돌아오록 함, usedHint에 추가 "first alphabet : A"*//*
+                            console.log("실행 : openHint");
+                            /**
+                             * hint = data.hint -> fulfillment에서 보내주는 hint
+                             * 게임판을 가리고 힌트를 보여줌
+                             * 타이머가 잠시 멈춤
+                             */
+                            const hint = data.hint;
+                            //힌트를 열면 타이머를 잠시 멈춤
+                            // Timer.stop(); //demo를 위함
+                            const backgroundModal = document.createElement("div");
+                            backgroundModal.setAttribute("class", "backgroundModal");
+                            backgroundModal.setAttribute("id", "backgroundModal");
+                            container.appendChild(backgroundModal);
+                            const contentModal = document.createElement("div");
+                            contentModal.setAttribute("class", "contentModal");
+                            contentModal.style.height = document.querySelector("#gameBoard").clientHeight + "px";
+                            contentModal.style.width = document.querySelector("#gameBoard").clientWidth + "px";
+                            backgroundModal.appendChild(contentModal);
+                            const hintModalText = document.createElement("p");
+                            hintModalText.textContent = "HINT";
+                            contentModal.appendChild(hintModalText);
+                            contentModal.appendChild(document.createElement("br"));
+                            contentModal.appendChild(document.createElement("hr"));
+                            contentModal.appendChild(document.createElement("br"));
+                            //사용자의 힌트 개수가 1개 이상인지 체크
+                            if (myHint >= 1) {
+                                if (hint.length == 1) {
+                                    backgroundModal.style.display = "none";
+                                    console.log(hint);
+                                    for (let i = 0; i < document.getElementsByName(hint).length; i++)
+                                        document.getElementsByName(hint)[i].style.textShadow = "0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18";
+                                    /*setTimeout(function () { //demo를 위해 주석처리
+                                        *//*글자가 다시 원상태로 돌아오록 함, usedHint에 추가 "first alphabet : A"*//*
                                          Timer.resume();
                                         for (let i = 0; i < document.getElementsByName(hint).length; i++)
                                             document.getElementsByName(hint)[i].style.textShadow = "none";
@@ -754,50 +800,50 @@ export class Action {
                                         content.textContent = "first alphabet is \"" + hint.toUpperCase() + "\"";
                                         usedHint.appendChild(content);
                                     }, 5000);*/
-                        //사용자의 남은 힌트를 보여줌
-                        const remainingHint = document.querySelector("#hintText");
-                        if (myHint > 0) myHint--;
-                        remainingHint.textContent = myHint;
-                    } else if (hint.length > 1) {
-                        Timer.stop(); // demo를 위함
-                        const hintModal = document.createElement("p");
-                        if (hint != "noHint") {
-                            hintModal.textContent = hint;
-                            console.log(hint);
-                            contentModal.appendChild(hintModal);
-                            //사용자의 남은 힌트를 보여줌
-                            const remainingHint = document.querySelector("#hintText");
-                            if (myHint > 0) myHint--;
-                            remainingHint.textContent = myHint;
-                        } else if (hint == "noHint") {
-                            hintModal.textContent = "Please charge your hint";
-                            contentModal.appendChild(hintModal);
-                        }
-                        backgroundModal.style.display = "block";
-                        setTimeout(function () {
-                            backgroundModal.style.display = "none";
-                            Timer.resume();
-                            if (hint != "noHint") {
-                                const usedHint = document.querySelector("#hintScrollBox");
-                                const content = document.createElement("p");
-                                content.textContent = hint;
-                                console.log(hint);
-                                usedHint.appendChild(content);
+                                    //사용자의 남은 힌트를 보여줌
+                                    const remainingHint = document.querySelector("#hintText");
+                                    if (myHint > 0) myHint--;
+                                    remainingHint.textContent = myHint;
+                                } else if (hint.length > 1) {
+                                    Timer.stop(); // demo를 위함
+                                    const hintModal = document.createElement("p");
+                                    if (hint != "noHint") {
+                                        hintModal.textContent = hint;
+                                        console.log(hint);
+                                        contentModal.appendChild(hintModal);
+                                        //사용자의 남은 힌트를 보여줌
+                                        const remainingHint = document.querySelector("#hintText");
+                                        if (myHint > 0) myHint--;
+                                        remainingHint.textContent = myHint;
+                                    } else if (hint == "noHint") {
+                                        hintModal.textContent = "Please charge your hint";
+                                        contentModal.appendChild(hintModal);
+                                    }
+                                    backgroundModal.style.display = "block";
+                                    setTimeout(function () {
+                                        backgroundModal.style.display = "none";
+                                        Timer.resume();
+                                        if (hint != "noHint") {
+                                            const usedHint = document.querySelector("#hintScrollBox");
+                                            const content = document.createElement("p");
+                                            content.textContent = hint;
+                                            console.log(hint);
+                                            usedHint.appendChild(content);
+                                        }
+                                    }, 5000);
+                                }
+                            } else if (myHint <= 0) {
+                                //사용자의 남은 힌트가 없다면 힌트를 보여주지 않음
+                                const hintModal = document.createElement("p");
+                                hintModal.textContent = "Please charge your hint";
+                                contentModal.appendChild(hintModal);
+                                backgroundModal.style.display = "block";
+                                setTimeout(function () {
+                                    backgroundModal.style.display = "none";
+                                    Timer.resume();
+                                }, 5000);
                             }
-                        }, 5000);
-                    }
-                } else if (myHint <= 0) {
-                    //사용자의 남은 힌트가 없다면 힌트를 보여주지 않음
-                    const hintModal = document.createElement("p");
-                    hintModal.textContent = "Please charge your hint";
-                    contentModal.appendChild(hintModal);
-                    backgroundModal.style.display = "block";
-                    setTimeout(function () {
-                        backgroundModal.style.display = "none";
-                        Timer.resume();
-                    }, 5000);
-                }
-            },
+                        },
             RESULT: function (data) {
                 console.log("실행 : result");
                 document.querySelector("#coinBox").style.visibility = "visible";
@@ -1014,9 +1060,8 @@ export class Action {
                 SettingBox.appendChild(ResetButton);
             },
             SETTINGSELECT: function (data) {
-                console.log("실행: settingselect");
-                document.querySelector("#coinBox").style.visibility = "visible";
-
+            console.log("실행: settingselect");
+            document.querySelector("#coinBox").style.visibility = "visible";
                 let sound = data.sound; //1. soundEffect 2.background sound
                 let onoff = data.onoff; //1.  0오면 off/1오면 on
                 if ((onoff == "0") && (sound == "SoundEffect")) {
@@ -1226,6 +1271,4 @@ export class Action {
         this.canvas.ready(callbacks);
         console.log("setCallbacks READY");
     }
-
-}//class Action
-
+}
