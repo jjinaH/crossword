@@ -1,5 +1,3 @@
-
-
 import {Common} from "./common.js";
 import {MainFrame} from "./mainFrame.js";
 import {StageSelect} from "./stageSelect.js";
@@ -139,7 +137,7 @@ function remove_welcome(){
  * This class is used as a wrapper for Google Assistant Canvas Action class
  * along with its callbacks.
  */
-class Action {
+export class Action {
 
     /**
      * @param {*} scene which serves as a container of all visual elements
