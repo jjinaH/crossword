@@ -357,17 +357,18 @@ button {
     transform: translate(-50%, -50%);
 }
 
-#ranking, #setting, #main, #welcomeback {
+#ranking, #setting, #main{
     display: flex;
-    flex-direction: column;
-    margin : 2vh;
-    font-size: 6vh;
+    object-fit: contain;
+    width: 50px;
+    position: relative;
+    left: 5.46vw;
+    top: 56.25vh;
+    padding: 0 0 20px 0;
 }
 
 #bottomCommon {
     position: absolute;
-    right : 1vw;
-    bottom : 1vh;
 }
 
 

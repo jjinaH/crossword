@@ -333,7 +333,7 @@ class Action {
 
                 const userExp = document.createElement("span");
                 userExp.setAttribute("id", "userExp");
-                userExp.textContent = "1000";
+                userExp.textContent = exp;
                 expBox.appendChild(userExp);
 
                 const expBar = document.createElement("span");
@@ -463,29 +463,25 @@ class Action {
                  * 메인, 랭킹, 설정
                  * @type {HTMLDivElement}
                  */
+
                 const bottomCommon = document.createElement("div");
                 bottomCommon.setAttribute("id", "bottomCommon");
                 container.appendChild(bottomCommon);
 
-                const mainButton = document.createElement("i");
-                mainButton.setAttribute("class", "fa fa-home");
+                const mainButton = document.createElement("img");
+                mainButton.setAttribute("src", "../image/home_icon.png");
                 mainButton.setAttribute("id", "main");
                 mainButton.onclick = home;
                 bottomCommon.appendChild(mainButton);
 
-                // const welcomeback = document.createElement("i");
-                // welcomeback.setAttribute("class", "fa fa-reply");
-                // welcomeback.setAttribute("id", "welcomeback");
-                // bottomCommon.appendChild(welcomeback);
-
-                const rankingButton = document.createElement("i");
-                rankingButton.setAttribute("class", "fa fa-star");
+                const rankingButton = document.createElement("img");
+                rankingButton.setAttribute("src", "../image/rank_icon.png");
                 rankingButton.setAttribute("id", "ranking");
                 rankingButton.onclick = ranking;
                 bottomCommon.appendChild(rankingButton);
 
-                const settingButton = document.createElement("i");
-                settingButton.setAttribute("class", "fa fa-cog");
+                const settingButton = document.createElement("img");
+                settingButton.setAttribute("src", "../image/setting_icon.png");
                 settingButton.setAttribute("id", "setting");
                 settingButton.onclick = setting;
                 bottomCommon.appendChild(settingButton);
