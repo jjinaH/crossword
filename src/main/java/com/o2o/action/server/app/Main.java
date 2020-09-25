@@ -35,7 +35,7 @@ public class Main extends DialogflowApp {
         }
     }
 
-    String URL = "https://actions.o2o.kr/devsvr3/test/index.html";
+    String URL = "https://actions.o2o.kr/devsvr4/test/index.html";
 
     StagePropertyInfo stageinfo;
     TTS tts;
