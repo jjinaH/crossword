@@ -1,47 +1,6 @@
-function stepLock(step) {
-    const totalStep = 10;
-    if(step > 12) {
-        const nextPage = document.createElement("div");
-        nextPage.setAttribute("id", "nextPage");
-        const nextIcon = document.createElement("i");
-        nextIcon.setAttribute("class", "fa fa-angle-right fa-4x");
-        nextPage.appendChild(nextIcon);
-        document.querySelector("#stepBox").appendChild(nextPage);
-    }
-    let stepNum = 0;
-    const stepBox = document.querySelector("#stepButton");
-    for (let row = 0; row < 3; row++) {
-        const stepRow = document.createElement("div");
-        stepRow.setAttribute("id", "stepRow");
-        stepBox.appendChild(stepRow);
-        for (let col = 0; col < 4; col++) {
-            if (stepNum == totalStep) return;
-            stepNum++;
-            const underBox = document.createElement("div");
-            if (step < stepNum) { //disable
-                const outerBox = document.createElement("div");
-                outerBox.setAttribute("id", "outerBox");
-                stepRow.appendChild(outerBox);
-                underBox.textContent = "Lv. " + stepNum;
-                underBox.setAttribute("class", "disableUnderBox");
-                const upperBox = document.createElement("div");
-                upperBox.setAttribute("class", "upperBox");
-                upperBox.textContent = "Lock";
-                outerBox.appendChild(underBox);
-                outerBox.appendChild(upperBox);
-            } else {
-                underBox.textContent = "Lv. " + stepNum;
-                const num = stepNum;
-                console.log("open : " + num);
-                underBox.setAttribute("class", "ableUnderBox");
-                underBox.addEventListener("click", function () {
-                    window.canvas.sendTextQuery("level" + num);
-                });
-                stepRow.appendChild(underBox);
-            }
-        }
-    }
-}
+import {Common} from "./common.js";
+import {MainFrame} from "./mainFrame.js";
+import {StageSelect} from "./stageSelect.js";
 
 const Timer = (function () {
     let intervalId = null;
@@ -165,34 +124,31 @@ function hardGame() {
     window.canvas.sendTextQuery("hard");
 }
 
+function remove_welcome(){
+    const pages = document.querySelectorAll("#welcomeBox,#copyright,#o2ologo");
+    console.log("count: "+pages.length);
+    for (let page of pages){
+        console.log("remove_welcome function()"+page.textContent);
+        page.parentNode.removeChild(page);
+    }
+}
+
 /**
  * This class is used as a wrapper for Google Assistant Canvas Action class
  * along with its callbacks.
  */
-class Action {
+export class Action {
 
     /**
      * @param {*} scene which serves as a container of all visual elements
      */
     constructor(scene) {
-
-//        if (navigator.userAgent.match(/Android/i)) { //안드로이드일 때만 가로화면 고정시키기
-//            const orientation = window.orientation;
-//            if(orientation != undefined) {
-//                if(orientation == 0) {
-//                     window.screen.
-//                }
-//            }
-//             const lockScreen = async () => {
-//                 return await window.screen.orientation.lock("landscape-primary");
-//             };
-//             lockScreen().then(function (result) {
-//                 console.log("lnscp?? : " + result);
-//             });
-//        }
+        console.log("Action Constructor");
 
         // index.html 안의 <div id="screen"></div>
         const container = document.querySelector("#screen"); // container
+
+        //헤더 높이 구하기
         const headerheight = async () => {
             return await window.interactiveCanvas.getHeaderHeightPx();
         };
@@ -204,6 +160,10 @@ class Action {
         });
         container.setAttribute("class", "container");
 
+        /**
+         *
+         * User Info
+         */
         //main, stageselect, difficultyselect에서 사용
         let level = 0;
         let exp = 0;
@@ -245,6 +205,23 @@ class Action {
         failAudio.volume = 1.0;
 
 
+        /**
+         * Display Class Variable
+         */
+        const common = new Common(container);
+        const mainFrame = new MainFrame(container);
+        const stageSelect = new StageSelect(container);
+
+        common.init();
+        common.doDisplay();
+
+        mainFrame.init();
+        mainFrame.doDisplay();
+
+
+        stageSelect.init();
+        stageSelect.doDisplay();
+
         this.canvas = window.interactiveCanvas;
         this.scene = scene;
         this.commands = {
@@ -257,13 +234,10 @@ class Action {
             },
             MAIN: function (data) {
                 console.log("실행 : main");
-                if(document.querySelector("#coinBox") != null)
+                if (document.querySelector("#coinBox") != null)
                     document.querySelector("#coinBox").style.visibility = "visible";
-
-                while (container.hasChildNodes()) {
-                    container.removeChild(container.firstChild);
-                }
-
+                //welcome title , copyright, o2ologo remove
+                remove_welcome();
                 /**
                  * 메인 화면에서 보여줄 사용자의
                  * 레벨, 경험치, 힌트, 코인
@@ -285,17 +259,19 @@ class Action {
                 }
 
                 /**
-                 * 좌측 사용자 레벨, 경험치
-                 * @type {HTMLDivElement}
+                 *
+                 * Display Setting
                  */
+                common.doDisplay();
 
-                const levelBox = document.createElement("div");
-                levelBox.setAttribute("id", "levelBox");
-                container.appendChild(levelBox);
-
-                const backCircle = document.createElement("div");
-                backCircle.setAttribute("id", "backCircle");
-                levelBox.appendChild(backCircle);
+                //set TextContent
+                common.userLevel.textContent = level;
+                common.userExp.textContent = exp;
+                common.levelFullExp.textContent = fullExp;
+                common.hintText.textContent = myHint;
+                common.coinText.textContent = myCoin;
+                common.accountText.textContent = userEmail;
+                common.inGameHintNumText.textContent = myHint;
 
                 const levelText = document.createElement("div");
                 levelText.setAttribute("id", "levelText");
@@ -350,185 +326,24 @@ class Action {
                 levelFullExp.textContent = fullExp;
                 expBox.appendChild(levelFullExp);
 
+                //set onClick Function
+                common.hintPlus.onclick = shop;
+                common.hintPlusIcon.onclick = shop;
+                common.coinPlus.onclick = shop;
+                common.coinPlusIcon.onclick = shop;
+                common.mainButton.onclick = home;
+                common.rankingButton.onclick = ranking;
+                common.settingButton.onclick = setting;
 
                 /**
                  * 중앙에 이어하기, 단계 선택 버튼
                  * @type {HTMLDivElement}
                  */
-                const playBox = document.createElement("div");
-                playBox.setAttribute("id", "playBox");
-                container.appendChild(playBox);
+                mainFrame.doDisplay();
 
-                const gameText = document.createElement("span");
-                gameText.setAttribute("id", "gameText");
-                gameText.textContent = "GAME";
-                playBox.appendChild(gameText);
+                mainFrame.continueButton.onclick = continuebutton;
 
-                const continueText = document.createElement("span");
-                continueText.setAttribute("id", "continueText");
-                continueText.textContent = "CONTINUE";
-                playBox.appendChild(continueText);
-
-                const gameContinueBox = document.createElement("div");
-                gameContinueBox.setAttribute("id", "gameContinueBox");
-                playBox.appendChild(gameContinueBox);
-                gameContinueBox.onclick = continuebutton;
-
-                const gameContinueIcon = document.createElement("img");
-                gameContinueIcon.setAttribute("id", "gameContinueIcon");
-                gameContinueIcon.setAttribute("src", "../image/continue_icon.png");
-                gameContinueBox.appendChild(gameContinueIcon);
-                gameContinueIcon.onclick = continuebutton;
-
-
-                const chooseText = document.createElement("span");
-                chooseText.setAttribute("id", "chooseText");
-                chooseText.textContent = "CHOOSE";
-                playBox.appendChild(chooseText);
-
-                const chooseLevelText = document.createElement("span");
-                chooseLevelText.setAttribute("id", "chooseLevelText");
-                chooseLevelText.textContent = "LEVEL";
-                playBox.appendChild(chooseLevelText);
-
-                const chooseLevelBox = document.createElement("div");
-                chooseLevelBox.setAttribute("id", "chooseLevelBox");
-                playBox.appendChild(chooseLevelBox);
-                chooseLevelBox.onclick = viewallButton;
-
-                const chooseLevelIcon = document.createElement("img");
-                chooseLevelIcon.setAttribute("id", "chooseLevelIcon");
-                chooseLevelIcon.setAttribute("src", "../image/chooseLv_icon.png");
-                chooseLevelBox.appendChild(chooseLevelIcon);
-                chooseLevelIcon.onclick = viewallButton;
-
-
-
-                /**
-                 * 우측 상단에
-                 * 힌트와 코인
-                 * @type {HTMLDivElement}
-                 */
-                const userInfoBox = document.createElement("div");
-                userInfoBox.setAttribute("id", "userInfoBox");
-                container.appendChild(userInfoBox);
-
-                const hintBox = document.createElement("div");
-                hintBox.setAttribute("id", "hintBox");
-                userInfoBox.appendChild(hintBox);
-
-                const hintIcon = document.createElement("i");
-                hintIcon.setAttribute("class", "fa fa-search");
-                hintIcon.setAttribute("id", "hintIcon");
-                hintBox.appendChild(hintIcon);
-
-                const hintText = document.createElement("div");
-                hintText.setAttribute("id", "hintText");
-                hintText.textContent = myHint;
-                hintBox.appendChild(hintText);
-
-                const hintPlus = document.createElement("div");
-                hintPlus.setAttribute("id", "hintPlus");
-                hintBox.appendChild(hintPlus);
-                hintPlus.onclick = shop;
-
-                const hintPlusIcon = document.createElement("i");
-                hintPlusIcon.setAttribute("class", "fa fa-plus");
-                hintPlusIcon.setAttribute("id", "hintPlusIcon");
-                hintPlus.appendChild(hintPlusIcon);
-                hintPlusIcon.onclick = shop;
-
-
-                const coinBox = document.createElement("div");
-                coinBox.setAttribute("id", "coinBox");
-                userInfoBox.appendChild(coinBox);
-
-                const coinIcon = document.createElement("img");
-                coinIcon.setAttribute("id", "coinIcon");
-                coinIcon.setAttribute("src", "../image/coin_icon.png");
-                coinBox.appendChild(coinIcon);
-
-                const coinText = document.createElement("div");
-                coinText.setAttribute("id", "coinText");
-                coinText.textContent = myCoin;
-                coinBox.appendChild(coinText);
-
-                const coinPlus = document.createElement("div");
-                coinPlus.setAttribute("id", "coinPlus");
-                coinBox.appendChild(coinPlus);
-                coinPlus.onclick = shop;
-
-                const coinPlusIcon = document.createElement("i");
-                coinPlusIcon.setAttribute("class", "fa fa-plus");
-                coinPlusIcon.setAttribute("id", "coinPlusIcon");
-                coinPlus.appendChild(coinPlusIcon);
-                coinPlusIcon.onclick = shop;
-
-
-                const accountBox = document.createElement("div");
-                accountBox.setAttribute("id", "accountBox");
-                userInfoBox.appendChild(accountBox);
-
-                const accountText = document.createElement("div");
-                accountText.setAttribute("id", "accountText");
-                accountText.textContent = userEmail;
-                accountBox.appendChild(accountText);
-
-                const inGameHintBox = document.createElement("div");
-                inGameHintBox.setAttribute("id", "inGameHintBox");
-                container.appendChild(inGameHintBox);
-
-                const inGameHintIcon = document.createElement("i");
-                inGameHintIcon.setAttribute("id", "inGameHintIcon");
-                inGameHintIcon.setAttribute("class", "fa fa-search");
-                inGameHintBox.appendChild(inGameHintIcon);
-
-                const inGameHintNumBox = document.createElement("div");
-                inGameHintNumBox.setAttribute("id", "inGameHintNumBox");
-                inGameHintBox.appendChild(inGameHintNumBox);
-
-                const inGameHintNumText = document.createElement("div");
-                inGameHintNumText.setAttribute("id", "inGameHintNumText");
-                inGameHintNumText.textContent = myHint;
-                inGameHintNumBox.appendChild(inGameHintNumText);
-
-
-                /**
-                 * 우측 하단에
-                 * 메인, 랭킹, 설정
-                 * @type {HTMLDivElement}
-                 */
-
-                const bottomCommon = document.createElement("div");
-                bottomCommon.setAttribute("id", "bottomCommon");
-                $("#bottomCommon").attr({
-                    "class": "myClass"
-                });
-                container.appendChild(bottomCommon);
-
-                const mainButton = document.createElement("img");
-                mainButton.setAttribute("src", "../image/home_icon.png");
-                mainButton.setAttribute("onmouseover", "this.src='../image/home_hvicon.png';");
-                mainButton.setAttribute("onmouseout", "this.src='../image/home_icon.png';");
-                mainButton.setAttribute("id", "main");
-                mainButton.onclick = home;
-                bottomCommon.appendChild(mainButton);
-
-                const rankingButton = document.createElement("img");
-                rankingButton.setAttribute("src", "../image/rank_icon.png");
-                rankingButton.setAttribute("onmouseover", "this.src='../image/rank_hvicon.png';");
-                rankingButton.setAttribute("onmouseout", "this.src='../image/rank_icon.png';");
-                rankingButton.setAttribute("id", "ranking");
-                rankingButton.onclick = ranking;
-                bottomCommon.appendChild(rankingButton);
-
-                const settingButton = document.createElement("img");
-                settingButton.setAttribute("src", "../image/setting_icon.png");
-                settingButton.setAttribute("onmouseover", "this.src='../image/setting_hvicon.png';");
-                settingButton.setAttribute("onmouseout", "this.src='../image/setting_icon.png';");
-                settingButton.setAttribute("id", "setting");
-                settingButton.onclick = setting;
-                bottomCommon.appendChild(settingButton);
+                mainFrame.stageButton.onclick = viewallButton;
 
             },
             STAGESELECT: function (data) {
@@ -538,19 +353,15 @@ class Action {
                  * 메인 화면, 중앙에 생성했던
                  * continue, view all 버튼 제거
                  */
-                container.removeChild(document.querySelector("#continue_stageButton"));
+                //container.removeChild(document.querySelector("#continue_stageButton"));
+                mainFrame.doDisplay();
                 /**
                  * 중앙에
                  * 선택할 수 있는 단계 보여줌
                  * @type {HTMLDivElement}
                  */
-                const stepBox = document.createElement("div");
-                stepBox.setAttribute("id", "stepBox");
-                container.appendChild(stepBox);
-                const stepButton = document.createElement("div");
-                stepButton.setAttribute("id", "stepButton");
-                stepBox.appendChild(stepButton);
-                stepLock(level); //단계 버튼 생성(10개)
+                stageSelect.doDisplay();
+                stageSelect.stepLock(level); //단계 버튼 생성(10개)
             },
             DIFFICULTYSELECT: function (data) {
                 console.log("실행 : difficulty");
