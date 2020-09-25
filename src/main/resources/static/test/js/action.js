@@ -273,59 +273,6 @@ export class Action {
                 common.accountText.textContent = userEmail;
                 common.inGameHintNumText.textContent = myHint;
 
-                const levelText = document.createElement("div");
-                levelText.setAttribute("id", "levelText");
-                levelText.textContent = "Level";
-                levelBox.appendChild(levelText);
-
-                const userLevel = document.createElement("div");
-                userLevel.setAttribute("id", "userLevel");
-                userLevel.textContent = level;
-                levelBox.appendChild(userLevel);
-
-                // 원형 progress bar 달기
-
-                const progressBar = document.createElement("div");
-                progressBar.setAttribute("id", "progress");
-                levelBox.appendChild(progressBar);
-
-                $('#progress').circleProgress({
-                    size:110,
-                    //그래프 크기
-                    startAngle: -Math.PI/2 ,
-                    //시작지점 (기본값 Math.PI)
-                    value: (exp/fullExp),
-                    //그래프에 표시될 값
-                    animation: true,
-                    //그래프가 그려지는 애니메이션 동작 여부
-                    fill: {gradient: ['#7cbf5a', '#f9d118']},
-                    //채워지는 색
-                    emptyFill: "rgba(0, 0, 0, 0.0)",
-                    //빈칸 색
-                    lineCap: 'round',
-                    //그래프 끝
-                    thickness: 10
-                    //그래프 두께
-                });
-
-                const expBox = document.createElement("div");
-                expBox.setAttribute("id", "expBox");
-                levelBox.appendChild(expBox);
-
-                const userExp = document.createElement("span");
-                userExp.setAttribute("id", "userExp");
-                userExp.textContent = exp;
-                expBox.appendChild(userExp);
-
-                const expBar = document.createElement("span");
-                expBar.setAttribute("id", "expBar");
-                expBox.appendChild(expBar);
-
-                const levelFullExp = document.createElement("span");
-                levelFullExp.setAttribute("id", "levelFullExp");
-                levelFullExp.textContent = fullExp;
-                expBox.appendChild(levelFullExp);
-
                 //set onClick Function
                 common.hintPlus.onclick = shop;
                 common.hintPlusIcon.onclick = shop;
