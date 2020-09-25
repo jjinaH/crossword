@@ -288,9 +288,10 @@ export class Action {
                  */
                 mainFrame.doDisplay();
 
-                mainFrame.continueButton.onclick = continuebutton;
-
-                mainFrame.stageButton.onclick = viewallButton;
+                mainFrame.gameContinueBox.onclick = continuebutton;
+                mainFrame.gameContinueIcon.onclick = continuebutton;
+                mainFrame.chooseLevelBox.onclick = viewallButton;
+                mainFrame.chooseLevelIcon.onclick = viewallButton;
 
             },
             STAGESELECT: function (data) {

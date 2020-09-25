@@ -4,11 +4,15 @@ export class MainFrame {
      * 중앙에 이어하기, 단계 선택 버튼
      * @type {HTMLDivElement}
      */
-    #_continue_stageButton;
-    #_continueButton;
-    #_continueText;
-    #_stageButton;
-    #_stageText;
+    #_playBox
+    #_gameText
+    #_continueText
+    #_gameContinueBox
+    #_gameContinueIcon
+    #_chooseText
+    #_chooseLevelText
+    #_chooseLevelBox
+    #_chooseLevelIcon
 
     constructor(container) {
         this.container = container;
@@ -17,7 +21,7 @@ export class MainFrame {
 
     doDisplay() {
         console.log("MainFrame DoDisplay");
-        const page = document.querySelector("#continue_stageButton");
+        const page = document.querySelector("#playBox");
         if (page.style.display == 'none') {
             page.style.display = 'flex';
         } else {
@@ -32,44 +36,63 @@ export class MainFrame {
          * @type {HTMLDivElement}
          */
 
-        this.#_continue_stageButton = document.createElement("div")
-        this.#_continue_stageButton.setAttribute("id", "continue_stageButton")
-        this.container.appendChild(this.#_continue_stageButton);
+        this.#_playBox = document.createElement("div");
+        this.#_playBox.setAttribute("id", "playBox");
+        this.container.appendChild(this.#_playBox);
 
-        this.#_continueButton = document.createElement("div");
-        this.#_continueButton.setAttribute("id", "continueButton");
-        //this.#_continueButton.onclick = continuebutton;
-        this.#_continueText = document.createElement("p");
+        this.#_gameText = document.createElement("span");
+        this.#_gameText.setAttribute("id", "gameText");
+        this.#_gameText.textContent = "GAME";
+        this.#_playBox.appendChild(this.#_gameText);
+
+        this.#_continueText = document.createElement("span");
+        this.#_continueText.setAttribute("id", "continueText");
         this.#_continueText.textContent = "CONTINUE";
-        this.#_continueButton.appendChild(this.#_continueText);
-        this.#_continue_stageButton.appendChild(this.#_continueButton);
+        this.#_playBox.appendChild(this.#_continueText);
 
-        this.#_stageButton = document.createElement("div");
-        this.#_stageButton.setAttribute("id", "stageButton");
-        //this.#_stageButton.onclick = viewallButton;
-        this.#_stageText = document.createElement("p");
-        this.#_stageText.textContent = "SELECT STAGE";
-        this.#_stageButton.appendChild(this.#_stageText);
-        this.#_continue_stageButton.appendChild(this.#_stageButton);
+        this.#_gameContinueBox = document.createElement("div");
+        this.#_gameContinueBox.setAttribute("id", "gameContinueBox");
+        this.#_playBox.appendChild(this.#_gameContinueBox);
+
+        this.#_gameContinueIcon = document.createElement("img");
+        this.#_gameContinueIcon.setAttribute("id", "gameContinueIcon");
+        this.#_gameContinueIcon.setAttribute("src", "../image/continue_icon.png");
+        this.#_gameContinueBox.appendChild(this.#_gameContinueIcon);
+
+
+        this.#_chooseText = document.createElement("span");
+        this.#_chooseText.setAttribute("id", "chooseText");
+        this.#_chooseText.textContent = "CHOOSE";
+        this.#_playBox.appendChild(this.#_chooseText);
+
+        this.#_chooseLevelText = document.createElement("span");
+        this.#_chooseLevelText.setAttribute("id", "chooseLevelText");
+        this.#_chooseLevelText.textContent = "LEVEL";
+        this.#_playBox.appendChild(this.#_chooseLevelText);
+
+        this.#_chooseLevelBox = document.createElement("div");
+        this.#_chooseLevelBox.setAttribute("id", "chooseLevelBox");
+        this.#_playBox.appendChild(this.#_chooseLevelBox);
+
+        this.#_chooseLevelIcon = document.createElement("img");
+        this.#_chooseLevelIcon.setAttribute("id", "chooseLevelIcon");
+        this.#_chooseLevelIcon.setAttribute("src", "../image/chooseLv_icon.png");
+        this.#_chooseLevelBox.appendChild(this.#_chooseLevelIcon);
     }
 
-    get continue_stageButton() {
-        return this.#_continue_stageButton;
+    get gameContinueBox() {
+        return this.#_gameContinueBox;
     }
 
-    get continueButton() {
-        return this.#_continueButton;
+    get gameContinueIcon() {
+        return this.#_gameContinueIcon;
     }
 
-    get continueText() {
-        return this.#_continueText;
+    get chooseLevelBox() {
+        return this.#_chooseLevelBox;
     }
 
-    get stageButton() {
-        return this.#_stageButton;
-    }
-
-    get stageText() {
-        return this.#_stageText;
+    get chooseLevelIcon() {
+        return this.#_chooseLevelIcon;
     }
 }//class MainFrame
