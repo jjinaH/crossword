@@ -162,41 +162,74 @@ button {
     top: 23.5vh;
 }
 
-
-#continue_stageButton{
-    display : flex;
-    margin-top : 15vh;
+#playBox {
+    display: flex;
 }
 
-#continueButton{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 15vh;
-    width : 30vw;
-    font-size : 6vh;
-    background-color: rgba(255,255,255,0.3);
-    border-radius: 1.5vh;
-    border : 1px solid rgba(255,255,255,0.6);
-    margin-right : 10vw;
+#gameText, #continueText, #chooseText, #chooseLevelText {
+    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
+    font-family: "NanumSquare", sans-serif;
+    font-size: 56.5px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+    position: absolute;
+    margin: 0 0 -20px 0;
 }
 
-#stageButton{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 15vh;
-    width : 30vw;
-    font-size : 6vh;
-    background-color: rgba(255,255,255,0.3);
-    border-radius: 1.5vh;
-    border : 1px solid rgba(255,255,255,0.6);
+#gameText, #chooseText {
+    font-weight: 400;
+    top: 43.375vh;
+}
+
+#gameText, #continueText, #gameContinueBox {
+    left: 25vw;
+}
+
+#chooseText, #chooseLevelText, #chooseLevelBox {
+    left: 60vw;
+}
+
+#continueText, #chooseLevelText {
+    font-weight: 800;
+    bottom: 43.25vh;
+}
+
+#gameContinueBox, #chooseLevelBox {
+    width: 90px;
+    height: 91px;
+    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 26.25vh;
+}
+
+#gameContinueBox {
+    background-color: #00b4ff;
+}
+
+#chooseLevelBox {
+    background-color: #2652d2;
+}
+
+#gameContinueIcon, #chooseLevelIcon {
+    width: 70px;
+    position: absolute;
+    left: 10px;
+    top: 15px;
+}
+
+#gameContinueIcon {
+    top: 10px;
+    left: 14px;
 }
 
 #userInfoBox {
     display: flex;
+    position: absolute;
 }
 
 #hintBox {
@@ -206,7 +239,6 @@ button {
     box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
     background-color: #7cbf5a;
     position: relative;
-    /*left: 55vw;*/
     left: 705px;
     top: 6vh;
 }

@@ -318,7 +318,7 @@ class Action {
                     //그래프 크기
                     startAngle: -Math.PI/2 ,
                     //시작지점 (기본값 Math.PI)
-                    value: 0.8,
+                    value: (exp/fullExp),
                     //그래프에 표시될 값
                     animation: true,
                     //그래프가 그려지는 애니메이션 동작 여부
@@ -355,25 +355,55 @@ class Action {
                  * 중앙에 이어하기, 단계 선택 버튼
                  * @type {HTMLDivElement}
                  */
-                // const continue_stageButton = document.createElement("div");
-                // continue_stageButton.setAttribute("id", "continue_stageButton");
-                // container.appendChild(continue_stageButton);
-                //
-                // const continueButton = document.createElement("div");
-                // continueButton.setAttribute("id", "continueButton");
-                // continueButton.onclick = continuebutton;
-                // const continueText = document.createElement("p");
-                // continueText.textContent = "CONTINUE";
-                // continueButton.appendChild(continueText);
-                // continue_stageButton.appendChild(continueButton);
-                //
-                // const stageButton = document.createElement("div");
-                // stageButton.setAttribute("id", "stageButton");
-                // stageButton.onclick = viewallButton;
-                // const stageText = document.createElement("p");
-                // stageText.textContent = "SELECT STAGE";
-                // stageButton.appendChild(stageText);
-                // continue_stageButton.appendChild(stageButton);
+                const playBox = document.createElement("div");
+                playBox.setAttribute("id", "playBox");
+                container.appendChild(playBox);
+
+                const gameText = document.createElement("span");
+                gameText.setAttribute("id", "gameText");
+                gameText.textContent = "GAME";
+                playBox.appendChild(gameText);
+
+                const continueText = document.createElement("span");
+                continueText.setAttribute("id", "continueText");
+                continueText.textContent = "CONTINUE";
+                playBox.appendChild(continueText);
+
+                const gameContinueBox = document.createElement("div");
+                gameContinueBox.setAttribute("id", "gameContinueBox");
+                playBox.appendChild(gameContinueBox);
+                gameContinueBox.onclick = continuebutton;
+
+                const gameContinueIcon = document.createElement("img");
+                gameContinueIcon.setAttribute("id", "gameContinueIcon");
+                gameContinueIcon.setAttribute("src", "../image/continue_icon.png");
+                gameContinueBox.appendChild(gameContinueIcon);
+                gameContinueIcon.onclick = continuebutton;
+
+
+                const chooseText = document.createElement("span");
+                chooseText.setAttribute("id", "chooseText");
+                chooseText.textContent = "CHOOSE";
+                playBox.appendChild(chooseText);
+
+                const chooseLevelText = document.createElement("span");
+                chooseLevelText.setAttribute("id", "chooseLevelText");
+                chooseLevelText.textContent = "LEVEL";
+                playBox.appendChild(chooseLevelText);
+
+                const chooseLevelBox = document.createElement("div");
+                chooseLevelBox.setAttribute("id", "chooseLevelBox");
+                playBox.appendChild(chooseLevelBox);
+                chooseLevelBox.onclick = viewallButton;
+
+                const chooseLevelIcon = document.createElement("img");
+                chooseLevelIcon.setAttribute("id", "chooseLevelIcon");
+                chooseLevelIcon.setAttribute("src", "../image/chooseLv_icon.png");
+                chooseLevelBox.appendChild(chooseLevelIcon);
+                chooseLevelIcon.onclick = viewallButton;
+
+
+
                 /**
                  * 우측 상단에
                  * 힌트와 코인
