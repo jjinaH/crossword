@@ -117,24 +117,7 @@ export class Common {
         this.#_progressBar.setAttribute("id", "progress");
         this.#_levelBox.appendChild(this.#_progressBar);
 
-        $('#progress').circleProgress({
-            size:110,
-            //그래프 크기
-            startAngle: -Math.PI/2 ,
-            //시작지점 (기본값 Math.PI)
-            value: (exp/fullExp),
-            //그래프에 표시될 값
-            animation: true,
-            //그래프가 그려지는 애니메이션 동작 여부
-            fill: {gradient: ['#7cbf5a', '#f9d118']},
-            //채워지는 색
-            emptyFill: "rgba(0, 0, 0, 0.0)",
-            //빈칸 색
-            lineCap: 'round',
-            //그래프 끝
-            thickness: 10
-            //그래프 두께
-        });
+
 
         this.#_expBox = document.createElement("div");
         this.#_expBox.setAttribute("id", "expBox");
