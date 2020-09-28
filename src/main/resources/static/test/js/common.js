@@ -61,10 +61,10 @@ export class Common {
 
     doDisplay() {
         console.log("Common DoDisplay");
-        const pages = document.querySelectorAll(" #levelBox,#userInfoBox,#inGameHintBox,#bottomCommon");
+        const pages = document.querySelectorAll(" #levelBox,#userInfoBox,#bottomCommon");
         let i = 0;
         for (let page of pages) {
-            if(!this.isDisplay){
+            if(!this.isDisplay){ //화면에 보여지지 않는다면 -> 보여주도록
                 console.log("this.display: "+i+this.display[i]);
                 if(i==1)
                 {
@@ -75,13 +75,22 @@ export class Common {
                 }
                 i++;
             }
-            else{
-                page.style.display = "none"
-            }
+            // else{ //화면에 보인다면 -> 보이지 않도록
+            //     page.style.display = "none"
+            // }
         }
-        this.isDisplay = !this.isDisplay
+        this.isDisplay = !this.isDisplay //상태 변경
 
         console.log(this.isDisplay.toString());
+    }
+
+    notDisplay() {
+        console.log("Common do not Display");
+        const pages = document.querySelectorAll("#levelBox, #userInfoBox, #inGameHintBox, #bottomCommon");
+        for(let page of pages)
+            page.style.display = "none"
+        ;
+        this.isDisplay = false;
     }
 
     init() {
@@ -106,16 +115,16 @@ export class Common {
         this.#_levelText = document.createElement("div");
         this.#_levelText.setAttribute("id", "levelText");
         this.#_levelText.textContent = "Level";
-        this.#_levelBox.appendChild(this.#_levelText);
+        this.#_backCircle.appendChild(this.#_levelText);
 
         this.#_userLevel = document.createElement("div");
         this.#_userLevel.setAttribute("id", "userLevel");
         //this.#userLevel.textContent = level;
-        this.#_levelBox.appendChild(this.#_userLevel);
+        this.#_backCircle.appendChild(this.#_userLevel);
 
         this.#_progressBar = document.createElement("div");
         this.#_progressBar.setAttribute("id", "progress");
-        this.#_levelBox.appendChild(this.#_progressBar);
+        this.#_backCircle.appendChild(this.#_progressBar);
 
 
 

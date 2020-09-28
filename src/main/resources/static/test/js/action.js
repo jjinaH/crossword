@@ -292,7 +292,8 @@ export class Action {
                     //그래프 크기
                     startAngle: -Math.PI/2 ,
                     //시작지점 (기본값 Math.PI)
-                    value: exp/fullExp,
+                    value: 1,
+                        // exp/fullExp,
                     //그래프에 표시될 값
                     animation: true,
                     //그래프가 그려지는 애니메이션 동작 여부

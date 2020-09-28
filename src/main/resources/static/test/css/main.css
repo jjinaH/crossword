@@ -17,7 +17,7 @@ button {
     background-repeat : no-repeat;
     background-size: cover;
     display: flex;
-    flex-direction: column;
+    flex-flow: wrap;
     color : white;
 }
 
@@ -59,8 +59,10 @@ button {
 
 /*메인 화면*/
 #levelBox {
-    /*font-size: 3vh;*/
-    position: relative;
+    border-style: solid;
+    height: 22.5vh;
+    width: 12vw;
+    padding: 50px 0 0 35px;
 }
 
 #backCircle {
@@ -69,9 +71,12 @@ button {
     box-shadow: -5.6px 8.3px 20px 0 rgba(25, 34, 61, 0.45);
     background-color: #ffffff;
     border-radius: 40px;
-    position: absolute;
-    left: 4.14vw;
-    top: 7.8vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 15px;
 }
 
 #levelText {
@@ -86,14 +91,10 @@ button {
     letter-spacing: normal;
     text-align: left;
     color: #066666;
-    position: absolute;
-    left: 6vw;
-    top: 9.5vh;
+    padding: 10px 0 5px 0;
 }
 
 #userLevel {
-    width: 23px;
-    height: 34px;
     font-family: 'NanumSquare', sans-serif;
     font-size: 44.5px;
     font-weight: 800;
@@ -101,22 +102,18 @@ button {
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
-    text-align: left;
     color: #324091;
-    position: absolute;
-    left: 6vw;
-    top: 11vh;
 }
 
 #progress {
     position: absolute;
-    top: 6vh;
-    left: 3vw;
 }
 
 #expBox {
-    position: relative;
-    bottom: 2vh;
+    width: 115px;
+    padding: 45px 0 0 0;
+    display: flex;
+    justify-content: space-between;
 }
 
 #userExp {
@@ -131,18 +128,12 @@ button {
     letter-spacing: normal;
     text-align: right;
     color: #a1cf79;
-    position: absolute;
-    left: 3vw;
-    top: 23.5vh;
 }
 
 #expBar {
     width: 2px;
     height: 15px;
     background-color: white;
-    position: absolute;
-    left: 7.3vw;
-    top: 23.9vh;
 }
 
 #levelFullExp {
@@ -157,9 +148,6 @@ button {
     letter-spacing: normal;
     text-align: left;
     color: #2e3f82;
-    position: absolute;
-    left: 7.8vw;
-    top: 23.5vh;
 }
 
 #playBox {
@@ -176,7 +164,7 @@ button {
     letter-spacing: normal;
     text-align: left;
     color: #ffffff;
-    position: absolute;
+    /*position: absolute;*/
     margin: 0 0 -20px 0;
 }
 
@@ -229,7 +217,11 @@ button {
 
 #userInfoBox {
     display: flex;
-    position: absolute;
+    border-style: solid;
+    width: 82vw;
+    height: 15vh;
+    justify-content: flex-end;
+    padding: 50px 40px 0 0;
 }
 
 #hintBox {
@@ -238,19 +230,20 @@ button {
     border-radius: 15px;
     box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
     background-color: #7cbf5a;
-    position: relative;
-    left: 705px;
-    top: 6vh;
+    margin: 0 10px 0 0;
+    display: flex;
 }
 
-#hintIcon {
+#hintIcon, #coinIcon {
+    position: relative;
+    left: 11px;
+    top: 7px;
     font-size: 25px;
 }
 
-#hintIcon {
-    position: absolute;
-    left: 11px;
-    top: 9px;
+#coinIcon {
+    width: 25px;
+    height: 25px;
 }
 
 #hintText, #coinText {
@@ -263,12 +256,13 @@ button {
     letter-spacing: normal;
     text-align: left;
     color: #ffffff;
+    position: relative;
+    left: 20px;
+    top: 8px;
 }
 
 #hintText {
-    position: absolute;
-    left: 44px;
-    top: 10px;
+    width: 15px;
 }
 
 #hintPlus, #coinPlus {
@@ -277,19 +271,23 @@ button {
     box-shadow: 0px 5px 15px 0 rgba(0, 0, 0, 0.35);
     background-color: #ffba00;
     border-radius: 50%;
+    position: relative;
+    bottom: 17px;
 }
 
 #hintPlus {
-    position: absolute;
-    left: 69px;
-    bottom: 17px;
+    left: 35px;
+}
+
+#coinPlus {
+    left: 40px;
 }
 
 #hintPlusIcon, #coinPlusIcon {
     font-size: 19px;
     position: absolute;
-    top: 6px;
-    left: 7px;
+    top: 7px;
+    left: 8px;
 }
 
 #coinBox {
@@ -298,29 +296,12 @@ button {
     border-radius: 15px;
     box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
     background-color: #7cbf5a;
-    position: relative;
-    left: 56vw;
-    top: 6vh;
-}
-
-#coinIcon {
-    width: 25px;
-    height: 25px;
-    position: absolute;
-    left: 10px;
-    top: 8px;
+    display: flex;
+    margin: 0 10px 0 0;
 }
 
 #coinText {
-    position: absolute;
-    left: 44px;
-    top: 10px;
-}
-
-#coinPlus {
-    position: absolute;
-    left: 119px;
-    bottom: 17px;
+    width: 55px;
 }
 
 #accountBox {
@@ -328,16 +309,12 @@ button {
     height: 40px;
     border-radius: 15px;
     background-color: #324091;
-    position: relative;
-    left: 57vw;
-    top: 6vh;
 }
 
 #accountText {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: 'NanumSquare', sans-serif;
     font-size: 22px;
     font-weight: 800;
@@ -399,14 +376,14 @@ button {
     display: flex;
     object-fit: contain;
     width: 50px;
-    position: relative;
-    left: 5.46vw;
-    top: 56.25vh;
     padding: 0 0 20px 0;
 }
 
 #bottomCommon {
-    position: absolute;
+    display: flex;
+    width: 10vw;
+    flex-direction: column;
+    padding: 100px 0 0 75px;
 }
 
 
