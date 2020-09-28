@@ -305,7 +305,6 @@ export class Action {
             },
             STAGESELECT: function (data) {
                 console.log("실행 : stage");
-                document.querySelector("#coinBox").style.visibility = "visible";
                 /**
                  * 메인 화면, 중앙에 생성했던
                  * continue, view all 버튼 제거
@@ -322,7 +321,6 @@ export class Action {
             },
             DIFFICULTYSELECT: function (data) {
                 console.log("실행 : difficulty");
-                document.querySelector("#coinBox").style.visibility = "visible";
                 let winMoney1 = 0;
                 let winMoney2 = 0;
                 let winMoney3 = 0;
@@ -381,7 +379,6 @@ export class Action {
                         window.canvas.sendTextQuery(difficultySelect.difficulty[i-1]);
                     })
                 }
-
             },
             INGAME: function (data) {
                 console.log("실행 : inGame");
