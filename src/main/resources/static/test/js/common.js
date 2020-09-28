@@ -5,6 +5,7 @@ export class Common {
      * @type {HTMLDivElement}
      */
 
+    #_userBox
     #_levelBox
     #_backCircle
     #_levelText
@@ -104,9 +105,15 @@ export class Common {
          * 좌측 사용자 레벨, 경험치
          * @type {HTMLDivElement}
          */
+
+
+        this.#_userBox = document.createElement("div");
+        this.#_userBox.setAttribute("id", "userBox");
+        this.container.appendChild(this.#_userBox);
+
         this.#_levelBox = document.createElement("div");
         this.#_levelBox.setAttribute("id", "levelBox");
-        this.container.appendChild(this.#_levelBox);
+        this.#_userBox.appendChild(this.#_levelBox);
 
         this.#_backCircle = document.createElement("div");
         this.#_backCircle.setAttribute("id", "backCircle");
@@ -153,7 +160,7 @@ export class Common {
          */
         this.#_userInfoBox = document.createElement("div");
         this.#_userInfoBox.setAttribute("id", "userInfoBox");
-        this.container.appendChild(this.#_userInfoBox);
+        this.#_userBox.appendChild(this.#_userInfoBox);
 
         this.#_hintBox = document.createElement("div");
         this.#_hintBox.setAttribute("id", "hintBox");
