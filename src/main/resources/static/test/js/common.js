@@ -178,7 +178,7 @@ export class Common {
 
         this.#_coinIcon = document.createElement("img");
         this.#_coinIcon.setAttribute("id", "coinIcon");
-        this.#_coinIcon.setAttribute("src", "../image/coin_icon.png");
+        this.#_coinIcon.setAttribute("src", "../image/common/coin_icon.png");
         this.#_coinBox.appendChild(this.#_coinIcon);
 
         this.#_coinText = document.createElement("div");
@@ -237,25 +237,25 @@ export class Common {
         this.container.appendChild(this.#_bottomCommon);
 
         this.#_mainButton = document.createElement("img");
-        this.#_mainButton.setAttribute("src", "../image/home_icon.png");
-        this.#_mainButton.setAttribute("onmouseover", "this.src='../image/home_hvicon.png';");
-        this.#_mainButton.setAttribute("onmouseout", "this.src='../image/home_icon.png';");
+        this.#_mainButton.setAttribute("src", "../image/common/home_icon.png");
+        this.#_mainButton.setAttribute("onmouseover", "this.src='../image/common/home_hvicon.png';");
+        this.#_mainButton.setAttribute("onmouseout", "this.src='../image/common/home_icon.png';");
         this.#_mainButton.setAttribute("id", "main");
         //this.#_mainButton.onclick = home;
         this.#_bottomCommon.appendChild(this.#_mainButton);
 
         this.#_rankingButton = document.createElement("img");
-        this.#_rankingButton.setAttribute("src", "../image/rank_icon.png");
-        this.#_rankingButton.setAttribute("onmouseover", "this.src='../image/rank_hvicon.png';");
-        this.#_rankingButton.setAttribute("onmouseout", "this.src='../image/rank_icon.png';");
+        this.#_rankingButton.setAttribute("src", "../image/common/rank_icon.png");
+        this.#_rankingButton.setAttribute("onmouseover", "this.src='../image/common/rank_hvicon.png';");
+        this.#_rankingButton.setAttribute("onmouseout", "this.src='../image/common/rank_icon.png';");
         this.#_rankingButton.setAttribute("id", "ranking");
         //this.#_rankingButton.onclick = ranking;
         this.#_bottomCommon.appendChild(this.#_rankingButton);
 
         this.#_settingButton = document.createElement("img");
-        this.#_settingButton.setAttribute("src", "../image/setting_icon.png");
-        this.#_settingButton.setAttribute("onmouseover", "this.src='../image/setting_hvicon.png';");
-        this.#_settingButton.setAttribute("onmouseout", "this.src='../image/setting_icon.png';");
+        this.#_settingButton.setAttribute("src", "../image/common/setting_icon.png");
+        this.#_settingButton.setAttribute("onmouseover", "this.src='../image/common/setting_hvicon.png';");
+        this.#_settingButton.setAttribute("onmouseout", "this.src='../image/common/setting_icon.png';");
         this.#_settingButton.setAttribute("id", "setting");
         //this.#_settingButton.onclick = setting;
         this.#_bottomCommon.appendChild(this.#_settingButton);
