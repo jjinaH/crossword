@@ -1,6 +1,7 @@
 import {Common} from "./common.js";
 import {MainFrame} from "./mainFrame.js";
 import {StageSelect} from "./stageSelect.js";
+import {Shop} from "./shop.js";
 
 const Timer = (function () {
     let intervalId = null;
@@ -211,9 +212,11 @@ export class Action {
         const common = new Common(container);
         const mainFrame = new MainFrame(container);
         const stageSelect = new StageSelect(container);
+        const shopPage = new Shop(container);
+
 
         common.init();
-        common.doDisplay();
+        common.notDisplay();
 
         mainFrame.init();
         mainFrame.doDisplay();
@@ -231,8 +234,10 @@ export class Action {
 
                 userEmail = data.inputemail;
 
+
+
             },
-            MAIN: function (data) {
+                MAIN: function (data) {
                 console.log("실행 : main");
                 if (document.querySelector("#coinBox") != null)
                     document.querySelector("#coinBox").style.visibility = "visible";
@@ -311,6 +316,8 @@ export class Action {
                 mainFrame.gameContinueIcon.onclick = continuebutton;
                 mainFrame.chooseLevelBox.onclick = viewallButton;
                 mainFrame.chooseLevelIcon.onclick = viewallButton;
+
+                shopPage.doDisplay();
 
             },
             STAGESELECT: function (data) {
@@ -929,6 +936,7 @@ export class Action {
             },
             RANKING: function (data) {
                 console.log("실행 : ranking");
+                mainFrame.doDisplay();
                 document.querySelector("#coinBox").style.visibility = "visible";
                 if (document.querySelector("#stepBox") != null) {
                     container.removeChild(document.querySelector("#stepBox"));
@@ -988,6 +996,9 @@ export class Action {
                 }
             },
             SHOP: function (data) {
+                shopPage.init();
+                mainFrame.doDisplay();
+
                 console.log("실행 : shop");
                 document.querySelector("#coinBox").style.visibility = "visible";
                 /**
@@ -997,85 +1008,7 @@ export class Action {
                  * 코인 충전
                  * 힌트 충전
                  */
-                if (document.querySelector("#stepBox") != null) {
-                    container.removeChild(document.querySelector("#stepBox"));
-                }
-                if (document.querySelector("#continue_stageButton") != null) {
-                    container.removeChild(document.querySelector("#continue_stageButton"));
-                }
-                if (document.querySelector("#rankBox") != null) {
-                    container.removeChild(document.querySelector("#rankBox"));
-                }
-                if (document.querySelector("#SettingBox") != null) {
-                    container.removeChild(document.querySelector("#SettingBox"));
-                }
-                if (document.querySelector("#inGameBox") != null) {
-                    container.removeChild(document.querySelector("#inGameBox"));
-                }
-                if (document.querySelector("#difficultyBox") != null) {
-                    container.removeChild(document.querySelector("#difficultyBox"));
-                }
-                if (document.querySelector("#resultBox") != null) {
-                    container.removeChild(document.querySelector("#resultBox"));
-                }
-                const Store = document.createElement("div");
-                Store.setAttribute("id", "Store");
-                container.appendChild(Store);
-                const Hintbox = document.createElement("div");
-                Hintbox.setAttribute("id", "HintBox");
-                Store.appendChild(Hintbox);
-                const top = document.createElement("div");
-                top.setAttribute("id", "top");
-                Hintbox.appendChild(top);
-                const HintText = document.createElement("div");
-                HintText.textContent = "Hint Purchase";
-                top.appendChild(HintText);
-                const hr = document.createElement("hr");
-                hr.setAttribute("id", "hr");
-                top.appendChild(hr);
-                const HintIcon = document.createElement("i");
-                HintIcon.setAttribute("class", "fa fa-neuter fa-2x");
-                top.appendChild(HintIcon);
-                const Hintcount = document.createElement("span");
-                Hintcount.textContent = " X 3";
-                top.appendChild(Hintcount);
-                const price = document.createElement("div");
-                price.setAttribute("id", "price");
-                price.textContent = "300c";
-                Hintbox.appendChild(price);
-                //
-                const Coinbox = document.createElement("div");
-                Coinbox.setAttribute("id", "Coinbox");
-                Store.appendChild(Coinbox);
-                const cointop = document.createElement("div");
-                cointop.setAttribute("id", "cointop");
-                Coinbox.appendChild(cointop);
-                const CoinText = document.createElement("div");
-                CoinText.textContent = "Coin Purchase";
-                cointop.appendChild(CoinText);
-                const hr2 = document.createElement("hr");
-                hr2.setAttribute("id", "hr");
-                cointop.appendChild(hr2);
-                const CoinIcon = document.createElement("i");
-                CoinIcon.setAttribute("class", "fa fa-eur fa-2x");
-                cointop.appendChild(CoinIcon);
-                const Coincount = document.createElement("span");
-                Coincount.textContent = " 1000c";
-                cointop.appendChild(Coincount);
-                const CoinPrice = document.createElement("div");
-                CoinPrice.setAttribute("id", "CoinPrice");
-                CoinPrice.textContent = "1000w";
-                Coinbox.appendChild(CoinPrice);
-                //
-                const ad = document.createElement("div");
-                ad.setAttribute("id", "ad");
-                Store.appendChild(ad);
-                const adtext = document.createElement("span");
-                adtext.textContent = "GET COINS ";
-                ad.appendChild(adtext);
-                const adIcon = document.createElement("i");
-                adIcon.setAttribute("class", "fa fa-caret-right");
-                ad.appendChild(adIcon);
+
             },
         };
     }
