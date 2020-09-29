@@ -28,7 +28,7 @@ export class MainFrame {
     doDisplay() {
         console.log("MainFrame DoDisplay");
         const page = document.querySelector("#playBox");
-        if (page.style.display == 'none') {
+        if (page.style.display === 'none') {
             page.style.display = 'flex';
         } else {
             page.style.display = 'none';
@@ -43,7 +43,8 @@ export class MainFrame {
          */
 
         this.#_playBox = document.createElement("div");
-        this.#_playBox.setAttribute("class", "pages");
+        this.#_playBox.setAttribute("id", "playBox");
+        // this.#_playBox.setAttribute("class", "pages");
         this.container.appendChild(this.#_playBox);
 
 
