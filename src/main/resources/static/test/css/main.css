@@ -16,7 +16,6 @@ button {
     background-image: url("../../image/default_bg.png");
     background-repeat : no-repeat;
     background-size: cover;
-    display: flex;
     flex-flow: wrap;
     color : white;
 }
@@ -57,19 +56,30 @@ button {
     font-size: 3vh;
 }
 
-#userBox {
+#higherBox {
     display: flex;
     border-style: solid;
-    height: 15vh;
-    width: 1280px;
 }
 
-/*메인 화면*/
+#lowerBox {
+    border-style: solid;
+    display: flex;
+}
+
+#leftLowerBox {
+    width: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0 0 0;
+}
+
+/*common*/
 #levelBox {
     border-style: solid;
-    /*height: 22.5vh;*/
-    /*width: 12vw;*/
-    padding: 50px 0 0 35px;
+    height: 22.5vh;
+    width: 15vw;
+    position: relative;
 }
 
 #backCircle {
@@ -82,8 +92,10 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
-    left: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #levelText {
@@ -114,13 +126,18 @@ button {
 
 #progress {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -48%);
 }
 
 #expBox {
     width: 115px;
-    padding: 45px 0 0 0;
     display: flex;
     justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 42px;
 }
 
 #userExp {
@@ -157,76 +174,9 @@ button {
     color: #2e3f82;
 }
 
-#playBox {
-    display: flex;
-}
-
-#gameText, #continueText, #chooseText, #chooseLevelText {
-    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
-    font-family: "NanumSquare", sans-serif;
-    font-size: 56.5px;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #ffffff;
-    /*position: absolute;*/
-    margin: 0 0 -20px 0;
-}
-
-#gameText, #chooseText {
-    font-weight: 400;
-    top: 43.375vh;
-}
-
-#gameText, #continueText, #gameContinueBox {
-    left: 25vw;
-}
-
-#chooseText, #chooseLevelText, #chooseLevelBox {
-    left: 60vw;
-}
-
-#continueText, #chooseLevelText {
-    font-weight: 800;
-    bottom: 43.25vh;
-}
-
-#gameContinueBox, #chooseLevelBox {
-    width: 90px;
-    height: 91px;
-    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
-    border-radius: 50%;
-    position: absolute;
-    bottom: 26.25vh;
-}
-
-#gameContinueBox {
-    background-color: #00b4ff;
-}
-
-#chooseLevelBox {
-    background-color: #2652d2;
-}
-
-#gameContinueIcon, #chooseLevelIcon {
-    width: 70px;
-    position: absolute;
-    left: 10px;
-    top: 15px;
-}
-
-#gameContinueIcon {
-    top: 10px;
-    left: 14px;
-}
-
 #userInfoBox {
     display: flex;
     border-style: solid;
-    /*width: 82vw;*/
-    /*height: 15vh;*/
     justify-content: flex-end;
     padding: 50px 40px 0 0;
     flex-grow: 1;
@@ -339,9 +289,6 @@ button {
     box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
     background-color: #7cbf5a;
     border-radius: 50%;
-    position: absolute;
-    top: 45vh;
-    left: 4.14vw;
 }
 
 #inGameHintIcon {
@@ -389,9 +336,55 @@ button {
 
 #bottomCommon {
     display: flex;
-    width: 10vw;
     flex-direction: column;
-    padding: 100px 0 0 75px;
+    padding: 130px 0 0 0;
+}
+
+/*main frame*/
+.pages {
+    display: flex;
+    border-style: solid;
+    flex-grow: 1;
+    padding: 40px 0 0 150px;
+}
+
+.mainTwoBox {
+    padding: 0 178px 0 0;
+}
+
+.mainText {
+    font-family: "NanumSquare", sans-serif;
+    font-size: 56.5px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 30px 0;
+    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
+}
+
+.extraBoldText {
+    font-weight: 800;
+}
+
+.mainCircle {
+    width: 90px;
+    height: 91px;
+    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
+    border-radius: 50%;
+}
+
+.mainIcon {
+    width: 70px;
+    position: relative;
+    left: 10px;
+    top: 10px;
+}
+
+#gameContinueCircle {
+    background-color: #00b4ff;
+}
+
+#chooseLevelCircle {
+    background-color: #2652d2;
 }
 
 

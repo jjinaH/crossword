@@ -269,6 +269,8 @@ export class Action {
                  */
                 common.doDisplay();
 
+                common.lowerBox.appendChild(mainFrame.playBox);
+
                 //set TextContent
                 common.userLevel.textContent = level;
                 common.userExp.textContent = exp;
@@ -313,10 +315,8 @@ export class Action {
                  */
                 mainFrame.doDisplay();
 
-                mainFrame.gameContinueBox.onclick = continuebutton;
-                mainFrame.gameContinueIcon.onclick = continuebutton;
-                mainFrame.chooseLevelBox.onclick = viewallButton;
-                mainFrame.chooseLevelIcon.onclick = viewallButton;
+                mainFrame.gameContinueButton.onclick = continuebutton;
+                mainFrame.chooseLevelButton.onclick = viewallButton;
 
                 shopPage.doDisplay();
 
