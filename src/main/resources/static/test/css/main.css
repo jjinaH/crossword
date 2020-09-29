@@ -341,7 +341,7 @@ button {
 }
 
 /*main frame*/
-.pages {
+#playBox {
     display: flex;
     border-style: solid;
     flex-grow: 1;
@@ -353,7 +353,6 @@ button {
 }
 
 .mainText {
-    font-family: "NanumSquare", sans-serif;
     font-size: 56.5px;
     display: flex;
     flex-direction: column;
@@ -876,160 +875,82 @@ input:checked + .slider:before {
 /*shop*/
 #shopBox {
     display: flex;
+    border-style: solid;
+    flex-grow: 1;
+    padding: 40px 0 0 150px;
 }
 
-#shopHintBox, #shopCoinBox {
-    width: 130px;
-    height: 131px;
-    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
+.circle {
     border-radius: 50%;
 }
 
-#shopHintBox {
-    background-color: #7cbf5a;
-    position: absolute;
-    left: 25vw;
-    top: 40vh;
+.shopCircle {
+    width: 130px;
+    height: 131px;
+    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
 }
 
-#shopCoinBox {
+.yellow {
     background-color: #ffba00;
-    position: absolute;
-    top: 40vh;
-    left: 57vw;
 }
 
-#shopHintIcon {
-    width: 54px;
-    height: 57px;
-    object-fit: contain;
-    position: absolute;
-    left: 10px;
-    top: 20px;
+.green {
+    background-color: #7cbf5a;
 }
 
-#shopHintText {
-    width: 115px;
-    height: 41px;
-    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
-    font-family: "NanumSquare", sans-serif;
-    font-size: 56.5px;
-    font-weight: 400;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #ffffff;
-    position: absolute;
-    left: 25vw;
-    top: 60vh;
-}
-
-#shopX3Text {
-    width: 66px;
-    height: 41px;
-    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
-    font-family: "NanumSquare", sans-serif;
-    font-size: 56.5px;
-    font-weight: 800;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #7cbf5a;
-    position: absolute;
-    left: 35vw;
-    top: 60vh;
-}
-
-.miniCoinIcon {
-    width: 28px;
-    height: 28px;
-}
-
-#buyHintText {
-    width: 85px;
-    height: 16px;
-    font-family: "NanumSquare", sans-serif;
-    font-size: 19.5px;
-    font-weight: 400;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #ffffff;
-}
-
-#coin300cText, #freeText {
-    width: 47px;
-    height: 15px;
-    font-family: "NanumSquare", sans-serif;
-    font-size: 19.5px;
-    font-weight: 800;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
+.blackText {
     color: #000000;
 }
 
-#shopCoinIcon {
-    width: 63px;
-    height: 63px;
-    object-fit: contain;
-    position: absolute;
-    left: 11.5px;
-    top: 17px;
-}
-
-#shopCoinText {
-    width: 116px;
-    height: 41px;
-    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
-    font-family: "NanumSquare", sans-serif;
-    font-size: 56.5px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #ffffff;
-}
-
-#shop500Text {
-    width: 98px;
-    height: 41px;
-    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
-    font-family: "NanumSquare", sans-serif;
-    font-size: 56.5px;
-    font-weight: 800;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
+.yellowText {
     color: #ffba00;
 }
 
-#watchAdsText {
-    width: 110px;
-    height: 16px;
+.greenText {
+    color: #7cbf5a;
+}
+
+.shopIcon {
+    width: 120px;
+    position: relative;
+    left: 5px;
+    top: 14px;
+}
+
+.miniCoinIcon {
+    width: 50px;
+}
+
+.shopText {
+    font-size: 56.5px;
+    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
+}
+
+.font {
     font-family: "NanumSquare", sans-serif;
+}
+
+.shopTwoBox {
+    padding: 0 200px 0 0;
+}
+
+.shopTextBox {
+    padding: 30px 0 0 0;
+}
+
+.lowerTextBox {
+    display: flex;
+    position: relative;
+    right: 10px;
+}
+
+.shopSmallText {
     font-size: 19.5px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #ffffff;
+    padding: 10px 0 0 0;
 }
 
-#freeText {
-
+.textSpace {
+    padding: 0 20px 0 0;
 }
+
+

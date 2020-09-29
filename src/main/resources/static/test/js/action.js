@@ -225,6 +225,9 @@ export class Action {
         stageSelect.init();
         stageSelect.doDisplay();
 
+        shopPage.init();
+        shopPage.doDisplay();
+
         this.canvas = window.interactiveCanvas;
         this.scene = scene;
         this.commands = {
@@ -317,9 +320,6 @@ export class Action {
 
                 mainFrame.gameContinueButton.onclick = continuebutton;
                 mainFrame.chooseLevelButton.onclick = viewallButton;
-
-                shopPage.doDisplay();
-
             },
             STAGESELECT: function (data) {
                 console.log("실행 : stage");
@@ -997,11 +997,14 @@ export class Action {
                 }
             },
             SHOP: function (data) {
-                shopPage.init();
+                common.doDisplay();
+                shopPage.doDisplay();
                 mainFrame.doDisplay();
 
+                common.lowerBox.appendChild(shopPage.shopBox);
+
                 console.log("실행 : shop");
-                document.querySelector("#coinBox").style.visibility = "visible";
+                // document.querySelector("#coinBox").style.visibility = "visible";
                 /**
                  * 상점은
                  * 뒤로 가기
