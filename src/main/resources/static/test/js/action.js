@@ -243,8 +243,6 @@ export class Action {
             },
                 MAIN: function (data) {
                 console.log("실행 : main");
-                if (document.querySelector("#coinBox") != null)
-                    document.querySelector("#coinBox").style.visibility = "visible";
                 //welcome title , copyright, o2ologo remove
                 remove_welcome();
                 /**
@@ -298,8 +296,7 @@ export class Action {
                     //그래프 크기
                     startAngle: -Math.PI/2 ,
                     //시작지점 (기본값 Math.PI)
-                    value: 1,
-                        // exp/fullExp,
+                    value: exp/fullExp,
                     //그래프에 표시될 값
                     animation: true,
                     //그래프가 그려지는 애니메이션 동작 여부
@@ -321,6 +318,7 @@ export class Action {
 
                 mainFrame.gameContinueButton.onclick = continuebutton;
                 mainFrame.chooseLevelButton.onclick = viewallButton;
+
             },
             STAGESELECT: function (data) {
                 console.log("실행 : stage");
@@ -816,104 +814,39 @@ export class Action {
                 mainFrame.doDisplay();
                 settingPage.doDisplay();
 
+                common.onlyBottomCommon();
+
                 common.lowerBox.appendChild(settingPage.settingBox);
 
-                // document.querySelector("#coinBox").style.visibility = "visible";
-                //
-                // if (document.querySelector("#stepBox") != null) {
-                //     container.removeChild(document.querySelector("#stepBox"));
-                // }
-                // if (document.querySelector("#continue_stageButton") != null) {
-                //     container.removeChild(document.querySelector("#continue_stageButton"));
-                // }
-                // if (document.querySelector("#rankBox") != null) {
-                //     container.removeChild(document.querySelector("#rankBox"));
-                // }
-                // if (document.querySelector("#Store") != null) {
-                //     container.removeChild(document.querySelector("#Store"));
-                // }
-                // if (document.querySelector("#inGameBox") != null) {
-                //     container.removeChild(document.querySelector("#inGameBox"));
-                // }
-                // if (document.querySelector("#difficultyBox") != null) {
-                //     container.removeChild(document.querySelector("#difficultyBox"));
-                // }
-                // if (document.querySelector("#resultBox") != null) {
-                //     container.removeChild(document.querySelector("#resultBox"));
-                // }
-                //
                 let backgroundsoundeffect = data.backgroundsound; //켜져있음
                 let soundeffect = data.soundeffect; //1
 
-                // const SettingBox = document.createElement("div");
-                // SettingBox.setAttribute("id", "SettingBox");
-                // container.appendChild(SettingBox);
-                // const UserID = document.createElement("div");
-                // UserID.setAttribute("id", "UserID");
-                // UserID.textContent = userEmail;
-                // SettingBox.appendChild(UserID);
-                // const leftBox = document.createElement("div");
-                // leftBox.setAttribute("id", "leftBox");
-                // SettingBox.appendChild(leftBox);
-                // const SoundEffect = document.createElement("div");
-                // SoundEffect.setAttribute("id", "SoundEffect");
-                // SoundEffect.textContent = "Sound Effect";
-                // leftBox.appendChild(SoundEffect);
-                // const BackGroundEffect = document.createElement("div");
-                // BackGroundEffect.setAttribute("id", "BackGroundEffect");
-                // BackGroundEffect.textContent = "BackGround Effect";
-                // leftBox.appendChild(BackGroundEffect);
-                // const rightBox = document.createElement("div");
-                // rightBox.setAttribute("id", "rightBox");
-                // SettingBox.appendChild(rightBox);
-                // const label = document.createElement("label");
-                // label.setAttribute("class", "switch");
-                // rightBox.appendChild(label);
-                // const input = document.createElement("input");
-                // input.setAttribute("id", "input");
-                // input.setAttribute("type", "checkbox");
-                // label.appendChild(input);
-                // const span = document.createElement("span");
-                // span.setAttribute("class", "slider round");
-                // label.appendChild(span);
-                // const label2 = document.createElement("label");
-                // label2.setAttribute("class", "switch2");
-                // rightBox.appendChild(label2);
-                // const input2 = document.createElement("input");
-                // input2.setAttribute("id", "input2");
-                // input2.setAttribute("type", "checkbox");
-                // label2.appendChild(input2);
-                // const span2 = document.createElement("span");
-                // span2.setAttribute("class", "slider round");
-                // label2.appendChild(span2);
-                //
-                // console.log(soundeffect);
+                console.log(soundeffect);
 
+                settingPage.accountText.textContent = userEmail;
 
                 //기초설정대로 보여주기
                 if (soundeffect == 1) {
-                    document.querySelector("#input").checked = true;
+                    settingPage.effectSound.checked = true;
                 } else {
-                    document.querySelector("#input").checked = false;
+                    settingPage.effectSound.checked = false;
                 }
                 if (backgroundsoundeffect == 1) {
-                    document.querySelector("#input2").checked = true;
+                    settingPage.bgSound.checked = true;
                 } else {
-                    document.querySelector("#input2").checked = false;
-
+                    settingPage.bgSound.checked = false;
                 }
 
                 /**
                  * 초기화
                  */
-                const ResetButton = document.createElement("button");
-                ResetButton.setAttribute("id", "ResetButton");
-                ResetButton.textContent = "RESET";
-                SettingBox.appendChild(ResetButton);
+                // const ResetButton = document.createElement("button");
+                // ResetButton.setAttribute("id", "ResetButton");
+                // ResetButton.textContent = "RESET";
+                // SettingBox.appendChild(ResetButton);
             },
             SETTINGSELECT: function (data) {
             console.log("실행: settingselect");
-            document.querySelector("#coinBox").style.visibility = "visible";
                 let sound = data.sound; //1. soundEffect 2.background sound
                 let onoff = data.onoff; //1.  0오면 off/1오면 on
                 if ((onoff == "0") && (sound == "SoundEffect")) {

@@ -721,67 +721,67 @@ button {
     border-radius : 0.5vw;
 }
 /*setting*/
-.switch {
-    position: absolute;
-    display: inline-block;
-    width: 160px;
-    height: 60px;
-    top : 50vh;
-    margin-left : 29vw;
-}
-.switch2 {
-    position: absolute;
-    display: inline-block;
-    width: 160px;
-    height: 60px;
-    top : 62vh;
-    margin-left : 29vw;
-}
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-.switch2 input{
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255,255,255,0.3);
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-.slider:before {
-    position: absolute;
-    height : 5vh;
-    width: 9vw;
-    background-color: #b5a9a9;
-    -webkit-transition: .4s;
-    transition: .4s;
-    content:'OFF';
-    color : white;
-    font-size : 4vh;
-    text-align : center;
-}
-input:checked + .slider:before {
-    -webkit-transform: translateX(7vw);
-    -ms-transform: translateX(7vw);
-    transform: translateX(7vw);
-    content:'ON';
-}
-.slider.round {
-    border-radius: 30px;
-}
-.slider.round:before {
-    border-radius: 30px;
-}
+/*.switch {*/
+/*    position: absolute;*/
+/*    display: inline-block;*/
+/*    width: 160px;*/
+/*    height: 60px;*/
+/*    top : 50vh;*/
+/*    margin-left : 29vw;*/
+/*}*/
+/*.switch2 {*/
+/*    position: absolute;*/
+/*    display: inline-block;*/
+/*    width: 160px;*/
+/*    height: 60px;*/
+/*    top : 62vh;*/
+/*    margin-left : 29vw;*/
+/*}*/
+/*.switch input {*/
+/*    opacity: 0;*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*}*/
+/*.switch2 input{*/
+/*    opacity: 0;*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*}*/
+/*.slider {*/
+/*    position: absolute;*/
+/*    cursor: pointer;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    bottom: 0;*/
+/*    background-color: rgba(255,255,255,0.3);*/
+/*    -webkit-transition: .4s;*/
+/*    transition: .4s;*/
+/*}*/
+/*.slider:before {*/
+/*    position: absolute;*/
+/*    height : 5vh;*/
+/*    width: 9vw;*/
+/*    background-color: #b5a9a9;*/
+/*    -webkit-transition: .4s;*/
+/*    transition: .4s;*/
+/*    content:'OFF';*/
+/*    color : white;*/
+/*    font-size : 4vh;*/
+/*    text-align : center;*/
+/*}*/
+/*input:checked + .slider:before {*/
+/*    -webkit-transform: translateX(7vw);*/
+/*    -ms-transform: translateX(7vw);*/
+/*    transform: translateX(7vw);*/
+/*    content:'ON';*/
+/*}*/
+/*.slider.round {*/
+/*    border-radius: 30px;*/
+/*}*/
+/*.slider.round:before {*/
+/*    border-radius: 30px;*/
+/*}*/
 /*ranking*/
 #rankBox{
     margin-top : 5vh;
@@ -925,7 +925,13 @@ input:checked + .slider:before {
     display: flex;
     position: relative;
     top: -8vh;
-    padding-left: 100px;
+    padding-left: 130px;
+}
+
+.rightBox {
+    padding-left: 180px;
+    position: relative;
+    top: -15px;
 }
 
 .settingText {
@@ -949,8 +955,20 @@ input:checked + .slider:before {
     left: -2px;
 }
 
-.resetPadding {
+.accountBoxPadding {
     padding-bottom: 25px;
+}
+
+.accountPadding {
+    padding-right: 18px;
+}
+
+.resetButtonPadding {
+    padding-top: 130px;
+}
+
+.resetTextBoxPadding {
+    padding-top: 60px;
 }
 
 .flex {
@@ -962,10 +980,6 @@ input:checked + .slider:before {
     font-family: "NanumSquare", sans-serif;
     font-size: 19.5px;
     color: #303e8c;
-}
-
-.accountPadding {
-    padding-right: 18px;
 }
 
 .settingButton {
@@ -996,3 +1010,67 @@ input:checked + .slider:before {
     justify-content: center;
 }
 
+input[type="checkbox"] {
+    display: none;
+}
+
+.label {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    width: 160px;
+    height: 60px;
+    border-radius: 30px;
+    background-color: rgba(50, 64, 145, 0.2);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all .3s;
+    margin-bottom: 45px;
+}
+
+.label > * {
+    vertical-align: sub;
+    transition: all .3s;
+    font-size: 20px;
+    font-family: "NanumSquare", sans-serif;
+}
+
+.label .marble {
+    position: absolute;
+    top: 10px;
+    left: 17px;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.label .on {
+    display: none;
+    padding: 18px 0 0 28px;
+}
+
+.label .off {
+    padding-left:95px;
+    position: relative;
+    top: 15px;
+}
+
+.input:checked + .label {
+    background-color: #7cbf5a;
+    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
+}
+
+.input:checked + .label .on {
+    display: inline-block;
+}
+
+.input:checked + .label .off {
+    display: none;
+}
+
+.input:checked + .label .marble {
+    left: 105px;
+}

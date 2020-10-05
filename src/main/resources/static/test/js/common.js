@@ -89,6 +89,13 @@ export class Common {
         this.isDisplay = false;
     }
 
+    onlyBottomCommon() {
+        console.log("Display only bottom common icons");
+        const page = document.querySelector("#higherBox");
+        if(page.style.visibility = "visible")
+            page.style.visibility = "hidden";
+    }
+
     init() {
         console.log("Common init()");
         const pages = document.querySelectorAll(" #higherBox, #lowerBox");

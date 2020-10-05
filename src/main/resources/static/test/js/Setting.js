@@ -23,8 +23,14 @@ export class Setting{
     #_resetIcon
     #_effectSound
     #_effectLabel
-    #_effectSpan
+    #_effectMarble
+    #_effectOn
+    #_effectOff
     #_bgSound
+    #_bgLabel
+    #_bgMarble
+    #_bgOn
+    #_bgOff
 
     constructor(container) {
         this.container = container;
@@ -49,6 +55,7 @@ export class Setting{
         this.#_settingBox.appendChild(this.#_leftBox);
 
         this.#_rightBox = document.createElement("div");
+        this.#_rightBox.setAttribute("class", "rightBox");
         this.#_settingBox.appendChild(this.#_rightBox);
 
         this.#_soundTextBox = document.createElement("div");
@@ -76,26 +83,65 @@ export class Setting{
         //on-off button 생성
         this.#_effectSound = document.createElement("input");
         this.#_effectSound.setAttribute("type", "checkbox");
+        this.#_effectSound.setAttribute("id", "switch1");
+        this.#_effectSound.setAttribute("class", "input");
         this.#_soundEffectButton.appendChild(this.#_effectSound);
 
         this.#_effectLabel = document.createElement("label");
-        this.#_effectLabel.setAttribute("for", "checkbox");
-        this.#_effectLabel.setAttribute("id", "effectSound");
+        this.#_effectLabel.setAttribute("for", "switch1");
+        this.#_effectLabel.setAttribute("class", "label");
         this.#_soundEffectButton.appendChild(this.#_effectLabel);
 
-        this.#_effectSpan = document.createElement("span");
-        this.#_effectLabel.appendChild(this.#_effectSpan);
+        this.#_effectMarble = document.createElement("span");
+        this.#_effectMarble.setAttribute("class", "marble");
+        this.#_effectLabel.appendChild(this.#_effectMarble);
 
+        this.#_effectOn = document.createElement("span");
+        this.#_effectOn.setAttribute("class", "on");
+        this.#_effectOn.textContent = "ON";
+        this.#_effectLabel.appendChild(this.#_effectOn);
+
+        this.#_effectOff = document.createElement("span");
+        this.#_effectOff.setAttribute("class", "off");
+        this.#_effectOff.textContent = "OFF";
+        this.#_effectLabel.appendChild(this.#_effectOff);
+
+        this.#_bgSound = document.createElement("input");
+        this.#_bgSound.setAttribute("type", "checkbox");
+        this.#_bgSound.setAttribute("id", "switch2");
+        this.#_bgSound.setAttribute("class", "input");
+        this.#_backgroundSoundButton.appendChild(this.#_bgSound);
+
+        this.#_bgLabel = document.createElement("label");
+        this.#_bgLabel.setAttribute("for", "switch2");
+        this.#_bgLabel.setAttribute("class", "label");
+        this.#_backgroundSoundButton.appendChild(this.#_bgLabel);
+
+        this.#_bgMarble = document.createElement("span");
+        this.#_bgMarble.setAttribute("class", "marble");
+        this.#_bgLabel.appendChild(this.#_bgMarble);
+
+        this.#_bgOn = document.createElement("span");
+        this.#_bgOn.setAttribute("class", "on");
+        this.#_bgOn.textContent = "ON";
+        this.#_bgLabel.appendChild(this.#_bgOn);
+
+        this.#_bgOff = document.createElement("span");
+        this.#_bgOff.setAttribute("class", "off");
+        this.#_bgOff.textContent = "OFF";
+        this.#_bgLabel.appendChild(this.#_bgOff);
 
 
         this.#_resetTextBox = document.createElement("div");
+        this.#_resetTextBox.setAttribute("class", "resetTextBoxPadding");
         this.#_leftBox.appendChild(this.#_resetTextBox);
 
         this.#_resetButtonBox = document.createElement("div");
+        this.#_resetButtonBox.setAttribute("class", "resetButtonPadding")
         this.#_rightBox.appendChild(this.#_resetButtonBox);
 
         this.#_userAccountBox = document.createElement("div");
-        this.#_userAccountBox.setAttribute("class", "resetPadding flex");
+        this.#_userAccountBox.setAttribute("class", "accountBoxPadding flex");
         this.#_resetTextBox.appendChild(this.#_userAccountBox);
 
         this.#_accountBox = document.createElement("div");
@@ -142,6 +188,18 @@ export class Setting{
 
     get settingBox() {
         return this.#_settingBox;
+    }
+
+    get accountText() {
+        return this.#_accountText;
+    }
+
+    get effectSound() {
+        return this.#_effectSound;
+    }
+
+    get bgSound() {
+        return this.#_bgSound;
     }
 
 
