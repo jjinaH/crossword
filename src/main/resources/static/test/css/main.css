@@ -58,11 +58,11 @@ button {
 
 #higherBox {
     display: flex;
-    border-style: solid;
+    /*border-style: solid;*/
 }
 
 #lowerBox {
-    border-style: solid;
+    /*border-style: solid;*/
     display: flex;
 }
 
@@ -72,11 +72,12 @@ button {
     flex-direction: column;
     align-items: center;
     padding: 40px 0 0 0;
+    /*border-style: solid;*/
 }
 
 /*common*/
 #levelBox {
-    border-style: solid;
+    /*border-style: solid;*/
     height: 22.5vh;
     width: 15vw;
     position: relative;
@@ -176,7 +177,7 @@ button {
 
 #userInfoBox {
     display: flex;
-    border-style: solid;
+    /*border-style: solid;*/
     justify-content: flex-end;
     padding: 50px 40px 0 0;
     flex-grow: 1;
@@ -267,6 +268,7 @@ button {
     height: 40px;
     border-radius: 15px;
     background-color: #324091;
+    position: relative;
 }
 
 #accountText {
@@ -281,6 +283,10 @@ button {
     line-height: normal;
     letter-spacing: normal;
     color: #7cbf5a;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #inGameHintBox {
@@ -343,7 +349,7 @@ button {
 /*main frame*/
 #playBox {
     display: flex;
-    border-style: solid;
+    /*border-style: solid;*/
     flex-grow: 1;
     padding: 40px 0 0 150px;
 }
@@ -715,58 +721,19 @@ button {
     border-radius : 0.5vw;
 }
 /*setting*/
-#SettingBox{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color : white;
-}
-#UserID{
-    position: relative;
-    justify-content: center;
-    margin-bottom : 8vh;
-    font-size : 5vh;
-}
-#leftBox{
-    text-align: right;
-    font-size : 5vh;
-    border-right: 0.5vh solid white;
-    padding-right : 2vw;
-    margin-right : 23vw;
-}
-#rightBox{
-    margin-bottom : 14vh;
-    margin-right : 44vw;
-}
-#SoundEffect{
-    margin-bottom:5vh;
-}
-#ResetButton{
-    position :absolute;
-    top: 80vh;
-    background-color: #668dd2;
-    height: 7vh;
-    width : 17vw;
-    font-size : 3vh;
-    background-color: rgba(255,255,255,0.3);
-    border-radius: 1.3vh;
-    border-color : white;
-    margin-left : 3vw;
-}
 .switch {
     position: absolute;
     display: inline-block;
-    width: 16vw;
-    height: 5vh;
+    width: 160px;
+    height: 60px;
     top : 50vh;
     margin-left : 29vw;
 }
 .switch2 {
     position: absolute;
     display: inline-block;
-    width: 16vw;
-    height: 5vh;
+    width: 160px;
+    height: 60px;
     top : 62vh;
     margin-left : 29vw;
 }
@@ -810,10 +777,10 @@ input:checked + .slider:before {
     content:'ON';
 }
 .slider.round {
-    border-radius: 0.8vh;
+    border-radius: 30px;
 }
 .slider.round:before {
-    border-radius: 0.8vh;
+    border-radius: 30px;
 }
 /*ranking*/
 #rankBox{
@@ -875,7 +842,7 @@ input:checked + .slider:before {
 /*shop*/
 #shopBox {
     display: flex;
-    border-style: solid;
+    /*border-style: solid;*/
     flex-grow: 1;
     padding: 40px 0 0 150px;
 }
@@ -923,11 +890,11 @@ input:checked + .slider:before {
 
 .shopText {
     font-size: 56.5px;
-    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
 }
 
 .font {
     font-family: "NanumSquare", sans-serif;
+    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
 }
 
 .shopTwoBox {
@@ -953,4 +920,79 @@ input:checked + .slider:before {
     padding: 0 20px 0 0;
 }
 
+/*setting*/
+#settingBox {
+    display: flex;
+    position: relative;
+    top: -8vh;
+    padding-left: 100px;
+}
+
+.settingText {
+    font-size: 31px;
+    padding-bottom: 68px;
+}
+
+.resetText {
+    font-size: 20px;
+    padding-right: 10px;
+}
+
+.settingCircle {
+    width: 50px;
+    height: 50px;
+}
+
+#accountIcon {
+    width: 55px;
+    position: relative;
+    left: -2px;
+}
+
+.resetPadding {
+    padding-bottom: 25px;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.settingSmallText {
+    font-family: "NanumSquare", sans-serif;
+    font-size: 19.5px;
+    color: #303e8c;
+}
+
+.accountPadding {
+    padding-right: 18px;
+}
+
+.settingButton {
+    width: 160px;
+    height: 60px;
+}
+
+.boxShadow {
+    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
+}
+
+.settingRound {
+    border-radius: 30px;
+}
+
+.blue {
+    background-color: #313f8f;
+}
+
+#resetIcon {
+    width: 35px;
+    height: 35px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 

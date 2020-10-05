@@ -2,6 +2,7 @@ import {Common} from "./common.js";
 import {MainFrame} from "./mainFrame.js";
 import {StageSelect} from "./stageSelect.js";
 import {Shop} from "./shop.js";
+import {Setting} from "./Setting.js";
 
 const Timer = (function () {
     let intervalId = null;
@@ -213,6 +214,7 @@ export class Action {
         const mainFrame = new MainFrame(container);
         const stageSelect = new StageSelect(container);
         const shopPage = new Shop(container);
+        const settingPage = new Setting(container);
 
 
         common.init();
@@ -221,9 +223,8 @@ export class Action {
         mainFrame.init();
         mainFrame.doDisplay();
 
-
-        stageSelect.init();
-        stageSelect.doDisplay();
+        settingPage.init();
+        settingPage.doDisplay();
 
         shopPage.init();
         shopPage.doDisplay();
@@ -811,76 +812,85 @@ export class Action {
             },
             SETTING: function (data) {
                 console.log("실행 : setting");
-                document.querySelector("#coinBox").style.visibility = "visible";
 
-                if (document.querySelector("#stepBox") != null) {
-                    container.removeChild(document.querySelector("#stepBox"));
-                }
-                if (document.querySelector("#continue_stageButton") != null) {
-                    container.removeChild(document.querySelector("#continue_stageButton"));
-                }
-                if (document.querySelector("#rankBox") != null) {
-                    container.removeChild(document.querySelector("#rankBox"));
-                }
-                if (document.querySelector("#Store") != null) {
-                    container.removeChild(document.querySelector("#Store"));
-                }
-                if (document.querySelector("#inGameBox") != null) {
-                    container.removeChild(document.querySelector("#inGameBox"));
-                }
-                if (document.querySelector("#difficultyBox") != null) {
-                    container.removeChild(document.querySelector("#difficultyBox"));
-                }
-                if (document.querySelector("#resultBox") != null) {
-                    container.removeChild(document.querySelector("#resultBox"));
-                }
-                let backgroundsoundeffect = data.backgroundsound; //1
+                mainFrame.doDisplay();
+                settingPage.doDisplay();
+
+                common.lowerBox.appendChild(settingPage.settingBox);
+
+                // document.querySelector("#coinBox").style.visibility = "visible";
+                //
+                // if (document.querySelector("#stepBox") != null) {
+                //     container.removeChild(document.querySelector("#stepBox"));
+                // }
+                // if (document.querySelector("#continue_stageButton") != null) {
+                //     container.removeChild(document.querySelector("#continue_stageButton"));
+                // }
+                // if (document.querySelector("#rankBox") != null) {
+                //     container.removeChild(document.querySelector("#rankBox"));
+                // }
+                // if (document.querySelector("#Store") != null) {
+                //     container.removeChild(document.querySelector("#Store"));
+                // }
+                // if (document.querySelector("#inGameBox") != null) {
+                //     container.removeChild(document.querySelector("#inGameBox"));
+                // }
+                // if (document.querySelector("#difficultyBox") != null) {
+                //     container.removeChild(document.querySelector("#difficultyBox"));
+                // }
+                // if (document.querySelector("#resultBox") != null) {
+                //     container.removeChild(document.querySelector("#resultBox"));
+                // }
+                //
+                let backgroundsoundeffect = data.backgroundsound; //켜져있음
                 let soundeffect = data.soundeffect; //1
-                const SettingBox = document.createElement("div");
-                SettingBox.setAttribute("id", "SettingBox");
-                container.appendChild(SettingBox);
-                const UserID = document.createElement("div");
-                UserID.setAttribute("id", "UserID");
-                UserID.textContent = userEmail;
-                SettingBox.appendChild(UserID);
-                const leftBox = document.createElement("div");
-                leftBox.setAttribute("id", "leftBox");
-                SettingBox.appendChild(leftBox);
-                const SoundEffect = document.createElement("div");
-                SoundEffect.setAttribute("id", "SoundEffect");
-                SoundEffect.textContent = "Sound Effect";
-                leftBox.appendChild(SoundEffect);
-                const BackGroundEffect = document.createElement("div");
-                BackGroundEffect.setAttribute("id", "BackGroundEffect");
-                BackGroundEffect.textContent = "BackGround Effect";
-                leftBox.appendChild(BackGroundEffect);
-                const rightBox = document.createElement("div");
-                rightBox.setAttribute("id", "rightBox");
-                SettingBox.appendChild(rightBox);
-                const label = document.createElement("label");
-                label.setAttribute("class", "switch");
-                rightBox.appendChild(label);
-                const input = document.createElement("input");
-                input.setAttribute("id", "input");
-                input.setAttribute("type", "checkbox");
-                label.appendChild(input);
-                const span = document.createElement("span");
-                span.setAttribute("class", "slider round");
-                label.appendChild(span);
-                const label2 = document.createElement("label");
-                label2.setAttribute("class", "switch2");
-                rightBox.appendChild(label2);
-                const input2 = document.createElement("input");
-                input2.setAttribute("id", "input2");
-                input2.setAttribute("type", "checkbox");
-                label2.appendChild(input2);
-                const span2 = document.createElement("span");
-                span2.setAttribute("class", "slider round");
-                label2.appendChild(span2);
 
-                console.log(soundeffect);
+                // const SettingBox = document.createElement("div");
+                // SettingBox.setAttribute("id", "SettingBox");
+                // container.appendChild(SettingBox);
+                // const UserID = document.createElement("div");
+                // UserID.setAttribute("id", "UserID");
+                // UserID.textContent = userEmail;
+                // SettingBox.appendChild(UserID);
+                // const leftBox = document.createElement("div");
+                // leftBox.setAttribute("id", "leftBox");
+                // SettingBox.appendChild(leftBox);
+                // const SoundEffect = document.createElement("div");
+                // SoundEffect.setAttribute("id", "SoundEffect");
+                // SoundEffect.textContent = "Sound Effect";
+                // leftBox.appendChild(SoundEffect);
+                // const BackGroundEffect = document.createElement("div");
+                // BackGroundEffect.setAttribute("id", "BackGroundEffect");
+                // BackGroundEffect.textContent = "BackGround Effect";
+                // leftBox.appendChild(BackGroundEffect);
+                // const rightBox = document.createElement("div");
+                // rightBox.setAttribute("id", "rightBox");
+                // SettingBox.appendChild(rightBox);
+                // const label = document.createElement("label");
+                // label.setAttribute("class", "switch");
+                // rightBox.appendChild(label);
+                // const input = document.createElement("input");
+                // input.setAttribute("id", "input");
+                // input.setAttribute("type", "checkbox");
+                // label.appendChild(input);
+                // const span = document.createElement("span");
+                // span.setAttribute("class", "slider round");
+                // label.appendChild(span);
+                // const label2 = document.createElement("label");
+                // label2.setAttribute("class", "switch2");
+                // rightBox.appendChild(label2);
+                // const input2 = document.createElement("input");
+                // input2.setAttribute("id", "input2");
+                // input2.setAttribute("type", "checkbox");
+                // label2.appendChild(input2);
+                // const span2 = document.createElement("span");
+                // span2.setAttribute("class", "slider round");
+                // label2.appendChild(span2);
+                //
+                // console.log(soundeffect);
 
 
+                //기초설정대로 보여주기
                 if (soundeffect == 1) {
                     document.querySelector("#input").checked = true;
                 } else {
