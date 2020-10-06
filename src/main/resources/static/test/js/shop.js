@@ -67,12 +67,12 @@ export class Shop{
         this.#_hintBox.appendChild(this.#_hintTextBox);
 
         this.#_hintText = document.createElement("span");
-        this.#_hintText.setAttribute("class", "font shopText")
+        this.#_hintText.setAttribute("class", "font textShadow shopText")
         this.#_hintText.textContent = "HINT";
         this.#_hintTextBox.appendChild(this.#_hintText);
 
         this.#_hintX3Text = document.createElement("span");
-        this.#_hintX3Text.setAttribute("class", "font extraBoldText greenText shopText");
+        this.#_hintX3Text.setAttribute("class", "font textShadow extraBoldText greenText shopText");
         this.#_hintX3Text.textContent = "X3";
         this.#_hintTextBox.appendChild(this.#_hintX3Text);
 
@@ -86,7 +86,7 @@ export class Shop{
         this.#_buyHintBox.appendChild(this.#_miniCoinIcon1);
 
         this.#_buyHintTextBox = document.createElement("div");
-        this.#_buyHintTextBox.setAttribute("class", "shopSmallText font");
+        this.#_buyHintTextBox.setAttribute("class", "shopSmallText small font textShadow");
         this.#_buyHintBox.appendChild(this.#_buyHintTextBox);
 
         this.#_buyHintText = document.createElement("span");
@@ -95,7 +95,7 @@ export class Shop{
         this.#_buyHintTextBox.appendChild(this.#_buyHintText);
 
         this.#_coin300cText = document.createElement("span");
-        this.#_coin300cText.setAttribute("class", "font blackText extraBoldText");
+        this.#_coin300cText.setAttribute("class", "font textShadow blackText extraBoldText");
         this.#_coin300cText.textContent = "300c";
         this.#_buyHintTextBox.appendChild(this.#_coin300cText);
 
@@ -121,12 +121,12 @@ export class Shop{
         this.#_coinBox.appendChild(this.#_coinTextBox);
 
         this.#_coinText = document.createElement("span");
-        this.#_coinText.setAttribute("class", "font shopText");
+        this.#_coinText.setAttribute("class", "font textShadow shopText");
         this.#_coinText.textContent = "COIN";
         this.#_coinTextBox.appendChild(this.#_coinText);
 
         this.#_coin500Text = document.createElement("span");
-        this.#_coin500Text.setAttribute("class", "font shopText extraBoldText yellowText");
+        this.#_coin500Text.setAttribute("class", "font textShadow shopText extraBoldText yellowText");
         this.#_coin500Text.textContent = "500";
         this.#_coinTextBox.appendChild(this.#_coin500Text);
 
@@ -140,16 +140,16 @@ export class Shop{
         this.#_watchAdsBox.appendChild(this.#_miniCoinIcon2);
 
         this.#_watchAdsTextBox = document.createElement("div");
-        this.#_watchAdsTextBox.setAttribute("class", "shopSmallText font");
+        this.#_watchAdsTextBox.setAttribute("class", "shopSmallText font small textShadow");
         this.#_watchAdsBox.appendChild(this.#_watchAdsTextBox);
 
         this.#_watchAdsText = document.createElement("span");
-        this.#_watchAdsText.setAttribute("class", "font textSpace");
+        this.#_watchAdsText.setAttribute("class", "font textSpace textShadow");
         this.#_watchAdsText.textContent = "WATCH ADS";
         this.#_watchAdsTextBox.appendChild(this.#_watchAdsText);
 
         this.#_freeText = document.createElement("span");
-        this.#_freeText.setAttribute("class", "font blackText extraBoldText");
+        this.#_freeText.setAttribute("class", "font blackText extraBoldText textShadow");
         this.#_freeText.textContent = "FREE";
         this.#_watchAdsTextBox.appendChild(this.#_freeText);
 

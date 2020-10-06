@@ -53,7 +53,7 @@ export class MainFrame {
         this.#_playBox.appendChild(this.#_gameContinueBox);
 
         this.#_gameContinueText = document.createElement("div");
-        this.#_gameContinueText.setAttribute("class", "font mainText");
+        this.#_gameContinueText.setAttribute("class", "font textShadow mainText");
         this.#_gameContinueBox.appendChild(this.#_gameContinueText);
 
         this.#_gameText = document.createElement("span");
@@ -84,7 +84,7 @@ export class MainFrame {
         this.#_playBox.appendChild(this.#_chooseLevelBox);
 
         this.#_chooseLevelText = document.createElement("div");
-        this.#_chooseLevelText.setAttribute("class", "font mainText");
+        this.#_chooseLevelText.setAttribute("class", "font textShadow mainText");
         this.#_chooseLevelBox.appendChild(this.#_chooseLevelText);
 
         this.#_chooseText = document.createElement("span");

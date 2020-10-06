@@ -65,12 +65,12 @@ export class Setting{
         this.#_rightBox.appendChild(this.#_soundButtonBox);
 
         this.#_soundEffectText = document.createElement("div");
-        this.#_soundEffectText.setAttribute("class", "font settingText");
+        this.#_soundEffectText.setAttribute("class", "font textShadow settingText");
         this.#_soundEffectText.textContent = "Sound Effect";
         this.#_soundTextBox.appendChild(this.#_soundEffectText);
 
         this.#_backgroundSoundText = document.createElement("div");
-        this.#_backgroundSoundText.setAttribute("class", "font settingText");
+        this.#_backgroundSoundText.setAttribute("class", "font textShadow settingText");
         this.#_backgroundSoundText.textContent = "Background Sound";
         this.#_soundTextBox.appendChild(this.#_backgroundSoundText);
 
@@ -141,7 +141,7 @@ export class Setting{
         this.#_rightBox.appendChild(this.#_resetButtonBox);
 
         this.#_userAccountBox = document.createElement("div");
-        this.#_userAccountBox.setAttribute("class", "accountBoxPadding flex");
+        this.#_userAccountBox.setAttribute("class", "accountBoxPadding flex alignCenter");
         this.#_resetTextBox.appendChild(this.#_userAccountBox);
 
         this.#_accountBox = document.createElement("div");
@@ -163,7 +163,7 @@ export class Setting{
         this.#_userAccountBox.appendChild(this.#_accountText);
 
         this.#_gameResetText = document.createElement("span");
-        this.#_gameResetText.setAttribute("class", "font settingText");
+        this.#_gameResetText.setAttribute("class", "font textShadow settingText");
         this.#_gameResetText.textContent = "GAME RESET";
         this.#_resetTextBox.appendChild(this.#_gameResetText);
 
@@ -175,7 +175,7 @@ export class Setting{
         this.#_gameResetButton.appendChild(this.#_gameResetCircle);
 
         this.#_resetText = document.createElement("span");
-        this.#_resetText.setAttribute("class", "font resetText");
+        this.#_resetText.setAttribute("class", "font textShadow resetText");
         this.#_resetText.textContent = "RESET";
         this.#_gameResetCircle.appendChild(this.#_resetText);
 

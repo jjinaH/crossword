@@ -77,6 +77,9 @@ export class Common {
         }
         this.isDisplay = !this.isDisplay //상태 변경
 
+        const page = document.querySelector("#inGameHintBox");
+        page.style.visibility = "hidden";
+
         console.log(this.isDisplay.toString());
     }
 
