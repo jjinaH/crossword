@@ -4,14 +4,16 @@ export class StageSelect{
     #nextPage;
     #lastPage;
 
-    doDisplay(){
+    //Display Function
+    doDisplay() {
         console.log("stageSelect DoDisplay");
         const page=document.querySelector("#stepBox");
-            if(page.style.display =='none') {
-                page.style.display = 'flex';
-            }else{
-                page.style.display = 'none';
-            }
+        page.style.display = 'flex';
+    }//doDisplay
+    doNoneDisplay() {
+        console.log("stageSelect doNoneDisplay");
+        const page=document.querySelector("#stepBox");
+        page.style.display = 'none';
     }//doDisplay
 
     constructor(container) {

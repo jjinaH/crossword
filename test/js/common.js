@@ -63,20 +63,26 @@ export class Common {
         const pages = document.querySelectorAll(" #levelBox,#userInfoBox,#inGameHintBox,#bottomCommon");
         let i = 0;
         for (let page of pages) {
-            if(!this.isDisplay){
-                console.log("this.display: "+i+this.display[i]);
-                if(i==1)
-                {
-                    page.style.display = "flex";
-                }
-                else{
-                    page.style.display = "block";
-                }
-                i++;
+            console.log("this.display: " + i + this.display[i]);
+            if (i == 1) {
+                page.style.display = "flex";
+            } else {
+                page.style.display = "block";
             }
-            else{
-                page.style.display = "none"
-            }
+            i++;
+
+        }
+        // this.isDisplay = !this.isDisplay
+        //
+        // console.log(this.isDisplay.toString());
+    }
+
+    doNoneDisplay() {
+        console.log("Common DoNoneDisplay");
+        const pages = document.querySelectorAll(" #levelBox,#userInfoBox,#inGameHintBox,#bottomCommon");
+        let i = 0;
+        for (let page of pages) {
+            page.style.display = "none"
         }
         this.isDisplay = !this.isDisplay
 

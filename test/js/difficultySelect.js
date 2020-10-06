@@ -9,11 +9,12 @@ export class DifficultySelect {
     doDisplay() {
         console.log("difficulty DoDisplay");
         const page = document.querySelector("#difficultyBox");
-        if (page.style.display == 'none') {
-            page.style.display = 'grid';
-        } else {
-            page.style.display = 'none';
-        }
+        page.style.display = 'grid';
+    }//doDisplay
+    doNoneDisplay() {
+        console.log("difficulty doNoneDisplay");
+        const page = document.querySelector("#difficultyBox");
+        page.style.display = 'none';
     }//doDisplay
 
     constructor(container) {

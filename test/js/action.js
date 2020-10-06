@@ -225,24 +225,24 @@ export class Action {
         //document.body.style.backgroundImage = "url('../image/bg.png')";
         //왜 이게 동작이 안될까 ;;;;;;;;;;;;;;;;;;;;;;;;;
         //container.style.backgroundImage = "url('../image/default_bg.png')";
-        console.log(container.style.backgroundImage);
+        //console.log(container.style.backgroundImage);
         //window.open("../image/default_bg.png");
         //welcome.setGameBackGround();
         common.init();
-        common.doDisplay();
+        common.doNoneDisplay();
 
         mainFrame.init();
-        mainFrame.doDisplay();
+        mainFrame.doNoneDisplay();
 
 
         stageSelect.init();
-        stageSelect.doDisplay();
+        stageSelect.doNoneDisplay();
 
         difficultySelect.init();
-        difficultySelect.doDisplay();
+        difficultySelect.doNoneDisplay();
 
         resultDisplay.init();
-        resultDisplay.doDisplay();
+        resultDisplay.doNoneDisplay();
 
 
 
@@ -266,6 +266,12 @@ export class Action {
                 remove_welcome();
                 document.body.style.backgroundImage = "url('')";
                 container.style.backgroundImage = "url('../image/scene/default_bg.png')";
+
+                common.doDisplay();
+                mainFrame.doDisplay();
+                stageSelect.doNoneDisplay();
+                difficultySelect.doNoneDisplay();
+                resultDisplay.doNoneDisplay();
                 /**
                  * 메인 화면에서 보여줄 사용자의
                  * 레벨, 경험치, 힌트, 코인
@@ -328,13 +334,16 @@ export class Action {
                  * continue, view all 버튼 제거
                  */
                 //container.removeChild(document.querySelector("#continue_stageButton"));
-                mainFrame.doDisplay();
+                common.doDisplay();
+                mainFrame.doNoneDisplay();
+                stageSelect.doDisplay();
+                difficultySelect.doNoneDisplay();
+                resultDisplay.doNoneDisplay();
                 /**
                  * 중앙에
                  * 선택할 수 있는 단계 보여줌
                  * @type {HTMLDivElement}
                  */
-                stageSelect.doDisplay();
                 stageSelect.stepLock(level); //단계 버튼 생성(10개)
             },
             DIFFICULTYSELECT: function (data) {
@@ -349,9 +358,11 @@ export class Action {
                  * 단계 선택, 중앙에 생성했던
                  * 단계 버튼 제거
                  */
-                //stageSelect.doDisplay();
-                mainFrame.doDisplay();
+                common.doDisplay();
+                mainFrame.doNoneDisplay();
+                stageSelect.doNoneDisplay();
                 difficultySelect.doDisplay();
+                resultDisplay.doNoneDisplay();
                 /**
                  * 배팅머니, 획득머니, 시간제한 등을 fulfillment에서 가져옴
                  * 변동사항이 있으면 안되므로 상수 선언
@@ -653,6 +664,11 @@ export class Action {
                 if (document.querySelector("#inGameBox") != null) {
                     container.removeChild(document.querySelector("#inGameBox"));
                 }
+                common.doNoneDisplay();
+                mainFrame.doNoneDisplay();
+                stageSelect.doNoneDisplay();
+                difficultySelect.doNoneDisplay();
+                resultDisplay.doDisplay();
 
                 const result = data.result;
                 let islevelup = false;

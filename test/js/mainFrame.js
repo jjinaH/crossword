@@ -18,11 +18,13 @@ export class MainFrame {
     doDisplay() {
         console.log("MainFrame DoDisplay");
         const page = document.querySelector("#continue_stageButton");
-        if (page.style.display == 'none') {
-            page.style.display = 'flex';
-        } else {
-            page.style.display = 'none';
-        }
+        page.style.display = 'flex';
+    }
+
+    doNoneDisplay() {
+        console.log("MainFrame DoDisplay");
+        const page = document.querySelector("#continue_stageButton");
+        page.style.display = 'none';
 
     }
 

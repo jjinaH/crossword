@@ -22,12 +22,14 @@ export class Result {
     doDisplay() {
         console.log("Result DoDisplay");
         const page = document.querySelector("#resultBox");
-        if (page.style.display == 'none') {
-            page.style.display = 'flex';
-        } else {
-            page.style.display = 'none';
-        }
+        page.style.display = 'flex';
     }//doDisplay
+    doNoneDisplay() {
+        console.log("Result doNoneDisplay");
+        const page = document.querySelector("#resultBox");
+        page.style.display = 'none';
+    }//doDisplay
+
 
     //UI Function
     intervalCoin(a){
