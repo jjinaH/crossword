@@ -3,6 +3,7 @@ import {MainFrame} from "./mainFrame.js";
 import {StageSelect} from "./stageSelect.js";
 import {Shop} from "./shop.js";
 import {Setting} from "./Setting.js";
+import {Ranking} from "./ranking.js";
 
 const Timer = (function () {
     let intervalId = null;
@@ -215,6 +216,7 @@ export class Action {
         const stageSelect = new StageSelect(container);
         const shopPage = new Shop(container);
         const settingPage = new Setting(container);
+        const rankingPage = new Ranking(container);
 
 
         common.init();
@@ -228,6 +230,11 @@ export class Action {
 
         shopPage.init();
         shopPage.doDisplay();
+
+        rankingPage.init();
+        rankingPage.doDisplay();
+
+
 
         this.canvas = window.interactiveCanvas;
         this.scene = scene;
@@ -881,63 +888,48 @@ export class Action {
             RANKING: function (data) {
                 console.log("실행 : ranking");
                 mainFrame.doDisplay();
-                document.querySelector("#coinBox").style.visibility = "visible";
-                if (document.querySelector("#stepBox") != null) {
-                    container.removeChild(document.querySelector("#stepBox"));
-                }
-                if (document.querySelector("#continue_stageButton") != null) {
-                    container.removeChild(document.querySelector("#continue_stageButton"));
-                }
-                if (document.querySelector("#SettingBox") != null) {
-                    container.removeChild(document.querySelector("#SettingBox"));
-                }
-                if (document.querySelector("#Store") != null) {
-                    container.removeChild(document.querySelector("#Store"));
-                }
-                if (document.querySelector("#inGameBox") != null) {
-                    container.removeChild(document.querySelector("#inGameBox"));
-                }
-                if (document.querySelector("#difficultyBox") != null) {
-                    container.removeChild(document.querySelector("#difficultyBox"));
-                }
-                if (document.querySelector("#resultBox") != null) {
-                    container.removeChild(document.querySelector("#resultBox"));
-                }
-                let totalRank = data.totalRank;
-                let myrank = data.myRank;
-                console.log("totalRank : " + totalRank); //list.json
-                console.log("myrank : " + myrank);
+                common.onlyBottomCommon();
+                common.lowerBox.appendChild(rankingPage.rankingBox);
+                rankingPage.doDisplay();
 
-                const rankBox = document.createElement("div");
-                rankBox.setAttribute("id", "rankBox");
-                container.appendChild(rankBox);
-                const yourrank = document.createElement("div");
-                yourrank.setAttribute("id", "yourrank");
-                yourrank.textContent = userEmail + "님의 랭킹은" + myrank + "위입니다.";
-                rankBox.appendChild(yourrank);
-                const ranking = document.createElement("div");
-                ranking.setAttribute("class", "ranking");
-                rankBox.appendChild(ranking);
-                for (let i = 0; i < totalRank.length; i++) {
-                    const rank = document.createElement("div");
-                    rank.setAttribute("id", "rank");
-                    ranking.appendChild(rank);
-                    const User = document.createElement("div");
-                    User.setAttribute("id", "User");
-                    rank.appendChild(User);
-                    const ranknum = document.createElement("div");
-                    ranknum.setAttribute("id", "ranknum");
-                    ranknum.textContent = "RANK " + (i + 1);
-                    User.appendChild(ranknum);
-                    const rankId = document.createElement("div");
-                    rankId.setAttribute("id", "rankId");
-                    rankId.textContent = totalRank[i][0];
-                    User.appendChild(rankId);
-                    const rankexp = document.createElement("div");
-                    rankexp.setAttribute("id", "rankexp");
-                    rank.appendChild(rankexp);
-                    rankexp.textContent = "exp \t" + totalRank[i][1];
-                }
+
+
+
+                // let totalRank = data.totalRank;
+                // let myrank = data.myRank;
+                // console.log("totalRank : " + totalRank); //list.json
+                // console.log("myrank : " + myrank);
+                //
+                // const rankBox = document.createElement("div");
+                // rankBox.setAttribute("id", "rankBox");
+                // container.appendChild(rankBox);
+                // const yourrank = document.createElement("div");
+                // yourrank.setAttribute("id", "yourrank");
+                // yourrank.textContent = userEmail + "님의 랭킹은" + myrank + "위입니다.";
+                // rankBox.appendChild(yourrank);
+                // const ranking = document.createElement("div");
+                // ranking.setAttribute("class", "ranking");
+                // rankBox.appendChild(ranking);
+                // for (let i = 0; i < totalRank.length; i++) {
+                //     const rank = document.createElement("div");
+                //     rank.setAttribute("id", "rank");
+                //     ranking.appendChild(rank);
+                //     const User = document.createElement("div");
+                //     User.setAttribute("id", "User");
+                //     rank.appendChild(User);
+                //     const ranknum = document.createElement("div");
+                //     ranknum.setAttribute("id", "ranknum");
+                //     ranknum.textContent = "RANK " + (i + 1);
+                //     User.appendChild(ranknum);
+                //     const rankId = document.createElement("div");
+                //     rankId.setAttribute("id", "rankId");
+                //     rankId.textContent = totalRank[i][0];
+                //     User.appendChild(rankId);
+                //     const rankexp = document.createElement("div");
+                //     rankexp.setAttribute("id", "rankexp");
+                //     rank.appendChild(rankexp);
+                //     rankexp.textContent = "exp \t" + totalRank[i][1];
+                // }
             },
             SHOP: function (data) {
                 common.doDisplay();

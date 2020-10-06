@@ -12,8 +12,7 @@ button {
 
 /*화면 전체*/
 .container {
-    /*background: linear-gradient(to bottom, #3d43ae, #3ca3de);*/
-    background-image: url("../../image/default_bg.png");
+    background: linear-gradient(to bottom, #3d43ae, #3ca3de);
     background-repeat : no-repeat;
     background-size: cover;
     flex-flow: wrap;
@@ -343,7 +342,7 @@ button {
 #bottomCommon {
     display: flex;
     flex-direction: column;
-    padding: 130px 0 0 0;
+    padding: 150px 0 0 0;
 }
 
 /*main frame*/
@@ -720,125 +719,94 @@ button {
     background-color: #4b8de4;
     border-radius : 0.5vw;
 }
-/*setting*/
-/*.switch {*/
-/*    position: absolute;*/
-/*    display: inline-block;*/
-/*    width: 160px;*/
-/*    height: 60px;*/
-/*    top : 50vh;*/
-/*    margin-left : 29vw;*/
-/*}*/
-/*.switch2 {*/
-/*    position: absolute;*/
-/*    display: inline-block;*/
-/*    width: 160px;*/
-/*    height: 60px;*/
-/*    top : 62vh;*/
-/*    margin-left : 29vw;*/
-/*}*/
-/*.switch input {*/
-/*    opacity: 0;*/
-/*    width: 0;*/
-/*    height: 0;*/
-/*}*/
-/*.switch2 input{*/
-/*    opacity: 0;*/
-/*    width: 0;*/
-/*    height: 0;*/
-/*}*/
-/*.slider {*/
-/*    position: absolute;*/
-/*    cursor: pointer;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    right: 0;*/
-/*    bottom: 0;*/
-/*    background-color: rgba(255,255,255,0.3);*/
-/*    -webkit-transition: .4s;*/
-/*    transition: .4s;*/
-/*}*/
-/*.slider:before {*/
-/*    position: absolute;*/
-/*    height : 5vh;*/
-/*    width: 9vw;*/
-/*    background-color: #b5a9a9;*/
-/*    -webkit-transition: .4s;*/
-/*    transition: .4s;*/
-/*    content:'OFF';*/
-/*    color : white;*/
-/*    font-size : 4vh;*/
-/*    text-align : center;*/
-/*}*/
-/*input:checked + .slider:before {*/
-/*    -webkit-transform: translateX(7vw);*/
-/*    -ms-transform: translateX(7vw);*/
-/*    transform: translateX(7vw);*/
-/*    content:'ON';*/
-/*}*/
-/*.slider.round {*/
-/*    border-radius: 30px;*/
-/*}*/
-/*.slider.round:before {*/
-/*    border-radius: 30px;*/
-/*}*/
 /*ranking*/
-#rankBox{
-    margin-top : 5vh;
+#rankingBox {
+    position: relative;
+    top: -17vh;
 }
-#rank{
-    height: 9vh;
-    display : flex;
-    font-size : 2vw;
+
+#rankLeftBox {
+    padding-right: 148px;
 }
-.ranking{
-    height: 34vh;
-    overflow : auto;
+
+#top5InfoBox {
+    position: relative;
+    top: -10px;
 }
-.ranking::-webkit-scrollbar {
-    width: 1vw;
+
+.topBox {
+    position: relative;
+    left: -50px;
+    padding-bottom: 30px;
 }
-.ranking::-webkit-scrollbar-thumb {
-    background-color: rgba(255,255,255,0.9);
-    border-radius : 0.5vw;
+
+.flexColumn {
+    flex-direction: column;
 }
-.ranking::-webkit-scrollbar-track {
-    background-color: rgba(255,255,255,0.3);
-    border-radius : 0.5vw;
+
+.rankYellow {
+    background-color: #f7d119;
 }
-#User{
-    background-color: rgba(255,255,255,0.2);
-    border-radius: 1vh;
-    border-color : white;
-    display : flex;
-    width : 38vw;
-    height : 6vh;
-    justify-content: left;
-    padding-left : 2vw;
-    padding-top : 1vh;
-    margin-right : 1vw;
+
+.rankYellowText {
+    color: #f7d119;
 }
-#rankexp{
-    background-color: rgba(255,255,255,0.2);
-    border-radius: 1vh;
-    padding-top : 1vh;
-    border-color : white;
-    margin-right : 1em;
-    display : flex;
-    width : 18vw;
-    height : 6vh;
-    justify-content: center;
-    white-space : pre-wrap;
+
+.rankBlue {
+    background-color: #324091;
 }
-#ranknum{
-    margin-right: 1vw;
-    border-right: 0.3vh solid white;
-    padding-right : 1vw;
+
+.rankBlueText {
+    color: #324091;
+    padding-bottom: 8px;
 }
-#yourrank{
-    font-size : 3vw;
-    margin-bottom: 4vh;
+
+.rankCircle {
+    width: 80px;
+    height: 80px;
+    margin: 0 20px 15px 0;
 }
+
+.top5Num {
+    font-size: 42.5px;
+}
+
+.rankCirclePadding {
+    margin-bottom: 20px;
+}
+
+#rankingIcon {
+    width: 76px;
+    object-fit: contain;
+    padding-bottom: 10px;
+}
+
+.rankRound {
+    width: 639px;
+    height: 46px;
+    border-radius: 23px;
+    position: relative;
+    margin-bottom: 13px;
+}
+
+.rankBlueOpacity {
+    background-color: rgba(50, 64, 145, 0.1);
+}
+
+.rank8NumPadding {
+    padding-left: 33px;
+}
+
+.rank8Mail {
+    position: absolute;
+    left: 141px;
+}
+
+.rank8Exp {
+    position: absolute;
+    left: 475px;
+}
+
 /*shop*/
 #shopBox {
     display: flex;
@@ -894,7 +862,14 @@ button {
 
 .font {
     font-family: "NanumSquare", sans-serif;
+}
+
+.textShadow {
     text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
+}
+
+.small {
+    font-size: 19.5px;
 }
 
 .shopTwoBox {
@@ -912,7 +887,6 @@ button {
 }
 
 .shopSmallText {
-    font-size: 19.5px;
     padding: 10px 0 0 0;
 }
 
@@ -973,6 +947,9 @@ button {
 
 .flex {
     display: flex;
+}
+
+.alignCenter {
     align-items: center;
 }
 
