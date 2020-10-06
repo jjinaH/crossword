@@ -1,31 +1,18 @@
 export class Scene {
+
+    #_playButton;
     constructor() {
         console.log("Scene Constructor");
         // 화면 크기를 콘솔에 출력
         const view = document.getElementById("screen");
+        //view.style.backgroundImage = "url('../image/bg.png')";
         this.ratio = window.devicePixelRatio;
         console.log("width : " + view.clientWidth + ", height : " + view.clientHeight);
 
-        const welcomeBox = document.createElement("div");
-        welcomeBox.setAttribute("id", "welcomeBox");
-        view.appendChild(welcomeBox);
-
-        const title = document.createElement("h1");
-        title.setAttribute("id", "title");
-        title.textContent = "WORD SEARCH";
-        welcomeBox.appendChild(title);
-
-        const playButton = document.createElement("div");
-        playButton.setAttribute("id", "playbutton");
-        playButton.onclick = function(){
-            let playReturnMessage  = window.canvas.sendTextQuery("play");
-            console.log(playReturnMessage);
-            //alert("click play button!")
-        };
-        const playText = document.createElement("p");
-        playText.textContent = "PLAY";
-        playButton.appendChild(playText);
-        welcomeBox.appendChild(playButton);
+        this.#_playButton = document.createElement("div");
+        this.#_playButton.setAttribute("id", "playbutton");
+        this.#_playButton.textContent = "start"
+        view.appendChild(this.#_playButton);
 
         const copyright = document.createElement("span");
         copyright.setAttribute("id", "copyright");
@@ -38,5 +25,7 @@ export class Scene {
         view.appendChild(o2ologo);
     }
 
-
+    get playButton() {
+        return this.#_playButton;
+    }
 }//class scene

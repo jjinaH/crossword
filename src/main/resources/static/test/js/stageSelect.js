@@ -1,15 +1,19 @@
 export class StageSelect{
     #stepBox;
     #stepButton;
+    #nextPage;
+    #lastPage;
 
-    doDisplay(){
+    //Display Function
+    doDisplay() {
         console.log("stageSelect DoDisplay");
         const page=document.querySelector("#stepBox");
-            if(page.style.display =='none') {
-                page.style.display = 'flex';
-            }else{
-                page.style.display = 'none';
-            }
+        page.style.display = 'flex';
+    }//doDisplay
+    doNoneDisplay() {
+        console.log("stageSelect doNoneDisplay");
+        const page=document.querySelector("#stepBox");
+        page.style.display = 'none';
     }//doDisplay
 
     constructor(container) {
@@ -18,53 +22,61 @@ export class StageSelect{
     }//constructor
 
     init(){
+        // if (step > 10) {
+        //     //nextPage,lastPage onClick Function
+        // }
         this.#stepBox = document.createElement("div");
         this.#stepBox.setAttribute("id", "stepBox");
         this.container.appendChild(this.#stepBox);
         this.#stepButton = document.createElement("div");
         this.#stepButton.setAttribute("id", "stepButton");
         this.#stepBox.appendChild(this.#stepButton);
-
+        this.#nextPage = document.createElement("img");
+        this.#nextPage.setAttribute("id","nextPage");
+        this.#nextPage.setAttribute("src", "../image/btn-arrow-right.png");
+        this.#stepBox.appendChild(this.#nextPage);
+        this.#lastPage = document.createElement("img");
+        this.#lastPage.setAttribute("id","lastPage");
+        this.#lastPage.setAttribute("src", "../image/btn-arrow-left.png");
+        this.#stepBox.appendChild(this.#lastPage);
     }
     stepLock(step) {
         const totalStep = 10;
-        if (step > 12) {
-            const nextPage = document.createElement("div");
-            nextPage.setAttribute("id", "nextPage");
-            const nextIcon = document.createElement("i");
-            nextIcon.setAttribute("class", "fa fa-angle-right fa-4x");
-            nextPage.appendChild(nextIcon);
-            this.#stepButton.appendChild(nextPage);
-        }
+
         let stepNum = 0;
-        for (let row = 0; row < 3; row++) {
+        for (let row = 0; row < 2; row++) {
             const stepRow = document.createElement("div");
             stepRow.setAttribute("id", "stepRow");
             this.#stepButton.appendChild(stepRow);
-            for (let col = 0; col < 4; col++) {
+            for (let col = 0; col < 5; col++) {
                 if (stepNum == totalStep) return;
                 stepNum++;
                 const underBox = document.createElement("div");
                 if (step < stepNum) { //disable
-                    const outerBox = document.createElement("div");
-                    outerBox.setAttribute("id", "outerBox");
-                    stepRow.appendChild(outerBox);
-                    underBox.textContent = "Lv. " + stepNum;
-                    underBox.setAttribute("class", "disableUnderBox");
-                    const upperBox = document.createElement("div");
-                    upperBox.setAttribute("class", "upperBox");
-                    upperBox.textContent = "Lock";
-                    outerBox.appendChild(underBox);
-                    outerBox.appendChild(upperBox);
+                    const disableBox = document.createElement("div");
+                    disableBox.setAttribute("id", "disableBox");
+                    stepRow.appendChild(disableBox);
+                    underBox.setAttribute("id", "disableUnderBox");
+                    const upperBox = document.createElement("img");
+                    upperBox.setAttribute("id", "upperBox");
+                    upperBox.setAttribute("src", "../image/ico-rock.png");
+                    disableBox.appendChild(underBox);
+                    underBox.appendChild(upperBox);
                 } else {
-                    underBox.textContent = "Lv. " + stepNum;
                     const num = stepNum;
                     console.log("open : " + num);
-                    underBox.setAttribute("class", "ableUnderBox");
+                    const ableBox = document.createElement("div");
+                    ableBox.setAttribute("id", "ableBox");
+                    stepRow.appendChild(ableBox);
+                    underBox.setAttribute("id", "ableUnderBox");
                     underBox.addEventListener("click", function () {
                         window.canvas.sendTextQuery("level" + num);
                     });
-                    stepRow.appendChild(underBox);
+                    const stepText = document.createElement("div");
+                    stepText.setAttribute("id", "stepText");
+                    stepText.textContent=num;
+                    ableBox.appendChild(underBox);
+                    underBox.appendChild(stepText);
                 }
             }
         }
