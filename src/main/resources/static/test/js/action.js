@@ -861,28 +861,28 @@ export class Action {
                     wrongAudio.volume = 0;
                     successAudio.volume = 0;
                     failAudio.volume = 0;
-                    document.querySelector("#input").checked = false;
+                    settingPage.effectSound.checked = false;
                 }
                 if ((onoff == "1") && (sound == "SoundEffect")) {
                     correctAudio.volume = 1;
                     wrongAudio.volume = 1;
                     successAudio.volume = 1;
                     failAudio.volume = 1;
-                    document.querySelector("#input").checked = true;
+                    settingPage.effectSound.checked = true;
                 }
                 if ((onoff == "0") && (sound == "BackGround")) {
                     correctAudio.volume = 0;
                     wrongAudio.volume = 0;
                     successAudio.volume = 0;
                     failAudio.volume = 0;
-                    document.querySelector("#input2").checked = false;
+                    settingPage.bgSound.checked = false;
                 }
                 if ((onoff == "1") && (sound == "BackGround")) {
                     correctAudio.volume = 1;
                     wrongAudio.volume = 1;
                     successAudio.volume = 1;
                     failAudio.volume = 1;
-                    document.querySelector("#input2").checked = true;
+                    settingPage.bgSound.checked = true;
                 }
             },
             RANKING: function (data) {
