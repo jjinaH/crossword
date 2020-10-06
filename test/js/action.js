@@ -2,6 +2,8 @@ import {Common} from "./common.js";
 import {MainFrame} from "./mainFrame.js";
 import {StageSelect} from "./stageSelect.js";
 import {DifficultySelect} from "./difficultySelect.js";
+import {Result} from "./result.js";
+import {Welcome} from "./welcome.js";
 
 const Timer = (function () {
     let intervalId = null;
@@ -71,7 +73,6 @@ const Timer = (function () {
 })();
 
 function main() {
-
     window.canvas.sendTextQuery("play");
 }
 
@@ -127,7 +128,7 @@ function hardGame() {
 }
 
 function remove_welcome(){
-    const pages = document.querySelectorAll("#welcomeBox,#copyright,#o2ologo");
+    const pages = document.querySelectorAll("#playbutton,#copyright,#o2ologo");
     console.log("count: "+pages.length);
     for (let page of pages){
         console.log("remove_welcome function()"+page.textContent);
@@ -210,26 +211,40 @@ export class Action {
         /**
          * Display Class Variable
          */
+        const welcome = new Welcome(container);
         const common = new Common(container);
         const mainFrame = new MainFrame(container);
         const stageSelect = new StageSelect(container);
         const difficultySelect = new DifficultySelect(container);
+        const resultDisplay = new Result(container);
+
+        welcome.init();
+
         //First Frame Test
         //remove_welcome();
+        //document.body.style.backgroundImage = "url('../image/bg.png')";
+        //왜 이게 동작이 안될까 ;;;;;;;;;;;;;;;;;;;;;;;;;
+        //container.style.backgroundImage = "url('../image/default_bg.png')";
+        console.log(container.style.backgroundImage);
+        //window.open("../image/default_bg.png");
+        //welcome.setGameBackGround();
+        // common.init();
+        // common.doDisplay();
+        //
+        // mainFrame.init();
+        // mainFrame.doDisplay();
+        //
 
-        common.init();
-        common.doDisplay();
+        //stageSelect.init();
+        //stageSelect.doDisplay();
 
-        mainFrame.init();
-        mainFrame.doDisplay();
+        // difficultySelect.init();
+        // difficultySelect.doDisplay();
 
+        //resultDisplay.init();
+        //resultDisplay.intervalFunc();
+        //resultDisplay.doDisplay();
 
-        stageSelect.init();
-        stageSelect.stepLock(2);
-        stageSelect.doDisplay();
-
-        difficultySelect.init();
-        difficultySelect.doDisplay();
 
 
         this.canvas = window.interactiveCanvas;
@@ -241,13 +256,17 @@ export class Action {
 
                 userEmail = data.inputemail;
 
+                scene.playButton.onclick = main;
+
             },
             MAIN: function (data) {
                 console.log("실행 : main");
                 if (document.querySelector("#coinBox") != null)
                     document.querySelector("#coinBox").style.visibility = "visible";
-                //welcome title , copyright, o2ologo remove
+                //welcome button, copyright, o2ologo remove
                 remove_welcome();
+                document.body.style.backgroundImage = "url('')";
+                container.style.backgroundImage = "url('../image/default_bg.png')";
                 /**
                  * 메인 화면에서 보여줄 사용자의
                  * 레벨, 경험치, 힌트, 코인
@@ -635,119 +654,73 @@ export class Action {
                 if (document.querySelector("#inGameBox") != null) {
                     container.removeChild(document.querySelector("#inGameBox"));
                 }
+
                 const result = data.result;
                 let islevelup = false;
+                //레벨값 세팅
                 if (level < data.level) {
                     islevelup = true;
                 }
+                //게임 후 내 레벨과 현재 힌트 갯수
                 level = data.level;
                 myHint = data.myHint;
+                //맞춘 단어와 맞추지 못한 단어 LIST
                 const matchedList = data.correctList;
                 const unmatchedList = data.wrongList;
-                const resultBox = document.createElement("div");
-                resultBox.setAttribute("id", "resultBox");
-                container.appendChild(resultBox);
-                const resultleftbox = document.createElement("div");
-                resultleftbox.setAttribute("id", "resultleftbox");
-                resultBox.appendChild(resultleftbox);
-                const resultText = document.createElement("h1");
-                resultText.setAttribute("id", "resultText");
-                resultText.textContent = result;
-                resultleftbox.appendChild(resultText);
-                const levelBox = document.createElement("div");
-                levelBox.setAttribute("id", "resultlevelBox");
-                resultleftbox.appendChild(levelBox);
-                const mylevel = document.createElement("div");
-                mylevel.textContent = "Lv." + level;
-                levelBox.appendChild(mylevel);
-                const progressbar = document.createElement("progress");
-                progressbar.setAttribute("id", "resultprogress");
-                progressbar.setAttribute("value", data.myExp);
-                progressbar.setAttribute("max", data.fullExp);
-                levelBox.appendChild(progressbar);
+
+                //결과 값과 현재 레벨 텍스트 설정
+                resultDisplay.resultText.textContent = result;
+                resultDisplay.resultLevelText.textContent = "Lv." + level;
+
+                //결과 값에 따른 아이콘 변경
+                if(islevelup){
+                    resultDisplay.resultIcon.setAttribute("src","../image/ico-"+"levelup"+".png");
+                }else{
+                    resultDisplay.resultIcon.setAttribute("src","../image/ico-"+result+".png");
+
+                }
+
+                //내 코인 및 exp 설정
+                resultDisplay.resultCoinText2.textContent = myCoin;
+                resultDisplay.resultExpText2.textContent = exp;
+
+                //결과에 따른 설정
+                //성공
                 if (result == "success") {
+                    //Audio Play
                     successAudio.load();
                     successAudio.autoplay = true;
-                    const gainexp = document.createElement("div");
+
+                    //레벨업 여부에 따른 결과
                     if (islevelup) {
                         gainexp.textContent = "+" + (data.fullExp - exp);
                     } else {
                         gainexp.textContent = "+" + (data.myExp - exp);
                     }
+                    //gain 효과
 
-                    levelBox.appendChild(gainexp);
+                //실패
                 } else if (result == "fail") {
+                    //Audio Play
                     failAudio.load();
                     failAudio.autoplay = true;
-                    const gainexp = document.createElement("div");
-                    gainexp.textContent = "";
-                    levelBox.appendChild(gainexp);
+
+
                 }
-                const coinBox = document.createElement("div");
-                coinBox.setAttribute("id", "resultcoinbox");
-                resultleftbox.appendChild(coinBox);
-                const coin = document.createElement("i");
-                coin.setAttribute("class", "fa fa-eur");
-                coinBox.appendChild(coin);
-                const mycoin = document.createElement("div");
-                mycoin.setAttribute("id", "resultCoinText");
-                mycoin.textContent = myCoin;
-                coinBox.appendChild(mycoin);
-                if (result == "success") {
-                    const gaincoin = document.createElement("div");
-                    gaincoin.textContent = "+" + (data.myCoin - myCoin);
-                    coinBox.appendChild(gaincoin);
-                } else if (result == "fail") {
-                    console.log("mycoin" + myCoin);
-                    console.log("data.mycoin" + data.myCoin);
-                    const gaincoin = document.createElement("div");
-                    gaincoin.textContent = "-" + (myCoin - data.myCoin);
-                    coinBox.appendChild(gaincoin);
-                }
-                const resultWord = document.createElement("div");
-                resultWord.setAttribute("id", "resultWord");
-                resultleftbox.appendChild(resultWord);
-                const matcheddiv = document.createElement("div");
-                matcheddiv.setAttribute("id", "matcheddiv");
-                resultWord.appendChild(matcheddiv);
+                //단어 맞춘 현황 설정
+                let wordCnt=0;
                 for (let i = 0; i < matchedList.length; i++) {
-                    const matched = document.createElement("span");
-                    matched.setAttribute("id", "matched");
-                    matched.textContent = matchedList[i];
-                    matcheddiv.appendChild(matched);
+                    resultDisplay.wordBoxItem[wordCnt].setAttribute("id","resultWord_matched");
+                    resultDisplay.wordBoxItem[wordCnt].textContent = matchedList[i];
+                    wordCnt++;
                 }
-                const unmatcheddiv = document.createElement("div");
-                resultWord.appendChild(unmatcheddiv);
                 for (let i = 0; i < unmatchedList.length; i++) {
-                    const unmatched = document.createElement("span");
-                    unmatched.setAttribute("id", "unmatched");
-                    unmatched.textContent = unmatchedList[i];
-                    unmatcheddiv.appendChild(unmatched);
+                    resultDisplay.wordBoxItem[wordCnt].setAttribute("id","resultWord_unmatched");
+                    resultDisplay.wordBoxItem[wordCnt].textContent = unmatchedList[i];
+                    wordCnt++;
                 }
-                const RetryOrNextButton = document.createElement("div");
-                RetryOrNextButton.setAttribute("id", "RetryOrNextButton");
-                resultBox.appendChild(RetryOrNextButton);
-                if (result == "success") {
-                    const nextbutton = document.createElement("i");
-                    nextbutton.setAttribute("class", "fa fa-chevron-right fa-3x");
-                    RetryOrNextButton.appendChild(nextbutton);
-                    nextbutton.onclick = next;
-                    const nextText = document.createElement("div");
-                    nextText.textContent = "NEXT";
-                    RetryOrNextButton.appendChild(nextText);
-                } else if (result == "fail") {
-                    const retrybutton = document.createElement("i");
-                    retrybutton.setAttribute("class", "fa fa-undo fa-3x");
-                    retrybutton.onclick = retry;
-                    RetryOrNextButton.appendChild(retrybutton);
-                    const retryText = document.createElement("div");
-                    retryText.textContent = "RETRY";
-                    RetryOrNextButton.appendChild(retryText);
-                }
-                document.querySelector("#userExpText").textContent = data.myExp + "/" + data.fullExp;
-                document.querySelector("#coinText").textContent = data.myCoin;
-                document.querySelector("#progress").setAttribute("value", data.myExp);
-                document.querySelector("#userLevel").textContent = "Lv." + level;
+
+                //coin, exp 설정
                 exp = data.myExp;
                 fullExp = data.fullExp;
                 myCoin = data.myCoin;

@@ -38,7 +38,7 @@ export class DifficultySelect {
             const boxItem = document.createElement("div");
             boxItem.setAttribute("id", "boxItem");
             this.#_boxItem.push(boxItem)
-            difficultyBox.appendChild(boxItem);
+            this.#_difficultyBox.appendChild(boxItem);
             const button = document.createElement("div");
             button.setAttribute("id", "button");
             button.setAttribute("class", "button" + (i + 1).toString());
