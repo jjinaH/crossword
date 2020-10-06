@@ -447,10 +447,11 @@ export class Action {
                 console.log("실행 : inGame");
                 document.querySelector("#coinBox").style.visibility = "hidden";
                 console.log("cnbx: " + document.querySelector("#coinBox").style.visible);
-                if (document.querySelector("#difficultyBox") != null)
-                    container.removeChild(document.querySelector("#difficultyBox"));
-                if (document.querySelector("#resultBox") != null)
-                    container.removeChild(document.querySelector("#resultBox"));
+                common.doDisplay();
+                mainFrame.doNoneDisplay();
+                stageSelect.doNoneDisplay();
+                difficultySelect.doNoneDisplay();
+                resultDisplay.doNoneDisplay();
                 /**
                  * 게임판, 게임판 행과 열, 시간제한, 맞춰야 할 모든 단어 수는 변경되면 안 되서 상수 선언
                  * 맞춰야 하는 단어 수는 변경되어야 하므로 let 선언 -> correct에서도 사용할 변수
