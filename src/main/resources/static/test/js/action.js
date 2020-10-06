@@ -3,7 +3,9 @@ import {MainFrame} from "./mainFrame.js";
 import {StageSelect} from "./stageSelect.js";
 import {Shop} from "./shop.js";
 import {Setting} from "./Setting.js";
-import {Ranking} from "./ranking.js";
+import {DifficultySelect} from "./difficultySelect.js";
+import {Result} from "./result.js";
+import {Welcome} from "./welcome.js";
 
 const Timer = (function () {
     let intervalId = null;
@@ -128,7 +130,7 @@ function hardGame() {
 }
 
 function remove_welcome(){
-    const pages = document.querySelectorAll("#welcomeBox,#copyright,#o2ologo");
+    const pages = document.querySelectorAll("#playbutton,#copyright,#o2ologo");
     console.log("count: "+pages.length);
     for (let page of pages){
         console.log("remove_welcome function()"+page.textContent);
@@ -211,19 +213,32 @@ export class Action {
         /**
          * Display Class Variable
          */
-        const common = new Common(container);
-        const mainFrame = new MainFrame(container);
-        const stageSelect = new StageSelect(container);
         const shopPage = new Shop(container);
         const settingPage = new Setting(container);
         const rankingPage = new Ranking(container);
+        const welcome = new Welcome(container);
+        const common = new Common(container);
+        const mainFrame = new MainFrame(container);
+        const stageSelect = new StageSelect(container);
+        const difficultySelect = new DifficultySelect(container);
+        const resultDisplay = new Result(container);
 
 
+        welcome.init();
+
+        //First Frame Test
+        //remove_welcome();
+        //document.body.style.backgroundImage = "url('../image/bg.png')";
+        //왜 이게 동작이 안될까 ;;;;;;;;;;;;;;;;;;;;;;;;;
+        //container.style.backgroundImage = "url('../image/default_bg.png')";
+        //console.log(container.style.backgroundImage);
+        //window.open("../image/default_bg.png");
+        //welcome.setGameBackGround();
         common.init();
-        common.notDisplay();
+        common.doNoneDisplay();
 
         mainFrame.init();
-        mainFrame.doDisplay();
+        mainFrame.doNoneDisplay();
 
         settingPage.init();
         settingPage.doDisplay();
@@ -234,6 +249,14 @@ export class Action {
         rankingPage.init();
         rankingPage.doDisplay();
 
+        stageSelect.init();
+        stageSelect.doNoneDisplay();
+
+        difficultySelect.init();
+        difficultySelect.doNoneDisplay();
+
+        resultDisplay.init();
+        resultDisplay.doNoneDisplay();
 
 
         this.canvas = window.interactiveCanvas;
@@ -245,13 +268,23 @@ export class Action {
 
                 userEmail = data.inputemail;
 
-
+                scene.playButton.onclick = main;
 
             },
-                MAIN: function (data) {
+            MAIN: function (data) {
                 console.log("실행 : main");
-                //welcome title , copyright, o2ologo remove
+                if (document.querySelector("#coinBox") != null)
+                    document.querySelector("#coinBox").style.visibility = "visible";
+                //welcome button, copyright, o2ologo remove
                 remove_welcome();
+                document.body.style.backgroundImage = "url('')";
+                container.style.backgroundImage = "url('../image/scene/default_bg.png')";
+
+                common.doDisplay();
+                mainFrame.doDisplay();
+                stageSelect.doNoneDisplay();
+                difficultySelect.doNoneDisplay();
+                resultDisplay.doNoneDisplay();
                 /**
                  * 메인 화면에서 보여줄 사용자의
                  * 레벨, 경험치, 힌트, 코인
@@ -326,27 +359,31 @@ export class Action {
                 mainFrame.gameContinueButton.onclick = continuebutton;
                 mainFrame.chooseLevelButton.onclick = viewallButton;
 
+
             },
             STAGESELECT: function (data) {
                 console.log("실행 : stage");
-                document.querySelector("#coinBox").style.visibility = "visible";
+
                 /**
                  * 메인 화면, 중앙에 생성했던
                  * continue, view all 버튼 제거
                  */
                 //container.removeChild(document.querySelector("#continue_stageButton"));
-                mainFrame.doDisplay();
+                common.doDisplay();
+                mainFrame.doNoneDisplay();
+                stageSelect.doDisplay();
+                difficultySelect.doNoneDisplay();
+                resultDisplay.doNoneDisplay();
                 /**
                  * 중앙에
                  * 선택할 수 있는 단계 보여줌
                  * @type {HTMLDivElement}
                  */
-                stageSelect.doDisplay();
                 stageSelect.stepLock(level); //단계 버튼 생성(10개)
             },
             DIFFICULTYSELECT: function (data) {
                 console.log("실행 : difficulty");
-                document.querySelector("#coinBox").style.visibility = "visible";
+
                 let winMoney1 = 0;
                 let winMoney2 = 0;
                 let winMoney3 = 0;
@@ -357,12 +394,11 @@ export class Action {
                  * 단계 선택, 중앙에 생성했던
                  * 단계 버튼 제거
                  */
-                if (document.querySelector("#stepBox") != null) {
-                    container.removeChild(document.querySelector("#stepBox"));
-                }
-                if (document.querySelector("#continue_stageButton") != null) {
-                    container.removeChild(document.querySelector("#continue_stageButton"));
-                }
+                common.doDisplay();
+                mainFrame.doNoneDisplay();
+                stageSelect.doNoneDisplay();
+                difficultySelect.doDisplay();
+                resultDisplay.doNoneDisplay();
                 /**
                  * 배팅머니, 획득머니, 시간제한 등을 fulfillment에서 가져옴
                  * 변동사항이 있으면 안되므로 상수 선언
@@ -401,47 +437,14 @@ export class Action {
                  * 난이도별 경험치 표시해야 함
                  * @type {HTMLDivElement}
                  */
-                const difficultyBox = document.createElement("div");
-                difficultyBox.setAttribute("id", "difficultyBox");
-                container.appendChild(difficultyBox);
 
-                const easyBox = document.createElement("div");
-                easyBox.setAttribute("id", "easyBox");
-                easyBox.setAttribute("class", "difficultyBoxMargin");
-                easyBox.onclick = easyGame;
-                difficultyBox.appendChild(easyBox);
-                const easyText = document.createElement("div");
-                easyText.setAttribute("class", "difficultyText");
-                easyText.textContent = "EASY";
-                easyBox.appendChild(easyText);
-                const easyDetail = document.createElement("div");
-                easyDetail.setAttribute("class", "difficultyDetail");
-                easyDetail.textContent = "★ \r\nSUCCESS : " + winMoney1 + "c GET \r\nFAIL : " + betMoney1 + "c CUT \r\nTime Limit : " + timeLimit1 + "s \r\n---------------------\r\n EXP x1";
-                easyBox.appendChild(easyDetail);
-                const mediumBox = document.createElement("div");
-                mediumBox.setAttribute("class", "difficultyBoxMargin");
-                mediumBox.onclick = mediumGame;
-                difficultyBox.appendChild(mediumBox);
-                const mediumText = document.createElement("div");
-                mediumText.setAttribute("class", "difficultyText");
-                mediumText.textContent = "MEDIUM";
-                mediumBox.appendChild(mediumText);
-                const mediumDetail = document.createElement("div");
-                mediumDetail.setAttribute("class", "difficultyDetail");
-                mediumDetail.textContent = "★★ \r\nSUCCESS : " + winMoney2 + "c GET \r\nFAIL : " + betMoney2 + "c CUT \r\nTime Limit : " + timeLimit2 + "s \r\n---------------------\r\n EXP x2";
-                mediumBox.appendChild(mediumDetail);
-                const hardBox = document.createElement("div");
-                hardBox.setAttribute("class", "difficultyBoxMargin");
-                hardBox.onclick = hardGame;
-                difficultyBox.appendChild(hardBox);
-                const hardText = document.createElement("div");
-                hardText.setAttribute("class", "difficultyText");
-                hardText.textContent = "HARD";
-                hardBox.appendChild(hardText);
-                const hardDetail = document.createElement("div");
-                hardDetail.setAttribute("class", "difficultyDetail");
-                hardDetail.textContent = "★★★ \r\nSUCCESS : " + winMoney3 + "c GET \r\nFAIL : " + betMoney3 + "c CUT \nTime Limit : " + timeLimit3 + "s \r\n---------------------\r\nEXP x3";
-                hardBox.appendChild(hardDetail);
+                for(let i=1;i<=3;i++){
+                    difficultySelect.feeText[i-1].textContent = eval("betMoney"+i);
+                    difficultySelect.timeText[i-1].textContent = eval("timeLimit"+i);
+                    difficultySelect.boxItem[i-1].addEventListener("click",function(){
+                        window.canvas.sendTextQuery(difficultySelect.difficulty[i-1]);
+                    })
+                }
             },
             INGAME: function (data) {
                 console.log("실행 : inGame");
@@ -695,126 +698,85 @@ export class Action {
                         },
             RESULT: function (data) {
                 console.log("실행 : result");
-                document.querySelector("#coinBox").style.visibility = "visible";
-                if (document.querySelector("#inGameBox") != null) {
-                    container.removeChild(document.querySelector("#inGameBox"));
-                }
+                // document.querySelector("#coinBox").style.visibility = "visible";
+                // if (document.querySelector("#inGameBox") != null) {
+                //     container.removeChild(document.querySelector("#inGameBox"));
+                // }
+                common.doNoneDisplay();
+                mainFrame.doNoneDisplay();
+                stageSelect.doNoneDisplay();
+                difficultySelect.doNoneDisplay();
+                resultDisplay.doDisplay();
+
                 const result = data.result;
                 let islevelup = false;
+                //레벨값 세팅
                 if (level < data.level) {
                     islevelup = true;
                 }
+                //게임 후 내 레벨과 현재 힌트 갯수
                 level = data.level;
                 myHint = data.myHint;
+                //맞춘 단어와 맞추지 못한 단어 LIST
                 const matchedList = data.correctList;
                 const unmatchedList = data.wrongList;
-                const resultBox = document.createElement("div");
-                resultBox.setAttribute("id", "resultBox");
-                container.appendChild(resultBox);
-                const resultleftbox = document.createElement("div");
-                resultleftbox.setAttribute("id", "resultleftbox");
-                resultBox.appendChild(resultleftbox);
-                const resultText = document.createElement("h1");
-                resultText.setAttribute("id", "resultText");
-                resultText.textContent = result;
-                resultleftbox.appendChild(resultText);
-                const levelBox = document.createElement("div");
-                levelBox.setAttribute("id", "resultlevelBox");
-                resultleftbox.appendChild(levelBox);
-                const mylevel = document.createElement("div");
-                mylevel.textContent = "Lv." + level;
-                levelBox.appendChild(mylevel);
-                const progressbar = document.createElement("progress");
-                progressbar.setAttribute("id", "resultprogress");
-                progressbar.setAttribute("value", data.myExp);
-                progressbar.setAttribute("max", data.fullExp);
-                levelBox.appendChild(progressbar);
+
+                //결과 값과 현재 레벨 텍스트 설정
+                resultDisplay.resultText.textContent = result;
+                resultDisplay.resultLevelText.textContent = "Lv." + level;
+
+                //결과 값에 따른 아이콘 변경
+                if(islevelup){
+                    resultDisplay.resultIcon.setAttribute("src","../image/ico-"+"levelup"+".png");
+                }else{
+                    resultDisplay.resultIcon.setAttribute("src","../image/ico-"+result+".png");
+                }
+
+                //내 코인 및 exp 설정
+                resultDisplay.resultCoinText2.textContent = myCoin;
+                resultDisplay.resultExpText2.textContent = exp;
+
+                //결과에 따른 설정
+                //성공
                 if (result == "success") {
+                    //Audio Play
                     successAudio.load();
                     successAudio.autoplay = true;
-                    const gainexp = document.createElement("div");
+
+                    //레벨업 여부에 따른 gain 효과
                     if (islevelup) {
-                        gainexp.textContent = "+" + (data.fullExp - exp);
+                        resultDisplay.intervalFunc(data.myCoin - myCoin,data.fullExp - exp);
                     } else {
-                        gainexp.textContent = "+" + (data.myExp - exp);
+                        resultDisplay.intervalFunc(data.myCoin - myCoin,data.myExp - exp);
                     }
 
-                    levelBox.appendChild(gainexp);
+
+                    //실패
                 } else if (result == "fail") {
+                    //Audio Play
                     failAudio.load();
                     failAudio.autoplay = true;
-                    const gainexp = document.createElement("div");
-                    gainexp.textContent = "";
-                    levelBox.appendChild(gainexp);
+
+
                 }
-                const coinBox = document.createElement("div");
-                coinBox.setAttribute("id", "resultcoinbox");
-                resultleftbox.appendChild(coinBox);
-                const coin = document.createElement("i");
-                coin.setAttribute("class", "fa fa-eur");
-                coinBox.appendChild(coin);
-                const mycoin = document.createElement("div");
-                mycoin.setAttribute("id", "resultCoinText");
-                mycoin.textContent = myCoin;
-                coinBox.appendChild(mycoin);
-                if (result == "success") {
-                    const gaincoin = document.createElement("div");
-                    gaincoin.textContent = "+" + (data.myCoin - myCoin);
-                    coinBox.appendChild(gaincoin);
-                } else if (result == "fail") {
-                    console.log("mycoin" + myCoin);
-                    console.log("data.mycoin" + data.myCoin);
-                    const gaincoin = document.createElement("div");
-                    gaincoin.textContent = "-" + (myCoin - data.myCoin);
-                    coinBox.appendChild(gaincoin);
-                }
-                const resultWord = document.createElement("div");
-                resultWord.setAttribute("id", "resultWord");
-                resultleftbox.appendChild(resultWord);
-                const matcheddiv = document.createElement("div");
-                matcheddiv.setAttribute("id", "matcheddiv");
-                resultWord.appendChild(matcheddiv);
+                //단어 맞춘 현황 설정
+                let wordCnt=0;
                 for (let i = 0; i < matchedList.length; i++) {
-                    const matched = document.createElement("span");
-                    matched.setAttribute("id", "matched");
-                    matched.textContent = matchedList[i];
-                    matcheddiv.appendChild(matched);
+                    resultDisplay.wordBoxItem[wordCnt].setAttribute("id","resultWord_matched");
+                    resultDisplay.wordBoxItem[wordCnt].textContent = matchedList[i];
+                    wordCnt++;
                 }
-                const unmatcheddiv = document.createElement("div");
-                resultWord.appendChild(unmatcheddiv);
                 for (let i = 0; i < unmatchedList.length; i++) {
-                    const unmatched = document.createElement("span");
-                    unmatched.setAttribute("id", "unmatched");
-                    unmatched.textContent = unmatchedList[i];
-                    unmatcheddiv.appendChild(unmatched);
+                    resultDisplay.wordBoxItem[wordCnt].setAttribute("id","resultWord_unmatched");
+                    resultDisplay.wordBoxItem[wordCnt].textContent = unmatchedList[i];
+                    wordCnt++;
                 }
-                const RetryOrNextButton = document.createElement("div");
-                RetryOrNextButton.setAttribute("id", "RetryOrNextButton");
-                resultBox.appendChild(RetryOrNextButton);
-                if (result == "success") {
-                    const nextbutton = document.createElement("i");
-                    nextbutton.setAttribute("class", "fa fa-chevron-right fa-3x");
-                    RetryOrNextButton.appendChild(nextbutton);
-                    nextbutton.onclick = next;
-                    const nextText = document.createElement("div");
-                    nextText.textContent = "NEXT";
-                    RetryOrNextButton.appendChild(nextText);
-                } else if (result == "fail") {
-                    const retrybutton = document.createElement("i");
-                    retrybutton.setAttribute("class", "fa fa-undo fa-3x");
-                    retrybutton.onclick = retry;
-                    RetryOrNextButton.appendChild(retrybutton);
-                    const retryText = document.createElement("div");
-                    retryText.textContent = "RETRY";
-                    RetryOrNextButton.appendChild(retryText);
-                }
-                document.querySelector("#userExpText").textContent = data.myExp + "/" + data.fullExp;
-                document.querySelector("#coinText").textContent = data.myCoin;
-                document.querySelector("#progress").setAttribute("value", data.myExp);
-                document.querySelector("#userLevel").textContent = "Lv." + level;
+
+                //coin, exp 설정
                 exp = data.myExp;
                 fullExp = data.fullExp;
                 myCoin = data.myCoin;
+
             },
             SETTING: function (data) {
                 console.log("실행 : setting");
@@ -948,7 +910,6 @@ export class Action {
                  * 코인 충전
                  * 힌트 충전
                  */
-
             },
         };
     }

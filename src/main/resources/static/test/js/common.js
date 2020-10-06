@@ -83,20 +83,23 @@ export class Common {
         console.log(this.isDisplay.toString());
     }
 
-    notDisplay() {
-        console.log("Common do not Display");
-        const pages = document.querySelectorAll("#higherBox, #lowerBox");
-        for(let page of pages)
-            page.style.display = "none"
-        ;
-        this.isDisplay = false;
-    }
-
     onlyBottomCommon() {
         console.log("Display only bottom common icons");
         const page = document.querySelector("#higherBox");
-        if(page.style.visibility = "visible")
+        if (page.style.visibility = "visible")
             page.style.visibility = "hidden";
+    }
+
+    doNoneDisplay() {
+        console.log("Common DoNoneDisplay");
+        const pages = document.querySelectorAll(" #levelBox,#userInfoBox,#inGameHintBox,#bottomCommon");
+        let i = 0;
+        for (let page of pages) {
+            page.style.display = "none"
+        }
+        this.isDisplay = !this.isDisplay
+
+        console.log(this.isDisplay.toString());
     }
 
     init() {
@@ -138,8 +141,6 @@ export class Common {
         this.#_progressBar.setAttribute("id", "progress");
         this.#_levelBox.appendChild(this.#_progressBar);
 
-
-
         this.#_expBox = document.createElement("div");
         this.#_expBox.setAttribute("id", "expBox");
         this.#_levelBox.appendChild(this.#_expBox);
@@ -166,7 +167,6 @@ export class Common {
         this.#_userInfoBox = document.createElement("div");
         this.#_userInfoBox.setAttribute("id", "userInfoBox");
         this.#_higherBox.appendChild(this.#_userInfoBox);
-
         this.#_hintBox = document.createElement("div");
         this.#_hintBox.setAttribute("id", "hintBox");
         this.#_userInfoBox.appendChild(this.#_hintBox);
