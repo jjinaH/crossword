@@ -1,5 +1,4 @@
 export class Ranking{
-
     #_rankingBox
     #_topBox
     #_bottomBox
@@ -150,5 +149,4 @@ export class Ranking{
     get rankingBoardText() {
         return this.#_rankingBoardText;
     }
-
 }

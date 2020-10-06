@@ -202,5 +202,4 @@ export class Setting{
         return this.#_bgSound;
     }
 
-
 }

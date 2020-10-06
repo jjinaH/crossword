@@ -1,5 +1,4 @@
 export class Shop{
-
     #_shopBox;
     #_hintBox;
     #_hintIcon;
