@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /gradle
 /.gradle
 /.idea
@@ -6,3 +7,6 @@
 /build.gradle
 /actions_service_key
 Main.java
+=======
+properties/
+>>>>>>> adba75324eb043de57384a895f3d749350c3520a
