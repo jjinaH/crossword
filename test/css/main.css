@@ -1,0 +1,1053 @@
+
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+
+body {
+    margin: 0;
+}
+
+button {
+    background-color: cornflowerblue;
+    color : white;
+}
+
+/*화면 전체*/
+.container {
+    background: linear-gradient(to bottom, #3d43ae, #3ca3de);
+    background-repeat : no-repeat;
+    background-size: cover;
+    flex-flow: wrap;
+    color : white;
+}
+
+/*처음 화면*/
+#welcomeBox {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+#title{
+    margin : 10vh;
+    font-size: 10vh;
+}
+
+#playbutton {
+    height: 10vh;
+    width : 30vw;
+    font-size : 7vh;
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 1.5vh;
+    border : 1px solid rgba(255,255,255,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#copyright{
+    position: absolute;
+    bottom: 0vh;
+    left: 5vw;
+    font-size: 3vh;
+}
+#o2ologo {
+    position: absolute;
+    bottom: 0vh;
+    right: 5vw;
+    font-size: 3vh;
+}
+
+#higherBox {
+    display: flex;
+    /*border-style: solid;*/
+}
+
+#lowerBox {
+    /*border-style: solid;*/
+    display: flex;
+}
+
+#leftLowerBox {
+    width: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0 0 0;
+    /*border-style: solid;*/
+}
+
+/*common*/
+#levelBox {
+    /*border-style: solid;*/
+    height: 22.5vh;
+    width: 15vw;
+    position: relative;
+}
+
+#backCircle {
+    width: 81px;
+    height: 81px;
+    box-shadow: -5.6px 8.3px 20px 0 rgba(25, 34, 61, 0.45);
+    background-color: #ffffff;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#levelText {
+    width: 30px;
+    height: 10px;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #066666;
+    padding: 10px 0 5px 0;
+}
+
+#userLevel {
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 44.5px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #324091;
+}
+
+#progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -48%);
+}
+
+#expBox {
+    width: 115px;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 42px;
+}
+
+#userExp {
+    width: 50px;
+    height: 15px;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 19.5px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: right;
+    color: #a1cf79;
+}
+
+#expBar {
+    width: 2px;
+    height: 15px;
+    background-color: white;
+}
+
+#levelFullExp {
+    width: 50px;
+    height: 15px;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 19.5px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #2e3f82;
+}
+
+#userInfoBox {
+    display: flex;
+    /*border-style: solid;*/
+    justify-content: flex-end;
+    padding: 50px 40px 0 0;
+    flex-grow: 1;
+}
+
+#hintBox {
+    width: 100px;
+    height: 40px;
+    border-radius: 15px;
+    box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
+    background-color: #7cbf5a;
+    margin: 0 10px 0 0;
+    display: flex;
+}
+
+#hintIcon, #coinIcon {
+    position: relative;
+    left: 11px;
+    top: 7px;
+    font-size: 25px;
+}
+
+#coinIcon {
+    width: 25px;
+    height: 25px;
+}
+
+#hintText, #coinText {
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+    position: relative;
+    left: 20px;
+    top: 8px;
+}
+
+#hintText {
+    width: 15px;
+}
+
+#hintPlus, #coinPlus {
+    width: 31px;
+    height: 31px;
+    box-shadow: 0px 5px 15px 0 rgba(0, 0, 0, 0.35);
+    background-color: #ffba00;
+    border-radius: 50%;
+    position: relative;
+    bottom: 17px;
+}
+
+#hintPlus {
+    left: 35px;
+}
+
+#coinPlus {
+    left: 40px;
+}
+
+#hintPlusIcon, #coinPlusIcon {
+    font-size: 19px;
+    position: absolute;
+    top: 7px;
+    left: 8px;
+}
+
+#coinBox {
+    width: 150px;
+    height: 40px;
+    border-radius: 15px;
+    box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
+    background-color: #7cbf5a;
+    display: flex;
+    margin: 0 10px 0 0;
+}
+
+#coinText {
+    width: 55px;
+}
+
+#accountBox {
+    width: 265px;
+    height: 40px;
+    border-radius: 15px;
+    background-color: #324091;
+    position: relative;
+}
+
+#accountText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #7cbf5a;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#inGameHintBox {
+    width: 81px;
+    height: 80px;
+    box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
+    background-color: #7cbf5a;
+    border-radius: 50%;
+}
+
+#inGameHintIcon {
+    font-size: 42px;
+    position: relative;
+    top: 19px;
+    left: 18px;
+}
+
+#inGameHintNumBox {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: -2.8px 4.1px 10px 0 rgba(33, 68, 93, 0.4);
+    background-color: #ffba00;
+    position: relative;
+    bottom: 49px;
+    left: 50px;
+}
+
+#inGameHintNumText {
+    width: 13px;
+    height: 18px;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 23.5px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+}
+
+#ranking, #setting, #main{
+    display: flex;
+    object-fit: contain;
+    width: 50px;
+    padding: 0 0 20px 0;
+}
+
+#bottomCommon {
+    display: flex;
+    flex-direction: column;
+    padding: 150px 0 0 0;
+}
+
+/*main frame*/
+#playBox {
+    display: flex;
+    /*border-style: solid;*/
+    flex-grow: 1;
+    padding: 40px 0 0 150px;
+}
+
+.mainTwoBox {
+    padding: 0 178px 0 0;
+}
+
+.mainText {
+    font-size: 56.5px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 30px 0;
+    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
+}
+
+.extraBoldText {
+    font-weight: 800;
+}
+
+.mainCircle {
+    width: 90px;
+    height: 91px;
+    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
+    border-radius: 50%;
+}
+
+.mainIcon {
+    width: 70px;
+    position: relative;
+    left: 10px;
+    top: 10px;
+}
+
+#gameContinueCircle {
+    background-color: #00b4ff;
+}
+
+#chooseLevelCircle {
+    background-color: #2652d2;
+}
+
+
+/*단계 선택 화면*/
+#stepBox {
+    font-size: 4vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#stepButton {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 10vh;
+    transform: rotate(-1deg);
+}
+#nextPage {
+    position: relative;
+    top: 8vh;
+}
+#stepButton, #nextPage {
+    margin-right: 4vw;
+}
+#stepRow {
+    display: flex;
+    flex-direction: row;
+}
+.disableUnderBox, .ableUnderBox{
+    margin-right: 1vw;
+    height: 8vh;
+    width : 15vw;
+    padding-top: 1vh;
+    border-radius: 1.2vh;
+    border: 1px solid white;
+}
+.ableUnderBox {
+    background-color: rgba(255,255,255,0.5);
+}
+.disableUnderBox {
+    background-color: rgba(255,255,255,0.2);
+    opacity: 0.5;
+}
+.upperBox {
+    position: relative;
+    bottom: 7vh;
+    left: 1.2vw;
+    height: 5vh;
+    width: 13vw;
+    background-color: rgba(255,255,255,0.6);
+    border-radius: 1.3vh;
+    transform: rotate(-15deg);
+}
+/*난이도 선택 화면*/
+.difficulty {
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 1.4vh;
+    border-color : white;
+    text-align: center;
+}
+#difficultyBox {
+    font-size: 3vh;
+    text-align: center;
+    white-space: pre;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 3vh;
+}
+.difficultyBoxMargin {
+    border: 1px solid rgba(255,255,255,0.6);
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 1.4vh;
+    margin-right: 3vw;
+    display: flex;
+    flex-direction: column;
+}
+.difficultyText {
+    border: 1px solid rgba(255,255,255,0.6);
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 1.5vh;
+    height: 6vh;
+    padding-top: 2vh;
+}
+.difficultyDetail {
+    padding: 1vw;
+}
+/*인게임 화면*/
+#inGameBox {
+    font-size: 3vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 2vh;
+    right: 3vw;
+}
+#gameProgress_HintBox{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 7vh;
+}
+#gameProgressBox {
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    font-size: 2vw;
+    background-color: rgba(255,255,255,0.3);
+    border: 2px solid white;
+    margin-bottom: 2vh;
+    border-radius: 1vh;
+}
+.gameProgress {
+    margin: 1vw;
+    background-color: rgba(255,255,255,0.4);
+    width: 3vw;
+    height: 3vh;
+    border-radius: 10vw;
+}
+.inGameBoxMargin {
+    margin-right: 7vw;
+}
+#usedHint {
+    background-color: rgba(255,255,255,0.3);
+    border: 2px solid white;
+    white-space: pre;
+    text-align: center;
+    padding: 1vh;
+    width: 18vw;
+    border-radius: 1vh;
+}
+#hintScrollBox{
+    height: 30vh;
+    overflow : auto;
+}
+#hintScrollBox::-webkit-scrollbar {
+    width: 0.5vw;
+}
+#hintScrollBox::-webkit-scrollbar-thumb {
+    background-color: rgba(255,255,255,0.9);
+    border-radius : 0.5vw;
+}
+#hintScrollBox::-webkit-scrollbar-track {
+    background-color: rgba(255,255,255,0.3);
+    border-radius : 0.5vw;
+}
+#gameBoardBox {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    bottom: 1vh;
+    right: 5.5vw;
+}
+#gameBoard {
+    width: 45vw;
+    height: 75vh;
+    border: 2px solid white;
+    border-radius: 1.4vh;
+}
+.rowBox {
+    display: flex;
+    flex-direction: row;
+}
+
+.alphabetBox {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255,255,255,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alphabet {
+    font-size:4vh;
+}
+
+#gameTimerBox {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 1vh;
+}
+#gameTimer {
+    width: 1vw;
+    background-color: rgba(255,255,255,0.3);
+    border: white;
+    border-radius: 2vh;
+    transform: rotate(180deg);
+    margin-left: 3vw;
+}
+#remainTime {
+    width: 1vw;
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 2vh;
+    transform: rotate(180deg);
+}
+#gameTimerText {
+    text-align: center;
+    border: 2px solid white;
+    padding: 0.2vw;
+    width: 3vw;
+    height: 5vh;
+    margin: 2vw;
+}
+
+/*힌트 열기*/
+.backgroundModal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.contentModal {
+    font-size: 4vh;
+    text-align: center;
+    color: black;
+    background-color: #ccff99;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    position: relative;
+    top: 4.5vh;
+}
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*wrong*/
+.shake {
+    animation: shake 1s;
+    animation-iteration-count: 1;
+}
+@keyframes shake {
+    0% { transform: translate(1px, 0px)}
+    10% { transform: translate(-1px, 0px)}
+    20% { transform: translate(-3px, 0px)}
+    30% { transform: translate(3px, 0px)}
+    40% { transform: translate(1px, 0px)}
+    50% { transform: translate(-1px, 0px)}
+    60% { transform: translate(-3px, 0px)}
+    70% { transform: translate(3px, 0px)}
+    80% { transform: translate(-1px, 0px)}
+    90% { transform: translate(1px, 0px)}
+    100% { transform: translate(1px, 0px)}
+}
+
+/*result*/
+#resultBox{
+    display: flex;
+    font-size : 4vh;
+}
+#resultText{
+    margin-bottom : 8vh;
+    text-align : center;
+}
+#resultlevelBox{
+    display : flex;
+    justify-content : space-between;
+    margin-bottom : 4vh;
+}
+#resultcoinbox{
+    display: flex;
+    justify-content : space-between;
+    margin-bottom : 4vh;
+}
+#RetryOrNextButton{
+    margin-top : 25vh;
+    margin-left : 6vw;
+}
+#resultWord{
+    display : flex;
+    flex-direction : column;
+    align-items:center;
+    border : 0.5vh solid;
+    border-radius: 2vh;
+}
+#matcheddiv{
+    margin-bottom: 2vh;
+    margin-top : 1vh;
+}
+#unmatcheddiv{
+    margin-bottom: 2vh;
+    margin-top : 1vh;
+}
+#matched{
+    margin-top: 2vh;
+    padding : 4vh;
+    font-size : 6vh;
+}
+#unmatched{
+    color : red;
+    padding : 4vh;
+    font-size : 6vh;
+}
+#resultprogress{
+    margin-left : 3vw;
+    margin-right : 3vw;
+    -webkit-appearance: none;
+}
+::-webkit-progress-bar {
+    background-color: rgba(255,255,255,0.3);
+    border-radius : 0.5vw;
+}
+::-webkit-progress-value {
+    background-color: #4b8de4;
+    border-radius : 0.5vw;
+}
+/*ranking*/
+#rankingBox {
+    position: relative;
+    top: -17vh;
+}
+
+#rankLeftBox {
+    padding-right: 148px;
+}
+
+#top5InfoBox {
+    position: relative;
+    top: -10px;
+}
+
+.topBox {
+    position: relative;
+    left: -50px;
+    padding-bottom: 30px;
+}
+
+.flexColumn {
+    flex-direction: column;
+}
+
+.rankYellow {
+    background-color: #f7d119;
+}
+
+.rankYellowText {
+    color: #f7d119;
+}
+
+.rankBlue {
+    background-color: #324091;
+}
+
+.rankBlueText {
+    color: #324091;
+    padding-bottom: 8px;
+}
+
+.rankCircle {
+    width: 80px;
+    height: 80px;
+    margin: 0 20px 15px 0;
+}
+
+.top5Num {
+    font-size: 42.5px;
+}
+
+.rankCirclePadding {
+    margin-bottom: 20px;
+}
+
+#rankingIcon {
+    width: 76px;
+    object-fit: contain;
+    padding-bottom: 10px;
+}
+
+.rankRound {
+    width: 639px;
+    height: 46px;
+    border-radius: 23px;
+    position: relative;
+    margin-bottom: 13px;
+}
+
+.rankBlueOpacity {
+    background-color: rgba(50, 64, 145, 0.1);
+}
+
+.rank8NumPadding {
+    padding-left: 33px;
+}
+
+.rank8Mail {
+    position: absolute;
+    left: 141px;
+}
+
+.rank8Exp {
+    position: absolute;
+    left: 475px;
+}
+
+/*shop*/
+#shopBox {
+    display: flex;
+    /*border-style: solid;*/
+    flex-grow: 1;
+    padding: 40px 0 0 150px;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.shopCircle {
+    width: 130px;
+    height: 131px;
+    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
+}
+
+.yellow {
+    background-color: #ffba00;
+}
+
+.green {
+    background-color: #7cbf5a;
+}
+
+.blackText {
+    color: #000000;
+}
+
+.yellowText {
+    color: #ffba00;
+}
+
+.greenText {
+    color: #7cbf5a;
+}
+
+.shopIcon {
+    width: 120px;
+    position: relative;
+    left: 5px;
+    top: 14px;
+}
+
+.miniCoinIcon {
+    width: 50px;
+}
+
+.shopText {
+    font-size: 56.5px;
+}
+
+.font {
+    font-family: "NanumSquare", sans-serif;
+}
+
+.textShadow {
+    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
+}
+
+.small {
+    font-size: 19.5px;
+}
+
+.shopTwoBox {
+    padding: 0 200px 0 0;
+}
+
+.shopTextBox {
+    padding: 30px 0 0 0;
+}
+
+.lowerTextBox {
+    display: flex;
+    position: relative;
+    right: 10px;
+}
+
+.shopSmallText {
+    padding: 10px 0 0 0;
+}
+
+.textSpace {
+    padding: 0 20px 0 0;
+}
+
+/*setting*/
+#settingBox {
+    display: flex;
+    position: relative;
+    top: -8vh;
+    padding-left: 130px;
+}
+
+.rightBox {
+    padding-left: 180px;
+    position: relative;
+    top: -15px;
+}
+
+.settingText {
+    font-size: 31px;
+    padding-bottom: 68px;
+}
+
+.resetText {
+    font-size: 20px;
+    padding-right: 10px;
+}
+
+.settingCircle {
+    width: 50px;
+    height: 50px;
+}
+
+#accountIcon {
+    width: 55px;
+    position: relative;
+    left: -2px;
+}
+
+.accountBoxPadding {
+    padding-bottom: 25px;
+}
+
+.accountPadding {
+    padding-right: 18px;
+}
+
+.resetButtonPadding {
+    padding-top: 130px;
+}
+
+.resetTextBoxPadding {
+    padding-top: 60px;
+}
+
+.flex {
+    display: flex;
+}
+
+.alignCenter {
+    align-items: center;
+}
+
+.settingSmallText {
+    font-family: "NanumSquare", sans-serif;
+    font-size: 19.5px;
+    color: #303e8c;
+}
+
+.settingButton {
+    width: 160px;
+    height: 60px;
+}
+
+.boxShadow {
+    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
+}
+
+.settingRound {
+    border-radius: 30px;
+}
+
+.blue {
+    background-color: #313f8f;
+}
+
+#resetIcon {
+    width: 35px;
+    height: 35px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.label {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    width: 160px;
+    height: 60px;
+    border-radius: 30px;
+    background-color: rgba(50, 64, 145, 0.2);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all .3s;
+    margin-bottom: 45px;
+}
+
+.label > * {
+    vertical-align: sub;
+    transition: all .3s;
+    font-size: 20px;
+    font-family: "NanumSquare", sans-serif;
+}
+
+.label .marble {
+    position: absolute;
+    top: 10px;
+    left: 17px;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.label .on {
+    display: none;
+    padding: 18px 0 0 28px;
+}
+
+.label .off {
+    padding-left:95px;
+    position: relative;
+    top: 15px;
+}
+
+.input:checked + .label {
+    background-color: #7cbf5a;
+    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
+}
+
+.input:checked + .label .on {
+    display: inline-block;
+}
+
+.input:checked + .label .off {
+    display: none;
+}
+
+.input:checked + .label .marble {
+    left: 105px;
+}
