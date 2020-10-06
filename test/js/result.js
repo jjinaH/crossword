@@ -125,7 +125,7 @@ export class Result {
             const resultWordItem = document.createElement("div");
             resultWordItem.setAttribute("id", "resultWordItem");
             resultWordBox.appendChild(resultWordItem);
-            resultWordItem.textContent = "abcdefg";
+            resultWordItem.textContent = "blank";
             this.#_wordBoxItem.push(resultWordItem);
         }
         //resultContinueBox
