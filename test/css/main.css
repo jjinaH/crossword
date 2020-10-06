@@ -1,7 +1,7 @@
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 
 body {
-    background-image : url("../../image/bg.png");
+    background-image : url("../../image/welcome/bg.png");
     background-repeat: no-repeat;
     object-fit: cover;
 

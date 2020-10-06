@@ -12,7 +12,7 @@ export class Welcome {
 
     setWelcomeBackGround(){
         console.log("Welcome setWelcomeBackGround()");
-        this.container.style.backgroundImage="url('../image/bg.png')";
+        this.container.style.backgroundImage="url('../welcome/image/bg.png')";
     }
 
     setGameBackGround(){

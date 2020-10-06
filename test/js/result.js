@@ -33,6 +33,9 @@ export class Result {
     intervalCoin(a){
         console.log("log: "+a);
         document.querySelector("#gainCoinText1").childNodes[0].textContent = "+" + a;
+    }
+    intervalExp(a){
+        console.log("log: "+a);
         document.querySelector("#gainExpText1").childNodes[0].textContent = "+" + a;
     }
 
@@ -191,18 +194,25 @@ export class Result {
     }
 
 
-    intervalFunc() {
+    intervalFunc(gainCoin,gainExp) {
         let intervalGainCoin = null;
-        let gainCoin =0;
-        let gainExp =0;
+        let intervalGainExp = null;
+        let Coin =0;
+        let Exp =0;
         let rst = new Result();
 
         intervalGainCoin=setInterval(() => {
-            rst.intervalCoin(gainCoin++);
-            if (gainCoin == 91) {
+            rst.intervalCoin(Coin++);
+            if (Coin === gainCoin) {
                 // 현재 진행되고 있는 inter 란 이름을 가진 setInterval 메소드를 제거합니다.
-
                 clearInterval(intervalGainCoin);
+            }
+        }, 10);
+        intervalGainExp=setInterval(() => {
+            rst.intervalExp(Exp++);
+            if (Exp === gainExp) {
+                // 현재 진행되고 있는 inter 란 이름을 가진 setInterval 메소드를 제거합니다.
+                clearInterval(intervalGainExp);
             }
         }, 10);
         let intervalCoinZoom = null;
@@ -210,9 +220,9 @@ export class Result {
         intervalCoinZoom=setInterval(() => {
             scale += 0.004;
             console.log("gain"+self.gainCoinText2.textContent);
-            self.gainCoinText2.textContent = "+" + (gainCoin - 1);
+            self.gainCoinText2.textContent = "+" + (Coin - 1);
             self.gainCoinText2.style.zoom = scale;
-            self.gainExpText2.textContent = "+" + (gainCoin - 1);
+            self.gainExpText2.textContent = "+" + (Exp - 1);
             self.gainExpText2.style.zoom = scale;
             if (scale >= 2.12) {
                 // 현재 진행되고 있는 inter 란 이름을 가진 setInterval 메소드를 제거합니다.

@@ -228,22 +228,21 @@ export class Action {
         console.log(container.style.backgroundImage);
         //window.open("../image/default_bg.png");
         //welcome.setGameBackGround();
-        // common.init();
-        // common.doDisplay();
-        //
-        // mainFrame.init();
-        // mainFrame.doDisplay();
-        //
+        common.init();
+        common.doDisplay();
 
-        //stageSelect.init();
-        //stageSelect.doDisplay();
+        mainFrame.init();
+        mainFrame.doDisplay();
 
-        // difficultySelect.init();
-        // difficultySelect.doDisplay();
 
-        //resultDisplay.init();
-        //resultDisplay.intervalFunc();
-        //resultDisplay.doDisplay();
+        stageSelect.init();
+        stageSelect.doDisplay();
+
+        difficultySelect.init();
+        difficultySelect.doDisplay();
+
+        resultDisplay.init();
+        resultDisplay.doDisplay();
 
 
 
@@ -266,7 +265,7 @@ export class Action {
                 //welcome button, copyright, o2ologo remove
                 remove_welcome();
                 document.body.style.backgroundImage = "url('')";
-                container.style.backgroundImage = "url('../image/default_bg.png')";
+                container.style.backgroundImage = "url('../image/scene/default_bg.png')";
                 /**
                  * 메인 화면에서 보여줄 사용자의
                  * 레벨, 경험치, 힌트, 코인
@@ -677,7 +676,6 @@ export class Action {
                     resultDisplay.resultIcon.setAttribute("src","../image/ico-"+"levelup"+".png");
                 }else{
                     resultDisplay.resultIcon.setAttribute("src","../image/ico-"+result+".png");
-
                 }
 
                 //내 코인 및 exp 설정
@@ -691,13 +689,13 @@ export class Action {
                     successAudio.load();
                     successAudio.autoplay = true;
 
-                    //레벨업 여부에 따른 결과
+                    //레벨업 여부에 따른 gain 효과
                     if (islevelup) {
-                        gainexp.textContent = "+" + (data.fullExp - exp);
+                        resultDisplay.intervalFunc(data.myCoin - myCoin,data.fullExp - exp);
                     } else {
-                        gainexp.textContent = "+" + (data.myExp - exp);
+                        resultDisplay.intervalFunc(data.myCoin - myCoin,data.myExp - exp);
                     }
-                    //gain 효과
+
 
                 //실패
                 } else if (result == "fail") {
@@ -724,6 +722,8 @@ export class Action {
                 exp = data.myExp;
                 fullExp = data.fullExp;
                 myCoin = data.myCoin;
+
+
             },
             SETTING: function (data) {
                 console.log("실행 : setting");
