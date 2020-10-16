@@ -519,7 +519,7 @@ public class Main extends DialogflowApp {
 //        data.put("setting", settingserial);
         String userserial = (String)data.get("user");
         UserInfo user = (UserInfo) Desrial(userserial);
-        if(sound.equals("BackgroundSound")) user.setBgmOn(isTrue);
+        if(sound.equals("backgroundsound")) user.setBgmOn(isTrue);
         if(sound.equals("SoundEffect")) user.setFoleyOn(isTrue);
         
         //TODO user 테이블 업데이트
