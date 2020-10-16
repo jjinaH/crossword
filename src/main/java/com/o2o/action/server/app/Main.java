@@ -24,13 +24,11 @@ public class Main extends DialogflowApp {
 
        DBConnector dbConnectors = new DBConnector("intern2001@o2o.kr");
         try{
-
             StagePropertyInfo info = new StagePropertyInfo();
-            UserInfo user = new UserInfo("1","0","3","5000",info,"intern2001@o2o.kr");
+            UserInfo user = new UserInfo("1","0","3","5000",info,"intern2001@o2o.kr", "true", "true");
             System.out.println("accumexp : " + user.getMyExp() + "  " +user.getMyCurrentExp() + " / " + user.getMyCurrentFullExp());
 
-        }catch(Exception e)
-        {
+        }catch(Exception e) {
             e.printStackTrace();
         }
     }
@@ -171,28 +169,23 @@ public class Main extends DialogflowApp {
         ResponseBuilder rb = getResponseBuilder(request);
         Map<String, Object> data = rb.getConversationData();
         Map<String, Object> htmldata = new HashMap<>();
-        HtmlResponse htmlResponse = new HtmlResponse();
 
-        String response;
         request.getConversationData().clear();
-        System.out.println(request.getConversationData());
-        System.out.println(request.getContexts());
         data.clear();
         setUp();
         data.put("history", "welcome");
         data.put("special case", false);
         htmldata.put("command", "welcome");
-        UserSettingInfo userSettingInfo = new UserSettingInfo();
-        String settingserial = Createserial(userSettingInfo);
-        data.put("setting", settingserial);
 
+//        UserSettingInfo userSettingInfo = new UserSettingInfo();
+//        String settingserial = Createserial(userSettingInfo);
+//        data.put("setting", settingserial);
 
         //db 연결
         if (!request.hasCapability("actions.capability.INTERACTIVE_CANVAS")) {
-            response = "Inveractive Canvas가 지원되지 않는 기기예요.";
-            return rb.add(new SimpleResponse().setSsml(response)).endConversation().build();
+            return rb.add(new SimpleResponse().setSsml("Inveractive Canvas가 지원되지 않는 기기예요."))
+                    .endConversation().build();
         } else {
-            response = tts.getTtsmap().get("welcome");
             if (request.isSignInGranted()) {
                 GoogleIdToken.Payload profile = getUserProfile(request.getUser().getIdToken());
                 System.out.println("case 1");
@@ -203,26 +196,24 @@ public class Main extends DialogflowApp {
                 String exp = dbConnector.getUserExp();
                 String coin = dbConnector.getUserCoin();
                 String hint = dbConnector.getUserHint();
+
+                String isBgmOn = dbConnector.getBgmOn();
+                String isFoleyOn = dbConnector.getFoleyOn();
                 System.out.println("accumexp : " + exp);
-                UserInfo user = new UserInfo(level, exp, hint, coin, stageinfo,email);
+
+                UserInfo user = new UserInfo(level, exp, hint, coin, stageinfo, email ,isBgmOn, isFoleyOn);
                 String serial = Createserial(user);
                 data.put("user", serial);
                 htmldata.put("inputemail", email);
                 //신규유저인지 아닌지
                 //sign한후에 email
-                return rb.add(new SimpleResponse().setTextToSpeech(response))
-                        .add(htmlResponse.setUrl(URL).setUpdatedState(htmldata))
+                return rb.add(new SimpleResponse().setTextToSpeech(tts.getTtsmap().get("welcome")))
+                        .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
                         .build();
             }else{
                 System.out.println("case 2");
                 return rb.add(new SignIn().setContext("To get your account details")).build();
-
             }
-
-//            return rb.add(new SimpleResponse().setTextToSpeech(response))
-//                    .add(htmlResponse.setUrl(URL).setUpdatedState(htmldata))
-//                    .build();
-
         }
     }
 
