@@ -33,7 +33,7 @@ public class Main extends DialogflowApp {
         }
     }
 
-    String URL = "https://actions.o2o.kr/devsvr4/test/index.html";
+    String URL = "https://actions.o2o.kr/devsvr9/test/index.html";
 
     StagePropertyInfo stageinfo;
     TTS tts;
@@ -502,9 +502,9 @@ public class Main extends DialogflowApp {
 
         String sound = request.getParameter("Sound").toString();
         String isonoff = request.getParameter("onoff").toString();
-        System.out.println("sound : " + sound + "isonoff : " + isonoff);
+        System.out.println("sound : " + sound + ",,  isonoff : " + isonoff);
 
-        String isTrue = "true".equals(isonoff) ? "true" : "false";
+        String isTrue = "1".equals(isonoff) ? "true" : "false"; //false:0
 
 //        String serial = (String)data.get("setting");
 //        UserSettingInfo userSettingInfo = (UserSettingInfo) Desrial(serial);
@@ -528,11 +528,10 @@ public class Main extends DialogflowApp {
         data.put("user", serial);
 
         htmldata.put("command", "settingselect");
-//        htmldata.put("sound",sound);
-//        htmldata.put("onoff",isonoff);
-
         htmldata.put("bgmOn", user.getBgmOn());
         htmldata.put("foleyOn", user.getFoleyOn());
+//        htmldata.put("sound",sound);
+//        htmldata.put("onoff",isonoff);
 
         return rb.add(new SimpleResponse().setTextToSpeech(tts.getTtsmap().get("setting")))
                 .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
