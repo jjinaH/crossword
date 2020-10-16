@@ -260,7 +260,10 @@ public class Main extends DialogflowApp {
     public ActionResponse difficultyFromStage(ActionRequest request) throws ExecutionException, InterruptedException {
         return difficulty(request);
     }
-
+    @ForIntent("difficultyFromResult")
+    public ActionResponse difficultyFromResult(ActionRequest request) throws ExecutionException, InterruptedException {
+        return difficulty(request);
+    }
     @ForIntent("ingameFromDifficulty")
     public ActionResponse ingameFromDifficulty(ActionRequest request) throws ExecutionException, InterruptedException {
         return ingame(request);
@@ -330,7 +333,7 @@ public class Main extends DialogflowApp {
        // UserInfo user = new UserInfo(1,0,3,5000,stageinfo);
         //메인에서 왔는지, 스테이지에서왔는지
         int stage;
-        if (data.get("history").equals("main")) {
+        if (data.get("history").equals("main")||data.get("history").equals("result")) {
             stage = user.getLevel();
         } else {
             stage = ((Double) request.getParameter("number")).intValue();
@@ -386,6 +389,8 @@ public class Main extends DialogflowApp {
         UserInfo user = (UserInfo) Desrial(userserial);
         // 유저 게임 시작 시 코인 감소
         user.GameStartChange(stage,difficulty);
+        System.out.println("ㄷㄷ user.getMyCoin() >>> "+user.getMyCoin());
+        System.out.println("ㄷㄷ user.getEmail() >>> "+user.getEmail());
         dbConnector.updateUserCoin(user.getMyCoin(),user.getEmail());
         // 유저 정보 저장
         userserial = Createserial(user);
