@@ -272,12 +272,10 @@ public class Main extends DialogflowApp {
         Map<String, Object> data = rb.getConversationData();
         Map<String, Object> htmldata = new HashMap<>();
         HtmlResponse htmlResponse = new HtmlResponse();
-
+        data.put("special case", false); // 세팅,상점, 랭킹인 경우 - 스페셜 케이스 -> 뒤로 돌아갈 수 있음
         data.put("history", "main");
-        // 세팅,상점, 랭킹인 경우 - 스페셜 케이스 -> 뒤로 돌아갈 수 있음
-        data.put("special case", false);
-
         htmldata.put("command", "main");
+
         // User정보 가져오기
         String userserial = (String)data.get("user");
         UserInfo user = (UserInfo) Desrial(userserial);
@@ -288,8 +286,10 @@ public class Main extends DialogflowApp {
         htmldata.put("myHint", user.getMyHint());
         htmldata.put("myCoin", user.getMyCoin());
         htmldata.put("fullExp",user.getMyCurrentFullExp());
-        String response = tts.getTtsmap().get("main");
-        return rb.add(new SimpleResponse().setTextToSpeech(response))
+        htmldata.put("bgmOn", user.getBgmOn());
+        htmldata.put("foleyOn", user.getFoleyOn());
+
+        return rb.add(new SimpleResponse().setTextToSpeech(tts.getTtsmap().get("main")))
                 .add(htmlResponse.setUrl(URL).setUpdatedState(htmldata))
                 .build();
     }
@@ -504,17 +504,13 @@ public class Main extends DialogflowApp {
         String response = "";
         double stage = (double)data.get("stage");
         String difficulty = (String)data.get("difficulty");
-        if (result.equals("success"))
-        {
+        if (result.equals("success")) {
             response = tts.getTtsmap().get("success");
             user.UserStageClearChange((int)stage,difficulty);
             dbConnector.updateUserExp(user.getMyExp(),user.getEmail());
             dbConnector.updateUserCoin(user.getMyCoin(),user.getEmail());
             dbConnector.updateUserLevel(user.getLevel(),user.getEmail());
-        }
-
-        else
-        {
+        } else {
             response = tts.getTtsmap().get("fail");
         }
         htmldata.put("command", "result");
@@ -545,17 +541,24 @@ public class Main extends DialogflowApp {
         ResponseBuilder rb = getResponseBuilder(request);
         Map<String, Object> data = rb.getConversationData();
         Map<String, Object> htmldata = new HashMap<>();
-        HtmlResponse htmlResponse = new HtmlResponse();
+
         data.put("special case", true);
         htmldata.put("command", "setting");
-        String settingserial = (String)data.get("setting");
-        UserSettingInfo userSettingInfo =  (UserSettingInfo) Desrial(settingserial);
-        System.out.println("soundeffect" + userSettingInfo.isSoundEffect() + "backgroundsound" + userSettingInfo.isBackGroundSound());
-        htmldata.put("soundeffect", userSettingInfo.isSoundEffect());
-        htmldata.put("backgroundsound", userSettingInfo.isBackGroundSound());
-        String response = tts.getTtsmap().get("setting");
-        return rb.add(new SimpleResponse().setTextToSpeech(response))
-                .add(htmlResponse.setUrl(URL).setUpdatedState(htmldata))
+
+        String userserial = (String)data.get("user");
+        UserInfo user = (UserInfo) Desrial(userserial);
+
+//        String settingserial = (String)data.get("setting");
+//        UserSettingInfo userSettingInfo =  (UserSettingInfo) Desrial(settingserial);
+//        System.out.println("soundeffect" + userSettingInfo.isSoundEffect() + "backgroundsound" + userSettingInfo.isBackGroundSound());
+//        htmldata.put("soundeffect", userSettingInfo.isSoundEffect());
+//        htmldata.put("backgroundsound", userSettingInfo.isBackGroundSound());
+
+        htmldata.put("bgmOn", user.getBgmOn());
+        htmldata.put("foleyOn", user.getFoleyOn());
+
+        return rb.add(new SimpleResponse().setTextToSpeech(tts.getTtsmap().get("setting")))
+                .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
                 .build();
     }
     @ForIntent("settingselect")
@@ -563,31 +566,43 @@ public class Main extends DialogflowApp {
         ResponseBuilder rb = getResponseBuilder(request);
         Map<String, Object> data = rb.getConversationData();
         Map<String, Object> htmldata = new HashMap<>();
-        HtmlResponse htmlResponse = new HtmlResponse();
+
         data.put("special case", true);
-        String response = tts.getTtsmap().get("setting");
-        String serial = (String)data.get("setting");
-        UserSettingInfo userSettingInfo = (UserSettingInfo) Desrial(serial);
+
         String sound = request.getParameter("Sound").toString();
         String isonoff = request.getParameter("onoff").toString();
         System.out.println("sound : " + sound + "isonoff : " + isonoff);
-        // 설정값을 userSettingInfo 객체에 세팅
-        if(sound.equals("BackgroundSound"))
-        {
-            userSettingInfo.setBackGroundSound(Integer.parseInt(isonoff));
-        }
-        else if(sound.equals("SoundEffect"))
-        {
-            userSettingInfo.setSoundEffect(Integer.parseInt(isonoff));
-        }
-        // 설정된 객체를 저장
-        String settingserial = Createserial(userSettingInfo);
-        data.put("setting", settingserial);
+
+        String isTrue = "true".equals(isonoff) ? "true" : "false";
+
+//        String serial = (String)data.get("setting");
+//        UserSettingInfo userSettingInfo = (UserSettingInfo) Desrial(serial);
+//        // 설정값을 userSettingInfo 객체에 세팅
+//        if(sound.equals("BackgroundSound")) {
+//            userSettingInfo.setBackGroundSound(Integer.parseInt(isonoff));
+//        } else if(sound.equals("SoundEffect")) {
+//            userSettingInfo.setSoundEffect(Integer.parseInt(isonoff));
+//        }
+//        // 설정된 객체를 저장
+//        String settingserial = Createserial(userSettingInfo);
+//        data.put("setting", settingserial);
+        String userserial = (String)data.get("user");
+        UserInfo user = (UserInfo) Desrial(userserial);
+        if(sound.equals("BackgroundSound")) user.setBgmOn(isTrue);
+        if(sound.equals("SoundEffect")) user.setFoleyOn(isTrue);
+
+        String serial = Createserial(user);
+        data.put("user", serial);
+
         htmldata.put("command", "settingselect");
-        htmldata.put("sound",sound);
-        htmldata.put("onoff",isonoff);
-        return rb.add(new SimpleResponse().setTextToSpeech(response))
-                .add(htmlResponse.setUrl(URL).setUpdatedState(htmldata))
+//        htmldata.put("sound",sound);
+//        htmldata.put("onoff",isonoff);
+
+        htmldata.put("bgmOn", user.getBgmOn());
+        htmldata.put("foleyOn", user.getFoleyOn());
+
+        return rb.add(new SimpleResponse().setTextToSpeech(tts.getTtsmap().get("setting")))
+                .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
                 .build();
     }
     @ForIntent("ranking")
@@ -595,17 +610,18 @@ public class Main extends DialogflowApp {
         ResponseBuilder rb = getResponseBuilder(request);
         Map<String, Object> data = rb.getConversationData();
         Map<String, Object> htmldata = new HashMap<>();
-        HtmlResponse htmlResponse = new HtmlResponse();
+
         data.put("special case", true);
         htmldata.put("command", "ranking");
         DBConnector db= new DBConnector("test");
+
         String userserial = (String)data.get("user");
         UserInfo user = (UserInfo) Desrial(userserial);
         htmldata.put("myRank",db.getMyRank(user.getEmail()));
         htmldata.put("totalRank",db.getTotalRank());
-        String response = tts.getTtsmap().get("ranking");
-        return rb.add(new SimpleResponse().setTextToSpeech(response))
-                .add(htmlResponse.setUrl(URL).setUpdatedState(htmldata))
+
+        return rb.add(new SimpleResponse().setTextToSpeech(tts.getTtsmap().get("ranking")))
+                .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
                 .build();
     }
 
@@ -614,14 +630,12 @@ public class Main extends DialogflowApp {
         ResponseBuilder rb = getResponseBuilder(request);
         Map<String, Object> data = rb.getConversationData();
         Map<String, Object> htmldata = new HashMap<>();
-        HtmlResponse htmlResponse = new HtmlResponse();
 
         data.put("special case", true);
         htmldata.put("command", "shop");
 
-        String response = tts.getTtsmap().get("store");
-        return rb.add(new SimpleResponse().setTextToSpeech(response))
-                .add(htmlResponse.setUrl(URL).setUpdatedState(htmldata))
+        return rb.add(new SimpleResponse().setTextToSpeech(tts.getTtsmap().get("store")))
+                .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
                 .build();
     }
 
@@ -631,7 +645,7 @@ public class Main extends DialogflowApp {
         ResponseBuilder rb = getResponseBuilder(request);
         Map<String, Object> data = rb.getConversationData();
         Map<String, Object> htmldata = new HashMap<>();
-        HtmlResponse htmlResponse = new HtmlResponse();
+
         String history = CommonUtil.makeSafeString(data.get("history"));
         Boolean isSpecial = (Boolean) (data.get("special case"));
 
@@ -639,15 +653,13 @@ public class Main extends DialogflowApp {
             htmldata.put("command", history);
             data.put("special case", false);
 
-            String response = "return";
-            return rb.add(new SimpleResponse().setTextToSpeech(response))
-                    .add(htmlResponse.setUrl(URL).setUpdatedState(htmldata))
+            return rb.add(new SimpleResponse().setTextToSpeech("return"))
+                    .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
                     .build();
         }
 
-        String response = "can't return";
-        return rb.add(new SimpleResponse().setTextToSpeech(response))
-                .add(htmlResponse.setUrl(URL).setUpdatedState(htmldata))
+        return rb.add(new SimpleResponse().setTextToSpeech("can't return"))
+                .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
                 .build();
     }
 }
