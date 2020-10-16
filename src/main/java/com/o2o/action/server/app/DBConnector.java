@@ -11,47 +11,46 @@ import java.util.List;
 //@Service
 public class DBConnector implements Serializable {
 
-    String commandGetUser = "/getUser/";
-    String commandCreateUser = "/createUser/";
-    String commandGetHint = "/getHint/";
-    String commandGetWord = "/getWord/";
     String commandGetTotalRank = "/getTotalRank";
     String commandGetMyRank = "/getMyRank/";
-    String commandGet = "/get";
     String commandReset = "/resetUser/";
     String commandUpdate = "/update";
-    String defaultSendUrl = "https://actions.o2o.kr/devsvr7";
+    String defaultSendUrl = "https://actions.o2o.kr/devsvr9";
     QueryController queryController;
     JsonParser jsonParser;
     JsonArray user;
 
     public DBConnector(String email) {
-        String userEmail = email;
-        String userCheckUrl = defaultSendUrl + commandGetUser + userEmail;
+
+        String userCheckUrl = defaultSendUrl + "/getUser/" + email;
         queryController = new QueryController();
-        String result = queryController.get(userCheckUrl);
+        String result = queryController.get(userCheckUrl); //TODO
         System.out.println("result =" + result.length() + "result");
 
         jsonParser = new JsonParser();
 
-
         if(result.length() == 3){
             //처음사용자 등록
-            String fisrtInputUrl = defaultSendUrl + commandCreateUser + userEmail;
+            String fisrtInputUrl = defaultSendUrl + "/createUser/" + email;
             String createResult = queryController.get(fisrtInputUrl);
             System.out.println("createResult = " + createResult);
-            DBConnector dbConnector = new DBConnector(userEmail);
+            DBConnector dbConnector = new DBConnector(email);
         }else{
             //이미 등록된 사용
             //유저 한명 data 전체 row
             user = (JsonArray) jsonParser.parse(result);
             String userData = user.toString();
+
             System.out.println("user = " + userData);
             System.out.println(user.get(0).getAsJsonObject().size());
         }
-
     }
-
+    public String getBgmOn() {
+        return user.get(0).getAsJsonObject().get("bgmOn").toString();
+    }
+    public String getFoleyOn() {
+        return user.get(0).getAsJsonObject().get("foleyOn").toString();
+    }
     //유저 각각 요소 가져오는거
     public String getUserLevel() {
         return user.get(0).getAsJsonObject().get("userLevel").toString();
@@ -112,7 +111,6 @@ public class DBConnector implements Serializable {
 
         }
 
-
         return totalRank2X;
     }
 
@@ -123,29 +121,32 @@ public class DBConnector implements Serializable {
         return jsonParser.parse(getMyRankResult).getAsInt();
     }
 
-
-
+    /**
+     * 문제 단어를 요청하는 쿼리
+     * @param difficulty
+     */
     public List<String> getWord(int difficulty){
         System.out.println(difficulty);
-        ArrayList<String> wordList = new ArrayList<>();
-        String getWordUrl = defaultSendUrl + commandGetWord + difficulty;
+        List<String> wordList = new ArrayList<>();
+        String getWordUrl = defaultSendUrl + "/getWord/" + difficulty;
         String getWordResult = queryController.get(getWordUrl);
         JsonArray wordArray = (JsonArray) jsonParser.parse(getWordResult);
-        int size = wordArray.size();
-        for(int i = 0; i<size; i++){
+        for(int i = 0; i<wordArray.size(); i++){
             wordList.add(wordArray.get(i).getAsJsonObject().get("wordContent").toString());
         }
 
         return wordList;
     }
-
-    public ArrayList<String> getHint(String word){
-        ArrayList<String> hintList = new ArrayList<>();
-        String getHintUrl = defaultSendUrl + commandGetHint + word;
+    /**
+     * 각 단어의 힌트를 요청하는 쿼리
+     * @param word
+     */
+    public List<String> getHint(String word){
+        List<String> hintList = new ArrayList<>();
+        String getHintUrl = defaultSendUrl + "/getHint/" + word;
         String getHintResult = queryController.get(getHintUrl);
         JsonArray hintArray = (JsonArray) jsonParser.parse(getHintResult);
-        int size = hintArray.size();
-        for(int i = 0; i<size; i++){
+        for(int i = 0; i<hintArray.size(); i++){
             hintList.add(hintArray.get(i).getAsJsonObject().get("hintContent").toString());
         }
 

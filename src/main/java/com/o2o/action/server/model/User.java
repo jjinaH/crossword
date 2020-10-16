@@ -33,9 +33,17 @@ public class User implements Serializable {
     @Column(name = "visit_timestamp", columnDefinition = "TIMESTAMP WITH TIME ZONE" )
     private OffsetDateTime visitTimestamp;
 
-    public User(){
-    }
+    /**
+     * 20.10.15 추가된 칼럼
+     */
+    @Column(name = "bgm_on")
+    private boolean bgmOn;
+    @Column(name = "foley_on")
+    private boolean foleyOn;
+    @Column(name = "play_cnt")
+    private int playCnt;
 
+    public User(){ }
     public User(String userEmail){
         this.userEmail = userEmail;
         userLevel = 1;
@@ -44,6 +52,8 @@ public class User implements Serializable {
         userCoin = 5000;
         accountTimestamp = OffsetDateTime.now();
         visitTimestamp = OffsetDateTime.now();
+        bgmOn=true;
+        foleyOn=true;
     }
 
     public interface getUserInfo{
@@ -53,9 +63,9 @@ public class User implements Serializable {
         int getUserHint();
         int getUserCoin();
         void setVisitTimestamp();
+        boolean getBgmOn();
+        boolean getFoleyOn();
     }
-
-
 
     public String getUserEmail() {
         return userEmail;
@@ -98,6 +108,29 @@ public class User implements Serializable {
     }
     public void setVisitTimestamp() {
         this.visitTimestamp = OffsetDateTime.now();
+    }
+
+    /**
+     * 20.10.15 추가 칼럼 getter, setter
+     */
+    public boolean getBgmOn() {
+        return bgmOn;
+    }
+    public boolean getFoleyOn() {
+        return foleyOn;
+    }
+    public int getPlayCnt() {
+        return playCnt;
+    }
+
+    public void setBgmOn(boolean bgmOn) {
+        this.bgmOn = bgmOn;
+    }
+    public void setFoleyOn(boolean foleyOn) {
+        this.foleyOn = foleyOn;
+    }
+    public void setPlayCnt(int playCnt) {
+        this.playCnt = playCnt;
     }
 }
 
