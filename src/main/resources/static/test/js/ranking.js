@@ -15,8 +15,7 @@ export class Ranking{
     doDisplay() {
         console.log("Ranking DoDisplay");
         const page = document.querySelector("#rankingBox");
-        if(page.style.display == 'none')
-            page.style.display = 'block';
+        page.style.display = 'block';
     }
 
     doNoneDisplay() {
@@ -34,17 +33,6 @@ export class Ranking{
         this.#_topBox = document.createElement("div");
         this.#_topBox.setAttribute("class", "center flexColumn topBox");
         this.#_rankingBox.appendChild(this.#_topBox);
-
-        this.#_bottomBox = document.createElement("div");
-        this.#_bottomBox.setAttribute("class", "flex");
-        this.#_rankingBox.appendChild(this.#_bottomBox);
-
-        this.#_leftBox = document.createElement("div");
-        this.#_bottomBox.appendChild(this.#_leftBox);
-
-        this.#_rightBox = document.createElement("div");
-        this.#_rightBox.setAttribute("id", "rankRightBox");
-        this.#_bottomBox.appendChild(this.#_rightBox);
 
         this.#_rankingIcon = document.createElement("img");
         this.#_rankingIcon.setAttribute("src", "../image/ranking/ranking_icon.png");

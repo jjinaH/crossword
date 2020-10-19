@@ -3,21 +3,14 @@
 
 body {
     background-image : url("../../image/welcome/bg.png");
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     object-fit: cover;
     margin: 0;
 }
 
-button {
-    background-color: cornflowerblue;
-
-    color: white;
-}
-
 /*화면 전체*/
 .container {
-    /*background: linear-gradient(to bottom, #3d43ae, #3ca3de);*/
-    /*background-image: url("../../image/default_bg.png");*/
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -51,18 +44,6 @@ button {
     color: #ffffff;
 }
 
-#copyright {
-    position: absolute;
-    bottom: 0vh;
-    left: 5vw;
-    font-size: 3vh;
-}
-#o2ologo {
-    position: absolute;
-    bottom: 0vh;
-    right: 5vw;
-    font-size: 3vh;
-}
 
 #higherBox {
     display: flex;
@@ -70,17 +51,17 @@ button {
 }
 
 #lowerBox {
-    height: 50vh;
+    height: 100%;
     display: flex;
+    position: relative;
 }
 
 #leftLowerBox {
     width: 15vw;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 0 0 0;
-    height: fit-content;
+    justify-content: center;
+    height: 100%;
+    position: relative;
     /*border-style: solid;*/
 }
 
@@ -90,6 +71,9 @@ button {
     height: 22.5vh;
     width: 15vw;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #backCircle {
@@ -97,15 +81,11 @@ button {
     height: 81px;
     box-shadow: -5.6px 8.3px 20px 0 rgba(25, 34, 61, 0.45);
     background-color: #ffffff;
-    border-radius: 40px;
+    border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 #levelText {
@@ -142,25 +122,15 @@ button {
 }
 
 #expBox {
-    width: 115px;
     display: flex;
-    justify-content: space-between;
     position: absolute;
     bottom: 0;
-    left: 42px;
 }
 
 #userExp {
-    width: 50px;
-    height: 15px;
     font-family: 'NanumSquare', sans-serif;
     font-size: 19.5px;
     font-weight: 800;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: right;
     color: #a1cf79;
 }
 
@@ -168,71 +138,58 @@ button {
     width: 2px;
     height: 15px;
     background-color: white;
+    position: relative;
+    top: 3px;
+    margin: 0 5px;
 }
 
 #levelFullExp {
-    width: 50px;
-    height: 15px;
     font-family: 'NanumSquare', sans-serif;
     font-size: 19.5px;
     font-weight: 800;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
     color: #2e3f82;
 }
 
 #userInfoBox {
     display: flex;
-    /*border-style: solid;*/
     justify-content: flex-end;
     padding: 50px 40px 0 0;
     flex-grow: 1;
 }
 
-#hintBox {
-    width: 100px;
-    height: 40px;
+.commonRound {
     border-radius: 15px;
+    height: 40px;
+    margin-right: 10px;
+    padding: 0 20px 0 10px;
+}
+
+.commonShadow {
     box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
-    background-color: #7cbf5a;
-    margin: 0 10px 0 0;
-    display: flex;
 }
 
-#hintIcon, #coinIcon {
-    position: relative;
-    left: 11px;
-    top: 7px;
-    font-size: 25px;
-}
-
-#coinIcon {
-    width: 25px;
-    height: 25px;
-}
-
-#hintText, #coinText {
-    font-family: 'NanumSquare', sans-serif;
+.commonFontSize {
     font-size: 22px;
-    font-weight: 800;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #ffffff;
+}
+
+.commonFontMargin {
+    margin-left: 10px;
+}
+
+.commonIcon {
+    height: 25px;
+    object-fit: contain;
     position: relative;
-    left: 20px;
-    top: 8px;
+    top: -1px;
 }
 
-#hintText {
-    width: 15px;
+#accountBox {
+    background-color: #324091;
+    padding: 0 30px 0 30px;
 }
 
+
+/*shop(store) 로 갈 수 있는 버튼*/
 #hintPlus, #coinPlus {
     width: 31px;
     height: 31px;
@@ -257,46 +214,8 @@ button {
     top: 7px;
     left: 8px;
 }
+/*common.js 에서 주석처리 되어있음*/
 
-#coinBox {
-    width: 150px;
-    height: 40px;
-    border-radius: 15px;
-    box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
-    background-color: #7cbf5a;
-    display: flex;
-    margin: 0 10px 0 0;
-}
-
-#coinText {
-    width: 55px;
-}
-
-#accountBox {
-    width: 265px;
-    height: 40px;
-    border-radius: 15px;
-    background-color: #324091;
-    position: relative;
-}
-
-#accountText {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'NanumSquare', sans-serif;
-    font-size: 22px;
-    font-weight: 800;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #7cbf5a;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
 
 #inGameHintBox {
     width: 81px;
@@ -322,6 +241,9 @@ button {
     position: relative;
     bottom: 49px;
     left: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #inGameHintNumText {
@@ -336,14 +258,9 @@ button {
     letter-spacing: normal;
     text-align: left;
     color: #ffffff;
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%, -50%);
 }
 
 #ranking, #setting, #main{
-    display: flex;
     object-fit: contain;
     width: 50px;
     padding: 0 0 20px 0;
@@ -352,7 +269,9 @@ button {
 #bottomCommon {
     display: flex;
     flex-direction: column;
-    padding: 150px 0 0 0;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 20px;
 }
 
 /*main frame*/
@@ -393,6 +312,16 @@ button {
     top: 10px;
 }
 
+#gameContinueIcon {
+    top: 12px;
+    left: 14px;
+}
+
+#chooseLevelIcon {
+    top: 19px;
+    left: 10px;
+}
+
 #gameContinueCircle {
     background-color: #00b4ff;
 }
@@ -404,11 +333,11 @@ button {
 /*단계 선택 화면*/
 
 #stepBox {
-    position: relative;
+    position: absolute;
     height: 321px;
     width: 1030px;
     left: 14vw;
-    top: 23.3vh;
+    top: 40vh;
 }
 
 #stepButton {
@@ -477,7 +406,7 @@ button {
 /*레벨 숫자 텍스트 */
 #stepText {
     position: absolute;
-    top: 25px;
+    top: 50px;
     left: 47px;
     display: inline-block;
     width: 30px;
@@ -488,7 +417,7 @@ button {
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
-    line-height: normal;
+    line-height: 41px;
     letter-spacing: normal;
     text-align: center;
     color: #ffffff;
@@ -518,10 +447,10 @@ button {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 107px;
-    position: relative;
+    position: absolute;
     left: 22.1vw;
     right: 12.9vw;
-    top: 25.8vh;
+    /*top: 32.4vh;*/
     bottom: 21.1vh;
     width: 827px;
     height: 305px;
@@ -532,133 +461,55 @@ button {
     flex-direction: column;
 }
 
-#button {
-    border-radius: 50%;
+.difficultyButton {
+    position: relative;
     width: 130px;
-    height: 131px;
-    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
+    height: 130px;
+    margin-bottom: 30px;
+}
+
+.difficultyIcon {
+    width: 130px;
+    position: relative;
+}
+
+.difficultyText{
+    position: relative;
+    bottom: 40px;
+    font-size: 20px;
 }
 
 #expTextBox {
     justify-content: space-between;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 213px;
-    height: 12.6vh;
 }
 
-#expText1 {
-    width: 95px;
-    height: 41px;
-    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
-    font-family: 'NanumSquare', sans-serif;
-    font-weight: 400;
+.numberText {
+    position: absolute;
+    left: 144px;
+}
+
+.expText {
     font-size: 56.5px;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #ffffff;
+    margin-bottom: 29px;
 }
 
-#expText2 {
-    width: 62px;
-    height: 41px;
-    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
-    font-family: 'NanumSquare', sans-serif;
-    font-weight: 800;
-    font-size: 56.5px;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
+.relative {
+    position: relative;
 }
 
-#timeBox {
-    display: flex;
-    flex-direction: row;
-    height: 4.5vh;
-    align-items: center;
-}
-
-#timeIcon {
+.difficultyTimeFeeIcon {
     width: 28px;
     height: 28px;
     margin-right: 0.6vw;
 }
 
-#timeText1 {
-    width: 95px;
-    height: 16px;
-    font-family: 'NanumSquare', sans-serif;
-    font-weight: 400;
+.difficultySmallText {
     font-size: 19.5px;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #ffffff;
-    margin-right: 1vw;
 }
 
-#timeText2 {
-    width: 34px;
-    height: 15px;
-    font-family: 'NanumSquare', sans-serif;
-    font-size: 19.5px;
-    font-weight: 800;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #000000;
-}
-
-#feeBox {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 4.5vh;
-}
-
-#feeIcon {
-    width: 28px;
-    height: 28px;
-    margin-right: 0.6vw;
-}
-
-#feeText1 {
-    width: 95px;
-    height: 16px;
-    font-family: 'NanumSquare', sans-serif;
-    font-weight: 400;
-    font-size: 19.5px;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #ffffff;
-    margin-right: 1vw;
-}
-
-#feeText2 {
-    width: 34px;
-    height: 15px;
-    font-family: 'NanumSquare', sans-serif;
-    font-size: 19.5px;
-    font-weight: 800;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #000000;
+.difficultyMargin {
+    margin-bottom: 12px;
 }
 
 .button1 {
@@ -687,21 +538,15 @@ button {
 
 /*인게임 화면*/
 #inGameBox {
-    font-size: 3vh;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    top: 2vh;
-    right: 3vw;
+    position: absolute;
+    top: -15vh;
+    left: 15vw;
 }
 
 #gameProgress_HintBox {
     display: flex;
     flex-direction: column;
-    position: relative;
-    top: 7vh;
 }
 
 #gameProgressBox {
@@ -710,24 +555,99 @@ button {
     justify-content: center;
     align-items: center;
     font-size: 2vw;
-    background-color: rgba(255, 255, 255, 0.3);
-    border: 2px solid white;
-    margin-bottom: 2vh;
-    border-radius: 1vh;
+    width: 378px;
 }
 
 .gameProgress {
-    margin: 1vw;
-    background-color: rgba(255, 255, 255, 0.4);
-    width: 3vw;
-    height: 3vh;
-    border-radius: 10vw;
+    margin-right: 10px;
+    width: 55px;
+    object-fit: contain;
 }
 
 .inGameBoxMargin {
-    margin-right: 7vw;
+    margin-right: 2.3vw;
+}
+/**
+힌트 스크롤 리스트
+ */
+#hintListBox{
+    height:413px;
+    width: 378px;
+    display:flex;
+    flex-direction: column;
+    position: absolute;
+    top:110px;
+    align-items: center;
+}
+#hintCarousel{
+    height:340px;
+    width:378px;
+}
+.hintItem{
+    margin-bottom: 10px;
+    position:relative;
+    width: 378px;
+    height: 60px;
+    border-radius: 30px;
+    opacity: 0.2;
 }
 
+#hintItemIcon{
+    width: 31px;
+    height: 32px;
+    object-fit: contain;
+    position:absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    opacity: 0.5;
+    left : 15px;
+}
+#hintItemText{
+    width: 307px;
+    height: 18px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left:72px;
+    font-family: 'NanumSquare',sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 18px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+}
+#hintItemFocus{
+    opacity: 1;
+    box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.easy{
+    background-color: #4f65cd;
+}
+.medium{
+    background-color: #30a48e;
+}
+.hard{
+    background-color: #5843bf;
+}
+
+#hintArrowUpButton{
+    margin-bottom: 19px;
+    width: 30px;
+    height: 17px;
+    object-fit: contain;
+    visibility: hidden;
+}
+#hintArrowDownButton{
+    margin-top: 19px;
+    width: 30px;
+    height: 17px;
+    object-fit: contain;
+    visibility: hidden;
+}
 #usedHint {
     background-color: rgba(255, 255, 255, 0.3);
     border: 2px solid white;
@@ -760,68 +680,207 @@ button {
 #gameBoardBox {
     display: flex;
     flex-direction: row;
-    position: relative;
-    bottom: 1vh;
-    right: 5.5vw;
+    height: fit-content;
 }
 
 #gameBoard {
-    width: 45vw;
-    height: 75vh;
-    border: 2px solid white;
-    border-radius: 1.4vh;
-}
-
-.rowBox {
-    display: flex;
-    flex-direction: row;
+    width: 554px;
+    height: 554px;
+    display: grid;
+    gap: 1%;
 }
 
 .alphabetBox {
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    background-color: rgba(67, 67, 67, 0.1);
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
 .alphabet {
-    font-size: 4vh;
+    height: 45px;
+    object-fit: contain;
 }
 
 #gameTimerBox {
     display: flex;
     flex-direction: column;
-    position: relative;
-    top: 1vh;
+    margin: 0 44px 0 10px;
 }
 
 #gameTimer {
-    width: 1vw;
-    background-color: rgba(255, 255, 255, 0.3);
-    border: white;
+    width: 22px;
+    height: 554px;
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 2vh;
     transform: rotate(180deg);
-    margin-left: 3vw;
 }
 
 #remainTime {
-    width: 1vw;
-    background-color: rgba(255, 255, 255, 0.8);
+    width: 22px;
     border-radius: 2vh;
     transform: rotate(180deg);
+    position: absolute;
+    bottom: 0;
+}
+
+#gameTimerTextBox {
+    box-shadow: 2.8px 4.1px 10px 0 rgba(47, 47, 47, 0.45);
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    bottom: -20px;
+    animation-name: color;
+}
+
+@keyframes color {
+    from {background-color: #54e7f5;}
+    to {background-color: #fed61a;}
 }
 
 #gameTimerText {
-    text-align: center;
-    border: 2px solid white;
-    padding: 0.2vw;
-    width: 3vw;
-    height: 5vh;
-    margin: 2vw;
+    font-family: "NanumSquare", sans-serif;
+    font-weight: 800;
+    letter-spacing: -1.56px;
+    font-size: 26px;
 }
 
 /*힌트 열기*/
+#hintButtonBox{
+    position:absolute;
+    left:56px;
+    top:338px;
+    width: 90px;
+    height:90px;
+
+}
+#hintClickBox{
+    border-radius: 50%;
+    position:absolute;
+    left :0px;
+    top : 0px;
+    width: 81px;
+    height: 80px;
+    box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
+    background-color: #7cbf5a;
+}
+/**
+좌측 힌트버튼
+ */
+#hintBoxIcon{
+    position:absolute;
+    left :18px;
+    top : 19px;
+    width: 42px;
+    height: 41px;
+    object-fit: contain;
+}
+#hintCountBox{
+    border-radius: 50%;
+    position:absolute;
+    right : 0px;
+    top :  0px;
+    width: 40px;
+    height: 40px;
+    box-shadow: -2.8px 4.1px 10px 0 rgba(33, 68, 93, 0.4);
+    background-color: #ffba00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#hintCountText{
+    font-family: 'NanumSquare',sans-serif;
+    font-size: 23.5px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 18px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+}
+/**
+힌트 모달
+ */
+#hintModalBox{
+    position : absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width:540px;
+    height:460px;
+    z-index : 2;
+}
+#hintModal{
+    position : absolute;
+    left: 0px;
+    top: 40px;
+    width: 540px;
+    height: 420px;
+    border-radius: 20px;
+    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
+    background-color: #ffffff;
+}
+#hintModalIcon{
+    position : absolute;
+    left: 228px;
+    top: 0px;
+    width: 69px;
+    height: 71px;
+    object-fit: contain;
+}
+#hintTopBox{
+    width: 540px;
+    height: 90px;
+    border-radius: 15px 15px 0px 0px;
+    position : absolute;
+    left: 0px;
+    top: 0px;
+    background-color: #99c34b;
+}
+#hintBottomBox{
+    width: 540px;
+    height: 330px;
+    position : absolute;
+    left: 0px;
+    top: 90px;
+}
+#hintTopBoxText{
+    position : absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 67px;
+    height: 22px;
+    font-family: 'NanumSquare',sans-serif;
+    font-size: 31px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 22px;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+}
+#hintNotifyText{
+    position : absolute;
+    left: 50%;
+    top : 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: auto;
+    font-family: 'NanumSquare',sans-serif;
+    font-size: 34.5px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+}
+
 .backgroundModal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -873,12 +932,12 @@ button {
 /*ranking*/
 #rankingBox {
     position: relative;
-    top: -17vh;
+    flex-grow: 1;
 }
 
 #rankRightBox {
     position: absolute;
-    left: 390px;
+    left: 30vw;
 }
 
 #top5InfoBox {
@@ -887,9 +946,9 @@ button {
 }
 
 .topBox {
-    position: relative;
-    left: 230px;
-    padding-bottom: 30px;
+    position: absolute;
+    top: -15vh;
+    left: 29vw;
 }
 
 .flexColumn {
@@ -910,7 +969,10 @@ button {
 
 .rankBlueText {
     color: #324091;
-    padding-bottom: 8px;
+}
+
+.top5Margin {
+    margin-top: 8px;
 }
 
 .rankCircle {
@@ -1000,8 +1062,8 @@ button {
 .shopIcon {
     width: 120px;
     position: relative;
-    left: 5px;
-    top: 14px;
+    left: 6px;
+    top: 17px;
 }
 
 .miniCoinIcon {
@@ -1067,7 +1129,6 @@ button {
 
 .resetText {
     font-size: 20px;
-    padding-right: 10px;
 }
 
 .settingCircle {
@@ -1131,6 +1192,7 @@ button {
 #resetIcon {
     width: 35px;
     height: 35px;
+    margin-left: 10px;
 }
 
 .center {
@@ -1205,15 +1267,68 @@ input[type="checkbox"] {
 }
 
 /*result*/
+#levelUpBox{
+    position: absolute;
+    left: 245px;
+    right: 270px;
+    top: 148px;
+    width: 333px;
+    height: 300px;
+}
+#levelUpIcon{
+    position: absolute;
+    left: 19px;
+    right: 25px;
+    width: 300px;
+    height: 300px;
+}
+#levelUpText{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 158px;
+    height: 37px;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 51px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #00b4ff;
+}
+#levelUpEffectText{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    opacity: 0.3;
+    transform: translate(-50%, -50%);
+    /*width: 333px;*/
+    /*height: 75px;*/
+    width: 158px;
+    height: 37px;
+    font-family: 'NanumSquare', sans-serif;
+    font-size: 51px;
+    font-weight: 800;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 100%;
+    letter-spacing: normal;
+    text-align: center;
+    color: #00b4ff;
+}
+
 #resultBox {
-    position: relative;
+    position: absolute;
     display: flex;
     flex-direction: column;
     width: 65.6vw;
-    height: 680px;
+    height: 596px;
     justify-content: flex-start;
     align-items: center;
-    top: 44px;
+    top: 18vh;
     left: 17.2vw;
     bottom: 40px;
 }
@@ -1227,12 +1342,12 @@ input[type="checkbox"] {
 
 #resultIcon {
     width: 78px;
-    height: 77px;
+    height: 71px;
     object-fit: fill;
 }
 
 #resultText {
-    width: 132px;
+    width: 150px;
     height: 23px;
     text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
     font-family: 'NanumSquare', sans-serif;
@@ -1240,30 +1355,37 @@ input[type="checkbox"] {
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
-    line-height: normal;
+    line-height: 23px;
     letter-spacing: normal;
     text-align: center;
+}
+.LEVELUP{
+    color: #f7d119;
+}
+.SUCCESS{
     color: #ffffff;
+}
+.FAIL{
+    color: #99c34b;
 }
 
 #resultLevelBox {
-
     width: 156px;
-    height: 28px;
+    height: 22px;
     border-radius: 25px;
     background-color: #324091;
     padding-top: 14px;
     padding-bottom: 14px;
-    /*margin-bottom: 34px;*/
 }
 
 #resultLevelText {
+    height: 23px;
     font-family: 'NanumSquare', sans-serif;
     font-size: 28px;
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
-    line-height: normal;
+    line-height: 22px;
     letter-spacing: normal;
     text-align: center;
     color: #f7d119;
@@ -1272,10 +1394,11 @@ input[type="checkbox"] {
 #resultCoinBox {
     display: flex;
     flex-direction: row;
+    align-self: flex-start;
+    margin-left: 20.5vw;
     justify-content: flex-start;
-    width: 23.6vw;
-    height: 79px;
-    margin-bottom: 21px;
+    width: 33.2vw;
+    height: 113px;
 }
 
 
@@ -1313,37 +1436,58 @@ input[type="checkbox"] {
 }
 
 #gainCoinText1 ,#gainExpText1{
+    padding-bottom:30px;
     position: relative;
     align-self: flex-start;
     display: inline-flex;
     width: 54px;
+    height: 75px;
     text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
     font-family: "NanumSquare", sans-serif;
     font-size: 31px;
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
-    line-height: normal;
+    line-height: 75px;
     letter-spacing: normal;
     text-align: left;
     color: #a9f2d4;
     z-index: 1;
 }
 
+#gainCoinEffectText,#gainExpEffectText{
+    height: 49px;
+    padding-bottom: 32px;
+    line-height: 49px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+#gainCoinInnerText,#gainExpInnerText{
+    height: 23px;
+    padding-bottom: 32px;
+    line-height: 23px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
 #gainCoinText2 ,#gainExpText2{
+    padding-bottom:30px;
     position: absolute;
     align-self: flex-start;
     display: inline-flex;
     width: 114px;
-    height: 49px;
-    opacity: 0.1;
+    height: 75px;
+    opacity: 1;
     text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
     font-family: "NanumSquare", sans-serif;
     font-size: 31px;
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
-    line-height: normal;
+    line-height: 75px;
     letter-spacing: normal;
     text-align: left;
     z-index: 2;
@@ -1353,12 +1497,16 @@ input[type="checkbox"] {
 #resultExpBox {
     display: flex;
     flex-direction: row;
+    align-self: flex-start;
+    margin-left: 20.5vw;
     justify-content: flex-start;
-    width: 23.6vw;
-    margin-bottom: 53px;
+    width: 33.2vw;
+    height: 113px;
+    margin-bottom: 51px;
 }
 
 #resultExpText1 {
+    align-self: flex-end;
     width: 9vw;
     margin-right: 5.1vw;
     text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
@@ -1374,6 +1522,7 @@ input[type="checkbox"] {
 }
 
 #resultExpText2 {
+    align-self: flex-end;
     text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
     font-family: 'NanumSquare', sans-serif;
     font-size: 56.5px;
@@ -1386,23 +1535,29 @@ input[type="checkbox"] {
     color: #f7d119;
 }
 
+#wordBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 110px;
+    width: 65.6vw;
+    margin-bottom: 48px;
+
+}
 #resultWordBox {
     display: grid;
     grid-row-gap: 10px;
     grid-column-gap: 0.8vw;
     grid-template-columns: repeat(5, 1fr);
-    height: 110px;
-    width: 65.6vw;
-    margin-bottom: 48px;
 }
 
-#resultWordItem_matched {
+.resultWordItem_matched {
     background-color: #324091;
     color: #ffffff;
-
 }
 
-#resultWordItem_unmatched {
+.resultWordItem_unmatched {
     background-color: rgba(0, 64, 145, 0.1);
     color: #324091;
 }
@@ -1419,8 +1574,6 @@ input[type="checkbox"] {
     line-height: 50px;
     letter-spacing: normal;
     text-align: center;
-    background-color: #324091;
-    color: #ffffff;
 }
 
 #resultContinueText {
@@ -1450,7 +1603,9 @@ input[type="checkbox"] {
     justify-content: space-evenly;
     align-items: center;
     width: 14.8vw;
-    height: 60px;
+    height: 26px;
+    padding-top: 14px;
+    padding-bottom: 14px;
     border-radius: 30px;
     box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
     background-color: #00b4ff;
