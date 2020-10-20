@@ -5,17 +5,14 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 // x,y 좌표점 클래스
-class Point implements Serializable
-{
+class Point implements Serializable {
     private int rowpoint=0;
     private int colpoint=0;
-    public Point(int _row, int _col)
-    {
+    public Point(int _row, int _col) {
         rowpoint = _row;
         colpoint = _col;
     }
-    public Point GetRandomPoint(int _limitrow, int _limitcol)
-    {
+    public Point GetRandomPoint(int _limitrow, int _limitcol) {
         Random random = new Random();
         int randomrow = random.nextInt(_limitrow-1);
         int randomcol = random.nextInt(_limitcol-1);
@@ -23,16 +20,15 @@ class Point implements Serializable
         colpoint = randomcol;
         return this;
     }
-    public int GetRow()
-    {
+    public int GetRow() {
         return rowpoint;
     }
 
-    public int GetCol()
-    {
+    public int GetCol() {
         return colpoint;
     }
 }
+
 // 보드판 알고리즘 클래스
 public class BoardAlgorithm implements Serializable{
     private int col = 0;
@@ -67,10 +63,8 @@ public class BoardAlgorithm implements Serializable{
                 board[i][j] = cell;
             }
         }
-        for(int i=0; i<_answers.length; i++)
-        {
-            if(_answers[i].getAnswerLength()>col ||_answers[i].getAnswerLength()>row )
-            {
+        for(int i=0; i<_answers.length; i++)  {
+            if(_answers[i].getAnswerLength()>col ||_answers[i].getAnswerLength()>row ) {
                 System.out.println("정답단어의 길이가 너무 깁니다. 종료합니다.");
                 return;
             }
@@ -78,20 +72,18 @@ public class BoardAlgorithm implements Serializable{
 
         isBoardSuccess = false;
         Successboard = new BoardCell[_row][_col];
-
     }
+
     // Int 어레이에 해당 숫자 포함되는지 확인하는 함수
-    private boolean isContainArray(int[] _arry, int _num)
-    {
-        for(int i=0; i< _arry.length; i++)
-        {
-            if(_arry[i]==_num)
-            {
+    private boolean isContainArray(int[] _arry, int _num) {
+        for(int i=0; i< _arry.length; i++) {
+            if(_arry[i]==_num) {
                 return true;
             }
         }
         return false;
     }
+
     // 보드판 정답을 제외한 알파벳 구성
     public void MakeUpBoardAlphabet() {
         // 모음 알파벳 아스키 순서모음
@@ -117,9 +109,7 @@ public class BoardAlgorithm implements Serializable{
                     Successboard[i][j] = cell;
                 }
             }
-
         }
-
     }
 
     // 보드판에 정답 알파벳 넣기 - 만약 _isfrontdir이 true이면 단어가 정방향으로만 배치됨
@@ -138,8 +128,7 @@ public class BoardAlgorithm implements Serializable{
         if (AnswerPoint.size() != answers[_answerindex].getAnswerLength()) {
             System.out.println("isPuton에서 받아온 Answer와 실제 Answer의 길이가 다릅니다." +answers[_answerindex].getAnswer() +"  size:"+AnswerPoint.size());
             System.out.println();
-            for(Point p:AnswerPoint)
-            {
+            for(Point p:AnswerPoint) {
                 System.out.println("row : " +p.GetRow() +"col : "+p.GetCol());
             }
             return;
@@ -320,8 +309,7 @@ public class BoardAlgorithm implements Serializable{
                             AnswerPoint.add(new Point(_row, _col - i));
                             limitcount--;
                             continue;
-                        }
-                        else  if (board[_row][_col - i].isAnswer == true) {
+                        } else  if (board[_row][_col - i].isAnswer == true) {
                             isanswerdir = false;
                             AnswerPoint.clear();
                             break;
@@ -378,11 +366,11 @@ public class BoardAlgorithm implements Serializable{
                    cell.isAnswer = board[i][j].isAnswer;
                    cell.cellchar = board[i][j].cellchar;
                    Successboard[i][j] = cell;
-                    }
-               }
-           isBoardSuccess = true;
-           System.out.println("AnswerBoard");
-           printBoard(Successboard);
+                }
+            }
+            isBoardSuccess = true;
+            System.out.println("AnswerBoard");
+            printBoard(Successboard);
             return;
         }
         // 랜덤한 점에서 시작
@@ -394,7 +382,7 @@ public class BoardAlgorithm implements Serializable{
             for (int j = RandomPoint.GetCol()+1; j%col!=RandomPoint.GetCol(); j++) {
                 i%=row;
                 j%=col;
-              //  System.out.println(i+" "+j);
+                //  System.out.println(i+" "+j);
                 // 방문 안한 정답중에 놓을 수 있는 셀이면
                 if (visit[_answerindex]==false&&isPuton(_answerindex, i, j, visit,_dirarray)) {
                     // 정답 넣기
@@ -402,8 +390,7 @@ public class BoardAlgorithm implements Serializable{
                     // 해당 정답 방문처리
                     visit[_answerindex] = true;
                     // 넣은 정답의 좌표를 해당 정답클래스에 기록
-                    for(int alphaindex=0; alphaindex<answers[_answerindex].getAnswerLength(); alphaindex++ )
-                    {
+                    for(int alphaindex=0; alphaindex<answers[_answerindex].getAnswerLength(); alphaindex++ ) {
                         int alpharow = AnswerPoint.get(alphaindex).GetRow();
                         int alphacol = AnswerPoint.get(alphaindex).GetCol();
                         answers[_answerindex].SetAlphabetPoint(alphaindex,alpharow,alphacol);
@@ -413,14 +400,10 @@ public class BoardAlgorithm implements Serializable{
                     // 재귀호출
                     PlaceAnswer(_answerindex + 1, i, j, visit,_dirarray);
 
-                }
-                else if(visit[_answerindex]==true)
-                {
+                } else if(visit[_answerindex]==true) {
                     AnswerPoint.clear();
                 }
             }
-
-
         }
         System.out.println();
     }

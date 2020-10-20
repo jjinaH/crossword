@@ -291,6 +291,7 @@ public class Main extends DialogflowApp {
         } else {
             difficulty = CommonUtil.makeSafeString(request.getParameter("difficulty"));
         }*/
+
         String difficulty = CommonUtil.makeSafeString(request.getParameter("difficulty"));
         int stage = (int)((double)data.get("stage"));
 
@@ -310,15 +311,18 @@ public class Main extends DialogflowApp {
         userserial = Createserial(user);
         data.put("user",userserial);
 
-        int dif = 0;
-        if(difficulty.equals("easy")) dif = 1;
-        else if(difficulty.equals("medium")) dif = 2;
-        else if(difficulty.equals("hard")) dif = 3;
+//        int dif = 0;
+//        if(difficulty.equals("easy")) dif = 1;
+//        else if(difficulty.equals("medium")) dif = 2;
+//        else if(difficulty.equals("hard")) dif = 3;
+
+        int dif = stage >=6 ? 3 : stage >= 4 ? 2 : 1; /* DB에 저장된 레벨별 단어난이도?? */
 
         //나중에 구성자 바꾸어야됌
         DBConnector dbConnector = new DBConnector(user.getEmail());
         List<String> wordlist = dbConnector.getWord(dif);
         Collections.shuffle(wordlist);
+
         List<String> hintlist = new ArrayList<>();
         for(int i=0; i< wordlist.size(); i++) {
             String word = wordlist.get(i).replaceAll("\"","");
@@ -331,7 +335,7 @@ public class Main extends DialogflowApp {
         GameBoard gameBoard = new GameBoard(difficulty, stage, stageinfo, wordlist, hintlist, user.getLevel());
 
         String boardserial = Createserial(gameBoard); // 게임보드 직렬화 후 전송
-        data.put("gameboard",boardserial);
+        data.put("gameboard", boardserial);
         char[][] board = gameBoard.getBoard();
 
         htmldata.put("command", "ingame");
@@ -466,7 +470,6 @@ public class Main extends DialogflowApp {
                 .build();
     }
 
-
     @ForIntent("setting")
     public ActionResponse setting(ActionRequest request) throws ExecutionException, InterruptedException {
         ResponseBuilder rb = getResponseBuilder(request);
@@ -492,6 +495,7 @@ public class Main extends DialogflowApp {
                 .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
                 .build();
     }
+
     @ForIntent("settingselect")
     public ActionResponse settingselect(ActionRequest request) throws ExecutionException, InterruptedException {
         ResponseBuilder rb = getResponseBuilder(request);
@@ -570,8 +574,6 @@ public class Main extends DialogflowApp {
                 .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
                 .build();
     }
-
-
 
     @ForIntent("return")
     public ActionResponse returnback(ActionRequest request) throws ExecutionException, InterruptedException {
