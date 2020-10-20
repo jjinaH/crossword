@@ -79,7 +79,7 @@ const Timer = (function () {
         gameTimerTextBox.style.animationPlayState = "running";
         console.log("게임 재실행");
     }
-    
+
     function isRunning() {
         return intervalId !== null;
     }
@@ -176,6 +176,7 @@ function coin(num) {
  */
 export class Action {
 
+
     /**
      * @param {*} scene which serves as a container of all visual elements
      */
@@ -191,8 +192,15 @@ export class Action {
         };
         headerheight().then(function (result) {
             console.log(result);
+
+            window.addEventListener("resize", function () {
+                document.body.setAttribute("style","height:" + (window.innerHeight - result) + "px; width: " + window.innerWidth + "px");
+                container.setAttribute("style", "margin-top: " + result + "px; " + "height:" + (window.innerHeight - result) + "px; width: " + window.innerWidth + "px");
+            });
+
             document.body.setAttribute("style","height:" + (window.innerHeight - result) + "px; width: " + window.innerWidth + "px");
             container.setAttribute("style", "margin-top: " + result + "px; " + "height:" + (window.innerHeight - result) + "px; width: " + window.innerWidth + "px");
+
             console.log(window.innerHeight - result);
             console.log(window.innerWidth);
         });
@@ -221,6 +229,7 @@ export class Action {
         let topHint = 0;
         //main -> 공통 화면
         let userEmail = "";
+
 
 
         const correctAudio = document.createElement("audio");
@@ -300,10 +309,7 @@ export class Action {
         resultDisplay.init();
         resultDisplay.doNoneDisplay();
 
-        bgMusic.load();
-        bgMusic.autoplay = true;
-        bgMusic.loop = true;
-
+        let bgm, foley;
         this.canvas = window.interactiveCanvas;
         this.scene = scene;
         this.commands = {
@@ -398,7 +404,7 @@ export class Action {
                 common.settingButton.onclick = setting;
 
                 $('#progress').circleProgress({
-                    size: 50, //수정필요
+                    size: 55, //수정필요
                     //그래프 크기
                     startAngle: -Math.PI / 2,
                     //시작지점 (기본값 Math.PI)
@@ -412,7 +418,7 @@ export class Action {
                     //빈칸 색
                     lineCap: 'round',
                     //그래프 끝
-                    thickness: 5 //수정필요
+                    thickness: 8 //수정필요
                     //그래프 두께
                 });
 
@@ -533,6 +539,10 @@ export class Action {
                 document.querySelector("#main").style.display = "block";
                 document.querySelector("#setting").style.display = "block";
 
+                bgMusic.load();
+                bgMusic.autoplay = true;
+                bgMusic.loop = true;
+
                 //setting 에서 돌아와서 기억하고 있던 정보로 다시 resume 해야함
                 if(document.querySelector("#inGameBox") != null) { //setting 에서 돌아왔을 경우
                     console.log("실행 : setting -> inGame");
@@ -565,8 +575,8 @@ export class Action {
                     const board = data.board;
                     const boardRow = data.board[0].length; //열
                     const boardCol = data.board.length; //행
-                    // const timeLimit = data.timeLimit;
-                    const timeLimit = 900;
+                    const timeLimit = data.timeLimit;
+                    // const timeLimit = 900;
                     const totalWord = data.totalWord;
                     // data.difficulty -> easy : 1, medium : 2, hard : 3
                     const difficulty = difficultySelect.difficulty[data.difficulty - 1]; //easy, medium, hard
@@ -618,8 +628,6 @@ export class Action {
                     gameTimerTextBox.appendChild(gameTimerText);
 
                     const remainHeight = document.querySelector("#gameTimer").clientHeight;
-                    const gameTimerHeight = document.querySelector("#gameTimer").style.height;
-                    console.log(gameTimerHeight);
                     console.log(remainHeight);
                     Timer.setter(timeLimit, remainHeight);
                     Timer.init();
@@ -628,19 +636,8 @@ export class Action {
                     const gameBoard = document.createElement("div");
                     gameBoard.setAttribute("id", "gameBoard");
 
-
-                    /* data 로부터 선택한 level 받아오는 설정 필요 */
-                    if (timeLimit <= 90) {
-                        gameBoard.style.gridTemplateColumns = "repeat(6, 1fr)";
-                        gameBoard.style.gridTemplateRows = "repeat(6, 1fr)";
-                    } else if (timeLimit <= 120 && timeLimit >= 95) {
-                        gameBoard.style.gridTemplateColumns = "repeat(7, 1fr)";
-                        gameBoard.style.gridTemplateRows = "repeat(7, 1fr)";
-                    } else {
-                        gameBoard.style.gridTemplateColumns = "repeat(8, 1fr)";
-                        gameBoard.style.gridTemplateRows = "repeat(8, 1fr)";
-                    }
-
+                    gameBoard.style.gridTemplateColumns = "repeat(" + boardCol +", 1fr)";
+                    gameBoard.style.gridTemplateRows = "repeat(" + boardRow + ", 1fr)";
 
                     gameBoardBox.appendChild(gameBoard);
 
@@ -695,7 +692,6 @@ export class Action {
 
                     const gameProgressBox = document.createElement("div");
                     gameProgressBox.setAttribute("id", "gameProgressBox");
-                    gameProgressBox.setAttribute("class", "inGameBoxMargin");
                     gameProgress_HintBox.appendChild(gameProgressBox);
 
                     //힌트 캐러셀 리스트 생성
@@ -745,9 +741,6 @@ export class Action {
                     // hintScrollBox.setAttribute("id", "hintScrollBox");
                     // usedHint.appendChild(hintScrollBox);
 
-
-                    hintListBox.style.height = (gameBoard.clientHeight * 3 / 5) + "px";
-                    gameProgressBox.style.width = hintListBox.clientWidth + "px";
                     //게임보드에 높이 맞추기
                     // usedHint.style.height = (gameBoard.clientHeight * 3 / 5) + "px";
                     // gameProgressBox.style.width = usedHint.clientWidth + "px";
@@ -1189,6 +1182,7 @@ export class Action {
                 mainFrame.doNoneDisplay();
                 rankingPage.doNoneDisplay();
                 shopPage.doNoneDisplay();
+                difficultySelect.doNoneDisplay();
 
                 settingPage.doDisplay();
 
@@ -1224,26 +1218,35 @@ export class Action {
                     })
                 }
 
+                let bgmOn = data.bgmOn; //유저의 bgm 설정 정보 얻어옴(db)
+                let foleyOn = data.foleyOn; //유저의 foley 설정 정보 얻어옴(db)
 
-                let backgroundsoundeffect = data.backgroundsound; //켜져있음 == 1 ==> 수정 필요함
-                let soundeffect = data.soundeffect; //1
-
-                console.log("bg sound : " + backgroundsoundeffect);
-                console.log("sound effect : " + soundeffect);
+                console.log("bgm : " + bgmOn);
+                console.log("foley : " + foleyOn);
 
                 settingPage.accountText.textContent = userEmail;
 
                 //기초설정대로 보여주기
-                if (soundeffect == 1) {
+                if (foleyOn == "true") {
                     settingPage.effectSound.checked = true;
                 } else {
                     settingPage.effectSound.checked = false;
                 }
-                if (backgroundsoundeffect == 1) {
+                if (bgmOn == "true") {
                     settingPage.bgSound.checked = true;
                 } else {
                     settingPage.bgSound.checked = false;
                 }
+
+                settingPage.effectSound.onclick = function () {
+                    if(foleyOn == "true") window.canvas.sendTextQuery("soundeffect off");
+                    else window.canvas.sendTextQuery("soundeffect on");
+                };
+
+                settingPage.bgSound.onclick = function () {
+                    if(bgmOn == "true") window.canvas.sendTextQuery("backgroundsound off");
+                    else window.canvas.sendTextQuery("backgroundsound on");
+                };
 
 
                 /**
@@ -1256,33 +1259,45 @@ export class Action {
             },
             SETTINGSELECT: function (data) {
                 console.log("실행: settingselect");
-                let sound = data.sound; //1. soundEffect 2.background sound
-                let onoff = data.onoff; //1.  0오면 off/1오면 on
+                let bgmOn = data.bgmOn; //유저의 bgm 설정 정보 얻어옴(db)
+                let foleyOn = data.foleyOn; //유저의 foley 설정 정보 얻어옴(db)
 
-                if ((onoff == "0") && (sound == "SoundEffect")) {
-                    console.log("soundEffect off");
+                console.log("ss bgm : " + bgmOn);
+                console.log("ss foley : " + foleyOn);
+
+                settingPage.effectSound.onclick = function () {
+                    if(foleyOn == "true") window.canvas.sendTextQuery("soundeffect off");
+                    else window.canvas.sendTextQuery("soundeffect on");
+                };
+
+                settingPage.bgSound.onclick = function () {
+                    if(bgmOn == "true") window.canvas.sendTextQuery("backgroundsound off");
+                    else window.canvas.sendTextQuery("backgroundsound on");
+                };
+
+                if (foleyOn != "true") {
+                    console.log("foley off");
                     correctAudio.volume = 0;
                     wrongAudio.volume = 0;
                     successAudio.volume = 0;
                     failAudio.volume = 0;
                     settingPage.effectSound.checked = false;
-                }
-                if ((onoff == "1") && (sound == "SoundEffect")) {
-                    console.log("soundEffect on");
+                } else {
+                    console.log("foley on");
                     correctAudio.volume = 1;
                     wrongAudio.volume = 1;
                     successAudio.volume = 1;
                     failAudio.volume = 1;
                     settingPage.effectSound.checked = true;
                 }
-                if ((onoff == "0") && (sound == "BackGround")) {
+
+                if (bgmOn != "true") {
                     console.log("backgroundMusic off");
                     bgMusic.volume = 0;
                     settingPage.bgSound.checked = false;
-                }
-                if ((onoff == "1") && (sound == "BackGround")) {
+                } else {
                     console.log("backgroundMusic on");
-                    bgMusic.volume = 1;
+                    bgMusic.volume = 0.5;
                     settingPage.bgSound.checked = true;
                 }
             },
@@ -1349,10 +1364,12 @@ export class Action {
                 rankingPage.rankingBox.appendChild(bottomBox);
 
                 const leftBox = document.createElement("div");
+                leftBox.setAttribute("class", "scroll");
                 bottomBox.appendChild(leftBox);
 
                 const rightBox = document.createElement("div");
                 rightBox.setAttribute("id", "rankRightBox");
+                rightBox.setAttribute("class", "scroll");
                 bottomBox.appendChild(rightBox);
 
 
@@ -1381,7 +1398,7 @@ export class Action {
                     top5InfoBox.appendChild(top5Mail);
 
                     const top5Exp = document.createElement("div");
-                    top5Exp.setAttribute("class", "rankYellowText font small extraBoldText");
+                    top5Exp.setAttribute("class", "rankYellowText font small extraBoldText top5Margin");
                     top5Exp.textContent = "Exp " + totalRank[i][1];
                     top5InfoBox.appendChild(top5Exp);
                 }

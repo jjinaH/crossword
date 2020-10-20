@@ -312,8 +312,8 @@ body {
 
 #stepBox {
     position: absolute;
-    height: 321px;
-    width: 1030px;
+    height: 17.0625rem;
+    width: 60.375rem;
     left: 14vw;
     top: 40vh;
 }
@@ -321,10 +321,10 @@ body {
 #stepButton {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(2, minmax(131px, auto));
+    grid-template-rows: repeat(2, minmax(8.1875rem, auto));
     position: absolute;
-    height: 321px;
-    width: 770px;
+    height: 17.9rem;
+    width: 48.125rem;
     left: 10vw;
     top: 0vh;
     right: 10vw;
@@ -352,46 +352,52 @@ body {
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(5, 1fr);
-    width: 770px;
-    height: 131px;
-    margin-bottom: 7.4vh;
+    width: 48.125rem;
+    height: 8.1875rem;
+    /* margin-bottom: 7.4vh; */
 }
 
 #ableBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    width: 130px;
-    height: 131px;
+    width: 8.125rem;
+    height: 8.1875rem;
     margin-right: 2.3vw;
 }
 
 #disableBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    width: 130px;
-    height: 131px;
+    width: 8.125rem;
+    height: 8.1875rem;
     margin-right: 2.3vw;
 }
 
 /*자물쇠 아이콘*/
 #upperBox {
     position: absolute;
-    top: 25px;
-    left: 40px;
-    width: 51px;
-    height: 73px;
+    /* top: 1rem; */
+    /* left: 1.9rem; */
+    width: 26.5px;
+    height: 41px;
     object-fit: contain;
 }
 
 /*레벨 숫자 텍스트 */
 #stepText {
     position: absolute;
-    top: 50px;
-    left: 47px;
+    /* top: 2.1rem; */
+    /* left: 2.6rem; */
     display: inline-block;
     width: 30px;
     height: 41px;
     text-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
     font-family: 'NanumSquare', sans-serif;
-    font-size: 56.5px;
+    font-size: 3.3rem;
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
@@ -403,8 +409,11 @@ body {
 }
 
 #ableUnderBox {
-    width: 130px;
-    height: 131px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6.125rem;
+    height: 6.1875rem;
     box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
     background-image: linear-gradient(to top, #516afb, #a1efc8);
     border-radius: 50%;
@@ -412,9 +421,12 @@ body {
 }
 
 #disableUnderBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
-    width: 130px;
-    height: 131px;
+    width: 6.125rem;
+    height: 6.1875rem;
     background-image: linear-gradient(to top, #1c2973, #3657a5);
     border-radius: 50%;
 }
@@ -424,14 +436,10 @@ body {
 #difficultyBox {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 107px;
+    grid-column-gap: 1rem;
     position: absolute;
-    left: 22.1vw;
-    right: 12.9vw;
-    /*top: 32.4vh;*/
-    bottom: 21.1vh;
-    width: 827px;
-    height: 305px;
+    left: 18rem;
+    top: 14rem;
 }
 
 #boxItem {
@@ -439,153 +447,57 @@ body {
     flex-direction: column;
 }
 
-#button {
+.difficultyButton {
     position: relative;
-    border-radius: 50%;
-    width: 130px;
-    height: 131px;
-    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
+    width: 5.8rem;
+    height: 5.8rem;
+    margin-bottom: .5rem;
 }
 
-#difficultyText{
-    position:absolute;
-    width: 74px;
-    height: 16px;
-    font-family: 'NanumSquare', sans-serif;
-    font-weight: 400;
-    font-size: 20px;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 16px;
-    letter-spacing: normal;
-    text-align: center;
-    left: 28px;
-    bottom: 19px;
-    color: #ffffff;
+.difficultyIcon {
+    width: 5rem;
+    position: relative;
+}
+
+.difficultyText{
+    position:relative;
+    bottom: 2.5rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+.numberText {
+    position: absolute;
+    left: 9rem;
 }
 
 #expTextBox {
     justify-content: space-between;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 213px;
-    height: 41px;
-    margin-bottom: 31px;
-    margin-top: 29px;
 }
 
-#expText1 {
-    width: 95px;
-    height: 41px;
-    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
-    font-family: 'NanumSquare', sans-serif;
-    font-weight: 400;
-    font-size: 56.5px;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #ffffff;
+.expText {
+    font-size: 3rem;
+    margin-right: 2rem;
 }
 
-#expText2 {
-    width: 62px;
-    height: 41px;
-    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
-    font-family: 'NanumSquare', sans-serif;
-    font-weight: 800;
-    font-size: 56.5px;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
+.difficultyTimeFeeIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
 }
 
-#timeBox {
-    display: flex;
-    flex-direction: row;
-    height: 41px;
-    align-items: center;
+.difficultySmallText {
+    font-size: 1.3rem;
+    margin-right: 0.5rem;
 }
 
-#timeIcon {
-    width: 28px;
-    height: 28px;
-    margin-right: 0.6vw;
+.difficultyMargin {
+    margin-bottom: 0.5rem;
 }
 
-#timeText1 {
-    width: 95px;
-    height: 16px;
-    font-family: 'NanumSquare', sans-serif;
-    font-weight: 400;
-    font-size: 19.5px;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #ffffff;
-    margin-right: 1vw;
-}
-
-#timeText2 {
-    width: 34px;
-    height: 15px;
-    font-family: 'NanumSquare', sans-serif;
-    font-size: 19.5px;
-    font-weight: 800;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #000000;
-}
-
-#feeBox {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 41px;
-}
-
-#feeIcon {
-    width: 28px;
-    height: 28px;
-    margin-right: 0.6vw;
-}
-
-#feeText1 {
-    width: 95px;
-    height: 16px;
-    font-family: 'NanumSquare', sans-serif;
-    font-weight: 400;
-    font-size: 19.5px;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #ffffff;
-    margin-right: 1vw;
-}
-
-#feeText2 {
-    width: 34px;
-    height: 15px;
-    font-family: 'NanumSquare', sans-serif;
-    font-size: 19.5px;
-    font-weight: 800;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #000000;
+.relative {
+    position: relative;
 }
 
 .button1 {
@@ -616,7 +528,7 @@ body {
 #inGameBox {
     display: flex;
     position: absolute;
-    top: -15vh;
+    top: -6.5rem;
     left: 15vw;
 }
 
@@ -630,47 +542,40 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-size: 2vw;
-
+    margin-bottom: .5rem;
 }
 
 .gameProgress {
-    margin-right: 10px;
-    width: 55px;
+    margin-right: .5rem;
+    width: 3rem;
     object-fit: contain;
 }
 
 .inGameBoxMargin {
-    margin-right: 2.3vw;
+    margin-right: 2.5rem;
 }
 /**
 힌트 스크롤 리스트
  */
 #hintListBox{
-    height:413px;
-    width: 378px;
     display:flex;
     flex-direction: column;
-    position: absolute;
-    top:110px;
     align-items: center;
 }
 #hintCarousel{
-    height:340px;
-    width:378px;
+
 }
 .hintItem{
-    margin-bottom: 10px;
-    position:relative;
-    width: 378px;
-    height: 60px;
-    border-radius: 30px;
+    margin-bottom: .5rem;
+    position: relative;
+    width: 23rem;
+    height: 2.5rem;
+    border-radius: 2rem;
     opacity: 0.2;
 }
 
 #hintItemIcon{
-    width: 31px;
-    height: 32px;
+    width: 1.5rem;
     object-fit: contain;
     position:absolute;
     top: 50%;
@@ -679,21 +584,14 @@ body {
     left : 15px;
 }
 #hintItemText{
-    width: 307px;
-    height: 18px;
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
-    left:72px;
+    left:4rem;
     font-family: 'NanumSquare',sans-serif;
-    font-size: 24px;
+    font-size: 1.3rem;
     font-weight: 800;
-    font-stretch: normal;
-    font-style: normal;
     line-height: 18px;
-    letter-spacing: normal;
-    text-align: left;
-    color: #ffffff;
 }
 #hintItemFocus{
     opacity: 1;
@@ -711,16 +609,14 @@ body {
 }
 
 #hintArrowUpButton{
-    margin-bottom: 19px;
-    width: 30px;
-    height: 17px;
+    margin-bottom: .5rem;
+    width: 2rem;
     object-fit: contain;
     visibility: hidden;
 }
 #hintArrowDownButton{
-    margin-top: 19px;
-    width: 30px;
-    height: 17px;
+    margin-top: .5rem;
+    width: 2rem;
     object-fit: contain;
     visibility: hidden;
 }
@@ -760,14 +656,14 @@ body {
 }
 
 #gameBoard {
-    width: 554px;
-    height: 554px;
+    width: 22rem;
+    height: 22rem;
     display: grid;
     gap: 1%;
 }
 
 .alphabetBox {
-    border-radius: 20px;
+    border-radius: 1rem;
     background-color: rgba(67, 67, 67, 0.1);
     display: flex;
     align-items: center;
@@ -775,27 +671,29 @@ body {
 }
 
 .alphabet {
-    height: 45px;
+    height: 1.3rem;
     object-fit: contain;
 }
 
 #gameTimerBox {
     display: flex;
     flex-direction: column;
-    margin: 0 44px 0 10px;
+    margin: 0 3rem 0 1rem;
 }
 
 #gameTimer {
-    width: 22px;
-    height: 554px;
+    width: 1.3rem;
+    height: 20rem;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 2vh;
     transform: rotate(180deg);
+    position: relative;
+    top: 1rem;
 }
 
 #remainTime {
-    width: 22px;
-    border-radius: 2vh;
+    width: 1.3rem;
+    border-radius: 1rem;
     transform: rotate(180deg);
     position: absolute;
     bottom: 0;
@@ -803,10 +701,10 @@ body {
 
 #gameTimerTextBox {
     box-shadow: 2.8px 4.1px 10px 0 rgba(47, 47, 47, 0.45);
-    width: 50px;
-    height: 50px;
+    width: 2.5rem;
+    height: 2.5rem;
     position: absolute;
-    bottom: -20px;
+    bottom: -1rem;
     animation-name: color;
 }
 
@@ -818,47 +716,45 @@ body {
 #gameTimerText {
     font-family: "NanumSquare", sans-serif;
     font-weight: 800;
-    letter-spacing: -1.56px;
-    font-size: 26px;
+    font-size: 1.3rem;
 }
 
 /*힌트 열기*/
 #hintButtonBox{
-    position:absolute;
-    left:56px;
-    top:338px;
-    width: 90px;
-    height:90px;
-
+    position: absolute;
+    left: 3.3rem;
+    top: 15.5rem;
 }
+
 #hintClickBox{
     border-radius: 50%;
     position:absolute;
     left :0px;
     top : 0px;
-    width: 81px;
-    height: 80px;
+    width: 3.5rem;
+    height: 3.5rem;
     box-shadow: -5.6px 8.3px 20px 0 rgba(0, 0, 0, 0.2);
     background-color: #7cbf5a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 /**
 좌측 힌트버튼
  */
 #hintBoxIcon{
     position:absolute;
-    left :18px;
-    top : 19px;
-    width: 42px;
-    height: 41px;
+    width: 1.6rem;
     object-fit: contain;
 }
+
 #hintCountBox{
     border-radius: 50%;
     position:absolute;
-    right : 0px;
-    top :  0px;
-    width: 40px;
-    height: 40px;
+    left : 21px;
+    top :  -3px;
+    width: 2rem;
+    height: 2rem;
     box-shadow: -2.8px 4.1px 10px 0 rgba(33, 68, 93, 0.4);
     background-color: #ffba00;
     display: flex;
@@ -867,11 +763,10 @@ body {
 }
 #hintCountText{
     font-family: 'NanumSquare',sans-serif;
-    font-size: 23.5px;
+    font-size: 1.2rem;
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
-    line-height: 18px;
     letter-spacing: normal;
     text-align: left;
     color: #ffffff;
@@ -884,70 +779,61 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width:540px;
-    height:460px;
+    width: 29rem;
+    height: 17rem;
     z-index : 2;
 }
 #hintModal{
     position : absolute;
     left: 0px;
     top: 40px;
-    width: 540px;
-    height: 420px;
+    width: 29rem;
+    height: 17rem;
     border-radius: 20px;
     box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
     background-color: #ffffff;
 }
 #hintModalIcon{
-    position : absolute;
-    left: 228px;
-    top: 0px;
-    width: 69px;
-    height: 71px;
+    position: absolute;
+    left: 12.5rem;
+    top: 2.5rem;
+    width: 3.5rem;
     object-fit: contain;
 }
 #hintTopBox{
-    width: 540px;
-    height: 90px;
+    width: 29rem;
+    height: 5rem;
     border-radius: 15px 15px 0px 0px;
     position : absolute;
     left: 0px;
     top: 0px;
     background-color: #99c34b;
+    display: flex;
+    justify-content: center;
 }
 #hintBottomBox{
-    width: 540px;
-    height: 330px;
-    position : absolute;
-    left: 0px;
     top: 90px;
+    width: 29rem;
+    height: 17rem;
+    display: flex;
+    align-items: center;
 }
+
 #hintTopBoxText{
-    position : absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 67px;
-    height: 22px;
     font-family: 'NanumSquare',sans-serif;
-    font-size: 31px;
+    font-size: 1.5rem;
     font-weight: 800;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 22px;
-    letter-spacing: normal;
-    text-align: left;
-    color: #ffffff;
+    position: relative;
+    top: 2.5rem;
 }
+
 #hintNotifyText{
-    position : absolute;
-    left: 50%;
-    top : 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
+    position: relative;
+    top: 2rem;
+    width: 29rem;
     height: auto;
     font-family: 'NanumSquare',sans-serif;
-    font-size: 34.5px;
+    font-size: 1.5rem;
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
@@ -1011,20 +897,27 @@ body {
     flex-grow: 1;
 }
 
+#bottomBox {
+    height: 15rem;
+    position: relative;
+    left: -2rem;
+}
+
+
 #rankRightBox {
-    position: absolute;
-    left: 30vw;
+    position: relative;
+    left: 1rem;
 }
 
 #top5InfoBox {
     position: relative;
-    top: -10px;
+    top: -1rem;
 }
 
 .topBox {
     position: absolute;
-    top: -15vh;
-    left: 29vw;
+    top: -6.5rem;
+    left: 20rem;
 }
 
 .flexColumn {
@@ -1045,35 +938,30 @@ body {
 
 .rankBlueText {
     color: #324091;
-    padding-bottom: 8px;
 }
 
 .rankCircle {
-    width: 80px;
-    height: 80px;
-    margin: 0 20px 15px 0;
+    width: 4rem;
+    height: 4rem;
+    margin: 0 1rem 1.5rem 0;
 }
 
 .top5Num {
-    font-size: 42.5px;
-}
-
-.rankCirclePadding {
-    margin-bottom: 20px;
+    font-size: 2rem;
 }
 
 #rankingIcon {
-    width: 76px;
+    width: 4rem;
     object-fit: contain;
-    padding-bottom: 10px;
+    padding-bottom: .5rem;
 }
 
 .rankRound {
-    width: 639px;
-    height: 46px;
-    border-radius: 23px;
+    width: 32rem;
+    height: 3rem;
+    border-radius: 2rem;
     position: relative;
-    margin-bottom: 13px;
+    margin-bottom: .7rem;
 }
 
 .rankBlueOpacity {
@@ -1081,18 +969,34 @@ body {
 }
 
 .rank8NumPadding {
-    padding-left: 33px;
+    padding-left: 2rem;
 }
 
 .rank8Mail {
     position: absolute;
-    left: 141px;
+    left: 8rem;
 }
 
 .rank8Exp {
     position: absolute;
-    left: 475px;
+    left: 23rem;
 }
+
+.top5Margin {
+    margin-top: .1rem;
+}
+
+.scroll {
+    overflow: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    padding-left: 2rem;
+}
+
+.scroll::-webkit-scrollbar {
+    display: none;
+}
+
 
 /*shop*/
 #shopBox {
@@ -1156,7 +1060,7 @@ body {
 }
 
 .small {
-    font-size: 19.5px;
+    font-size: 1.3rem;
 }
 
 .shopTwoBox {
@@ -1406,25 +1310,25 @@ input[type="checkbox"] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 46px;
+    margin-bottom: 0.775rem;
 }
 
 #resultIcon {
-    width: 78px;
-    height: 71px;
+    width: 3.975rem;
+    height: 3.5375rem;
     object-fit: fill;
 }
 
 #resultText {
-    width: 150px;
-    height: 23px;
+    width: 9.375rem;
+    height: 0.8375rem;
     text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
     font-family: 'NanumSquare', sans-serif;
-    font-size: 31px;
+    font-size: 1rem;
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
-    line-height: 23px;
+    line-height: 1rem;
     letter-spacing: normal;
     text-align: center;
 }
@@ -1439,22 +1343,22 @@ input[type="checkbox"] {
 }
 
 #resultLevelBox {
-    width: 156px;
-    height: 22px;
+    width: 8.35rem;
+    height: 1.075rem;
     border-radius: 25px;
     background-color: #324091;
-    padding-top: 14px;
-    padding-bottom: 14px;
+		padding-top: 0.575rem;
+    padding-bottom: 0.575rem;
 }
 
 #resultLevelText {
-    height: 23px;
+    height: 1.4375rem;
     font-family: 'NanumSquare', sans-serif;
-    font-size: 28px;
+    font-size: 1rem;
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
-    line-height: 22px;
+    line-height: 1.55rem;
     letter-spacing: normal;
     text-align: center;
     color: #f7d119;
@@ -1464,10 +1368,10 @@ input[type="checkbox"] {
     display: flex;
     flex-direction: row;
     align-self: flex-start;
-    margin-left: 20.5vw;
+    margin: 0 auto;
     justify-content: flex-start;
-    width: 33.2vw;
-    height: 113px;
+    width: 18.2vw;
+    height: 3.73125rem;
 }
 
 
@@ -1476,13 +1380,13 @@ input[type="checkbox"] {
     display: inline-flex;
     width: 9vw;
     margin-right: 5.1vw;
-    text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
+    text-shadow: 0px 1rem 30px rgba(0, 0, 0, 0.35);
     font-family: 'NanumSquare', sans-serif;
-    font-size: 56.5px;
+    font-size: 1.73125rem;
     font-weight: 400;
     font-stretch: normal;
     font-style: normal;
-    line-height: 56.5px;
+    line-height: 2.73125rem;
     letter-spacing: normal;
     text-align: left;
     vertical-align: bottom;
@@ -1494,30 +1398,31 @@ input[type="checkbox"] {
     align-self: flex-end;
     text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
     font-family: 'NanumSquare', sans-serif;
-    font-size: 56.5px;
+    font-size: 1.73125rem;
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
-    line-height: 56.5px;
+    line-height: 2.73125rem;
     letter-spacing: normal;
     text-align: center;
     color: #f7d119;
+		margin-left:auto;
 }
 
 #gainCoinText1 ,#gainExpText1{
-    padding-bottom:30px;
+    padding-bottom:1.875rem;
     position: relative;
     align-self: flex-start;
     display: inline-flex;
-    width: 54px;
-    height: 75px;
+    width: 0;
+    height: 1.8875rem;
     text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
     font-family: "NanumSquare", sans-serif;
-    font-size: 31px;
+    font-size: 0.8rem;
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
-    line-height: 75px;
+    line-height: 4.6875rem;
     letter-spacing: normal;
     text-align: left;
     color: #a9f2d4;
@@ -1525,38 +1430,38 @@ input[type="checkbox"] {
 }
 
 #gainCoinEffectText,#gainExpEffectText{
-    height: 49px;
+    height: 39px;
     padding-bottom: 32px;
-    line-height: 49px;
+    line-height: 3.0625rem;
     position: absolute;
     bottom: 0;
     left: 0;
 }
 
 #gainCoinInnerText,#gainExpInnerText{
-    height: 23px;
-    padding-bottom: 32px;
-    line-height: 23px;
+    height: 0px;
+    padding-bottom: 27px;
+    line-height: 1rem;
     position: absolute;
     bottom: 0;
     left: 0;
 }
 
-#gainCoinText2 ,#gainExpText2{
-    padding-bottom:30px;
+#gainCoinText2,#gainExpText2{
+    padding-bottom:1.875rem;
     position: absolute;
     align-self: flex-start;
     display: inline-flex;
     width: 114px;
-    height: 75px;
+    height: 4.6875rem;
     opacity: 1;
     text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
     font-family: "NanumSquare", sans-serif;
-    font-size: 31px;
+    font-size: 1.5rem;
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
-    line-height: 75px;
+    line-height: 4.6875rem;
     letter-spacing: normal;
     text-align: left;
     z-index: 2;
@@ -1567,11 +1472,11 @@ input[type="checkbox"] {
     display: flex;
     flex-direction: row;
     align-self: flex-start;
-    margin-left: 20.5vw;
+    margin: 0 auto;
     justify-content: flex-start;
-    width: 33.2vw;
-    height: 113px;
-    margin-bottom: 51px;
+    width: 18.2vw;
+    height: 2.73125rem;
+    margin-bottom: 0.1875rem;
 }
 
 #resultExpText1 {
@@ -1580,7 +1485,7 @@ input[type="checkbox"] {
     margin-right: 5.1vw;
     text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
     font-family: 'NanumSquare', sans-serif;
-    font-size: 56.5px;
+    font-size: 1.73125rem;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
@@ -1594,7 +1499,7 @@ input[type="checkbox"] {
     align-self: flex-end;
     text-shadow: 0px 15px 30px rgba(0, 0, 0, 0.35);
     font-family: 'NanumSquare', sans-serif;
-    font-size: 56.5px;
+    font-size: 1.73125rem;
     font-weight: 800;
     font-stretch: normal;
     font-style: normal;
@@ -1602,6 +1507,7 @@ input[type="checkbox"] {
     letter-spacing: normal;
     text-align: center;
     color: #f7d119;
+		margin-left:auto;
 }
 
 #wordBox{
@@ -1609,15 +1515,15 @@ input[type="checkbox"] {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 110px;
+    height: 4.875rem;
     width: 65.6vw;
-    margin-bottom: 48px;
+    margin-bottom: 1rem;
 
 }
 #resultWordBox {
     display: grid;
-    grid-row-gap: 10px;
-    grid-column-gap: 0.8vw;
+    grid-row-gap: 0.625rem;
+    grid-column-gap: 0.6vw;
     grid-template-columns: repeat(5, 1fr);
 }
 
@@ -1633,23 +1539,23 @@ input[type="checkbox"] {
 
 #resultWordItem {
     width: 12.5vw;
-    height: 50px;
+    height: 3.125rem;
     border-radius: 10px;
     font-family: 'NanumSquare', sans-serif;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: 50px;
+    line-height: 3.125rem;
     letter-spacing: normal;
     text-align: center;
 }
 
 #resultContinueText {
-    width: 94px;
-    height: 16px;
+    width: 5.875rem;
+    height: 1rem;
     font-family: 'NanumSquare', sans-serif;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
@@ -1657,12 +1563,12 @@ input[type="checkbox"] {
     letter-spacing: normal;
     text-align: left;
     color: #ffffff;
-    line-height: 16px;
+    line-height: 1rem;
 }
 
 #resultContinueIcon {
-    width: 24px;
-    height: 31px;
+    width: 1.5rem;
+    height: 1.25rem;
     object-fit: contain;
 }
 
@@ -1672,10 +1578,10 @@ input[type="checkbox"] {
     justify-content: space-evenly;
     align-items: center;
     width: 14.8vw;
-    height: 26px;
-    padding-top: 14px;
-    padding-bottom: 14px;
-    border-radius: 30px;
-    box-shadow: 0px 15px 30px 0 rgba(0, 0, 0, 0.35);
+    height: 1.125rem;
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+    border-radius: 15px;
+    box-shadow: 0px 0.9rem 30px 0 rgba(0, 0, 0, 0.35);
     background-color: #00b4ff;
 }
