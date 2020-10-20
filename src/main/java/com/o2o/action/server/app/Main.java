@@ -345,7 +345,7 @@ public class Main extends DialogflowApp {
         htmldata.put("totalWord", gameBoard.getTotalWord());
         htmldata.put("gameboard", gameBoard);
         htmldata.put("stage", stage);
-        htmldata.put("difficulty", dif);
+        htmldata.put("difficulty", difficulty);
 
         return rb.add(new SimpleResponse().setTextToSpeech(tts.getTtsmap().get("ingame")))
                 .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
