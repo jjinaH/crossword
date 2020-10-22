@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface UserRepository extends PagingAndSortingRepository<User, String> {
     List<User> findAll();
-    List<User.getUserInfo> findByUserEmail(String email);
+    List<User> findByUserEmail(String email);
 
     //@Query(value = "select x.* from public.ktour_api x where upper(regexp_replace(x.title, '[[:punct:]]|[[:space:]]', '', 'g')) like concat('%',upper(regexp_replace(:title, '[[:punct:]]|[[:space:]]', '', 'g')), '%') and lang in (:Lang)", nativeQuery = true)
     //public List<?> queryByTitleAndLang(String title, String Lang);

@@ -21,17 +21,20 @@ import java.util.concurrent.ExecutionException;
 public class Main extends DialogflowApp {
 
     public static void main(String[] args) {
+
        DBConnector dbConnectors = new DBConnector("intern2001@o2o.kr");
         try{
             StagePropertyInfo info = new StagePropertyInfo();
             UserInfo user = new UserInfo("1","0","3","5000",info,"intern2001@o2o.kr", "true", "true");
             System.out.println("accumexp : " + user.getMyExp() + "  " +user.getMyCurrentExp() + " / " + user.getMyCurrentFullExp());
+
         }catch(Exception e) {
             e.printStackTrace();
         }
     }
 
-    String URL = "https://actions.o2o.kr/devsvr9/test/index.html";
+    String URL = "https://actions.o2o.kr/devsvr4/test/index.html";
+
     StagePropertyInfo stageinfo;
     TTS tts;
     DBConnector dbConnector;
@@ -42,6 +45,7 @@ public class Main extends DialogflowApp {
         } catch (FileNotFoundException e) {
             e.getStackTrace();
         }
+
     }
 
    static String Createserial(Object obj) {
@@ -61,6 +65,7 @@ public class Main extends DialogflowApp {
 
    static Object Desrial(String outst) {
         byte[] inserializedMember = Base64.getDecoder().decode(outst);
+        ;
         try {
             ByteArrayInputStream bais = new ByteArrayInputStream(inserializedMember);
             ObjectInputStream out = new ObjectInputStream(bais);
@@ -72,6 +77,8 @@ public class Main extends DialogflowApp {
         }
         return null;
     }
+
+
 
     private GoogleIdToken.Payload getUserProfile(String idToken) {
         GoogleIdToken.Payload profile = null;
@@ -229,7 +236,7 @@ public class Main extends DialogflowApp {
 
         int level = "stageSelect".equals(data.get("history"))
                 ? ((Double) request.getParameter("number")).intValue() //선택한 레벨
-                : user.getLevel(); //메인이나 RESULT에서 CONTINUE 선택시 TODO 유저레벨이 아닌 마지막 플레이한 레벨 last_play_level 칼럼 추가
+                : user.getLevel(); //TODO 유저레벨이 아닌 마지막 플레이한 레벨
         System.out.println("이전화면 >>>>> " + data.get("history") );
         System.out.println("레벨 >>>>> " + level );
 
@@ -357,7 +364,7 @@ public class Main extends DialogflowApp {
                 if (gameBoard.getResult().isWin()) // 다 맞추었는지 확인
                     htmldata.put("finish", true);
                 else htmldata.put("finish", false);
-                
+
             } else {
                 htmldata.put("command", "wrong");
                 response = "wrong";

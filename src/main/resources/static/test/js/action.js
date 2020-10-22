@@ -28,7 +28,6 @@ const Timer = (function () {
         timerStart = 0;
         percent = 0;
         plusPercent = 100 / remainTime;
-        console.log(plusHeight);
     }
 
     function initTimer() { //초기 타이머 설정
@@ -60,6 +59,7 @@ const Timer = (function () {
             throw "Timer is already running!";
         }
         intervalId = setInterval(update, 1000);
+        gameTimerTextBox.style.animationDuration = timerText + 3 + "s";
     }
 
     function stopTimer() {
@@ -195,7 +195,9 @@ export class Action {
 
             window.addEventListener("resize", function () {
                 document.body.setAttribute("style","height:" + (window.innerHeight - result) + "px; width: " + window.innerWidth + "px");
-                container.setAttribute("style", "margin-top: " + result + "px; " + "height:" + (window.innerHeight - result) + "px; width: " + window.innerWidth + "px");
+                container.style.marginTop = result + "px";
+                container.style.height = (window.innerHeight - result) + "px";
+                container.style.width = window.innerWidth + "px";
             });
 
             document.body.setAttribute("style","height:" + (window.innerHeight - result) + "px; width: " + window.innerWidth + "px");
@@ -229,6 +231,7 @@ export class Action {
         let topHint = 0;
         //main -> 공통 화면
         let userEmail = "";
+        let bgmOn, foleyOn;
 
 
 
@@ -274,16 +277,6 @@ export class Action {
 
         welcome.init();
 
-        //First Frame Test
-        //remove_welcome();
-        // document.body.style.backgroundImage = "url('')";
-        // console.log(container);
-        // container.style.backgroundImage = "url('../image/scene/default_bg.png')";
-        // console.log(container);
-
-        //window.open("../image/scene/default_bg.png");
-        //welcome.setGameBackGround();
-
         common.init();
         common.doNoneDisplay();
 
@@ -309,7 +302,13 @@ export class Action {
         resultDisplay.init();
         resultDisplay.doNoneDisplay();
 
-        let bgm, foley;
+        if (window.innerWidth < 1280) { //모바일일 경우
+            const welcomeIcon = document.createElement("img");
+            welcomeIcon.setAttribute("src", "../image/welcome/title.png");
+            welcomeIcon.setAttribute("id", "welcomeIcon");
+            container.appendChild(welcomeIcon);
+        }
+
         this.canvas = window.interactiveCanvas;
         this.scene = scene;
         this.commands = {
@@ -327,7 +326,7 @@ export class Action {
                 //welcome button, copyright, o2ologo remove
                 remove_welcome();
                 document.body.style.backgroundImage = "url('')";
-                container.style.backgroundImage = "url('../image/scene/default_bg.png')";
+                container.style.backgroundImage = "url('../image/background/bg_default.png')";
 
                 //inGame 화면에서 main(home)으로 바로 나온 경우
                 if(Timer.running()) Timer.stop();
@@ -374,6 +373,19 @@ export class Action {
                     fullExp = data.fullExp;
                 }
 
+                bgmOn = (data.bgmOn === "true");
+                foleyOn = (data.foleyOn === "true");
+
+                console.log("bgm on : " + bgmOn);
+
+                bgMusic.muted = !bgmOn;
+                correctAudio.muted = !foleyOn;
+                wrongAudio.muted = !foleyOn;
+                successAudio.muted = !foleyOn;
+                failAudio.muted = !foleyOn;
+
+                console.log("bgm muted : " + bgMusic.muted);
+
                 /**
                  *
                  * Display Setting
@@ -403,9 +415,7 @@ export class Action {
                 common.rankingButton.onclick = ranking;
                 common.settingButton.onclick = setting;
 
-                $('#progress').circleProgress({
-                    size: 55, //수정필요
-                    //그래프 크기
+                let circleoption = {
                     startAngle: -Math.PI / 2,
                     //시작지점 (기본값 Math.PI)
                     value: exp / fullExp,
@@ -418,9 +428,17 @@ export class Action {
                     //빈칸 색
                     lineCap: 'round',
                     //그래프 끝
-                    thickness: 8 //수정필요
-                    //그래프 두께
-                });
+                };
+
+                if(window.innerWidth < 1280) {
+                    //화면 가로길이가 1280 미만(모바일)일 경우 그래프 크기 55, 두께 5
+                    circleoption = {size: 55, thickness: 5, ...circleoption};
+                } else {
+                    //화면 가로길이가 1280 이상(Nest Hub Max)일 경우 그래프 크기 110, 두께 8
+                    circleoption = {size: 110, thickness: 8, ...circleoption};
+                }
+
+                $('#progress').circleProgress(circleoption);
 
                 /**
                  * 중앙에 이어하기, 단계 선택 버튼
@@ -549,7 +567,7 @@ export class Action {
 
                     settingPage.doNoneDisplay();
                     common.displayHigherBox();
-                    container.style.backgroundImage = "url('../image/inGame/bg_" + container.getAttribute("value") + ".png')";
+                    container.style.backgroundImage = "url('../image/background/bg_" + container.getAttribute("value") + ".png')";
                     document.querySelector("#inGameBox").style.display = "flex";
                     document.querySelector("#hintButtonBox").style.display = "block";
 
@@ -578,18 +596,17 @@ export class Action {
                     const timeLimit = data.timeLimit;
                     // const timeLimit = 900;
                     const totalWord = data.totalWord;
-                    // data.difficulty -> easy : 1, medium : 2, hard : 3
-                    const difficulty = difficultySelect.difficulty[data.difficulty - 1]; //easy, medium, hard
+                    const difficulty = data.difficulty; //easy, medium, hard
                     console.log("board : " + board);
                     console.log("boardRow : " + boardRow);
                     console.log("boardCol : " + boardCol);
                     console.log("timeLimit : " + timeLimit);
                     console.log("totalWord : " + totalWord);
-                    console.log("difficulty : " + difficulty);
+                    console.log("difficulty : " + data.difficulty);
                     cnt = 0;
 
                     //난이도별 설정
-                    container.style.backgroundImage = "url('../image/inGame/bg_" + difficulty + ".png')";
+                    container.style.backgroundImage = "url('../image/background/bg_" + difficulty + ".png')";
                     container.setAttribute("value", difficulty);
 
 
@@ -620,7 +637,6 @@ export class Action {
                     const gameTimerTextBox = document.createElement("div");
                     gameTimerTextBox.setAttribute("id", "gameTimerTextBox");
                     gameTimerTextBox.setAttribute("class", "circle center");
-                    gameTimerTextBox.style.animationDuration = timeLimit + "s";
                     remainTime.appendChild(gameTimerTextBox);
 
                     const gameTimerText = document.createElement("div");
@@ -1031,7 +1047,7 @@ export class Action {
                 // document.querySelector("#coinBox").style.visibility = "visible";
                 bgMusic.pause();
 
-                container.style.backgroundImage = "url('../image/scene/default_bg.png')";
+                container.style.backgroundImage = "url('../image/background/bg_default.png')";
 
                 if (document.querySelector("#inGameBox") != null) {
                     common.lowerBox.removeChild(document.querySelector("#inGameBox"));
@@ -1174,7 +1190,7 @@ export class Action {
             SETTING: function (data) {
                 console.log("실행 : setting");
 
-                container.style.backgroundImage = "url('../image/scene/default_bg.png')";
+                container.style.backgroundImage = "url('../image/background/bg_default.png')";
 
                 settingPage.setDisplayDefault();
 
@@ -1183,6 +1199,7 @@ export class Action {
                 rankingPage.doNoneDisplay();
                 shopPage.doNoneDisplay();
                 difficultySelect.doNoneDisplay();
+                stageSelect.doNoneDisplay();
 
                 settingPage.doDisplay();
 
@@ -1218,33 +1235,21 @@ export class Action {
                     })
                 }
 
-                let bgmOn = data.bgmOn; //유저의 bgm 설정 정보 얻어옴(db)
-                let foleyOn = data.foleyOn; //유저의 foley 설정 정보 얻어옴(db)
-
-                console.log("bgm : " + bgmOn);
-                console.log("foley : " + foleyOn);
+                console.log("setting bgm : " + bgmOn);
+                console.log("setting foley : " + foleyOn);
 
                 settingPage.accountText.textContent = userEmail;
 
-                //기초설정대로 보여주기
-                if (foleyOn == "true") {
-                    settingPage.effectSound.checked = true;
-                } else {
-                    settingPage.effectSound.checked = false;
-                }
-                if (bgmOn == "true") {
-                    settingPage.bgSound.checked = true;
-                } else {
-                    settingPage.bgSound.checked = false;
-                }
+                settingPage.effectSound.checked = foleyOn;
+                settingPage.bgSound.checked = bgmOn;
 
                 settingPage.effectSound.onclick = function () {
-                    if(foleyOn == "true") window.canvas.sendTextQuery("soundeffect off");
+                    if(foleyOn) window.canvas.sendTextQuery("soundeffect off");
                     else window.canvas.sendTextQuery("soundeffect on");
                 };
 
                 settingPage.bgSound.onclick = function () {
-                    if(bgmOn == "true") window.canvas.sendTextQuery("backgroundsound off");
+                    if(bgmOn) window.canvas.sendTextQuery("backgroundsound off");
                     else window.canvas.sendTextQuery("backgroundsound on");
                 };
 
@@ -1259,47 +1264,31 @@ export class Action {
             },
             SETTINGSELECT: function (data) {
                 console.log("실행: settingselect");
-                let bgmOn = data.bgmOn; //유저의 bgm 설정 정보 얻어옴(db)
-                let foleyOn = data.foleyOn; //유저의 foley 설정 정보 얻어옴(db)
+                bgmOn = (data.bgmOn === "true"); //유저의 bgm 설정 정보 얻어옴(db)
+                foleyOn = (data.foleyOn === "true"); //유저의 foley 설정 정보 얻어옴(db)
 
                 console.log("ss bgm : " + bgmOn);
                 console.log("ss foley : " + foleyOn);
 
                 settingPage.effectSound.onclick = function () {
-                    if(foleyOn == "true") window.canvas.sendTextQuery("soundeffect off");
+                    if(foleyOn) window.canvas.sendTextQuery("soundeffect off");
                     else window.canvas.sendTextQuery("soundeffect on");
                 };
 
                 settingPage.bgSound.onclick = function () {
-                    if(bgmOn == "true") window.canvas.sendTextQuery("backgroundsound off");
+                    if(bgmOn) window.canvas.sendTextQuery("backgroundsound off");
                     else window.canvas.sendTextQuery("backgroundsound on");
                 };
 
-                if (foleyOn != "true") {
-                    console.log("foley off");
-                    correctAudio.volume = 0;
-                    wrongAudio.volume = 0;
-                    successAudio.volume = 0;
-                    failAudio.volume = 0;
-                    settingPage.effectSound.checked = false;
-                } else {
-                    console.log("foley on");
-                    correctAudio.volume = 1;
-                    wrongAudio.volume = 1;
-                    successAudio.volume = 1;
-                    failAudio.volume = 1;
-                    settingPage.effectSound.checked = true;
-                }
+                correctAudio.muted = !foleyOn;
+                wrongAudio.muted = !foleyOn;
+                successAudio.muted = !foleyOn;
+                failAudio.muted = !foleyOn;
+                settingPage.effectSound.checked = foleyOn;
 
-                if (bgmOn != "true") {
-                    console.log("backgroundMusic off");
-                    bgMusic.volume = 0;
-                    settingPage.bgSound.checked = false;
-                } else {
-                    console.log("backgroundMusic on");
-                    bgMusic.volume = 0.5;
-                    settingPage.bgSound.checked = true;
-                }
+                bgMusic.muted = !bgmOn;
+                settingPage.bgSound.checked = bgmOn;
+
             },
             RANKING: function (data) {
                 console.log("실행 : ranking");
