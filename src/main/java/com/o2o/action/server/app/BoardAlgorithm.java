@@ -12,7 +12,7 @@ class Point implements Serializable {
         rowpoint = _row;
         colpoint = _col;
     }
-    public Point GetRandomPoint(int _limitrow, int _limitcol) {
+    public Point getRandomPoint(int _limitrow, int _limitcol) {
         Random random = new Random();
         int randomrow = random.nextInt(_limitrow-1);
         int randomcol = random.nextInt(_limitcol-1);
@@ -20,16 +20,14 @@ class Point implements Serializable {
         colpoint = randomcol;
         return this;
     }
-    public int GetRow() {
+    public int getRow() {
         return rowpoint;
     }
-
-    public int GetCol() {
+    public int getCol() {
         return colpoint;
     }
 }
 
-// 보드판 알고리즘 클래스
 public class BoardAlgorithm implements Serializable{
     private int col = 0;
     private int row = 0;
@@ -126,18 +124,18 @@ public class BoardAlgorithm implements Serializable{
     // isPuton으로 받아온 정답의 위치에 실제 정답을 입력
     void Puton(int _answerindex, boolean visit[]) {
         if (AnswerPoint.size() != answers[_answerindex].getAnswerLength()) {
-            System.out.println("isPuton에서 받아온 Answer와 실제 Answer의 길이가 다릅니다." +answers[_answerindex].getAnswer() +"  size:"+AnswerPoint.size());
-            System.out.println();
+            System.out.println("isPuton에서 받아온 Answer와 실제 Answer의 길이가 다릅니다." +answers[_answerindex].getAnswer()+", size:"+AnswerPoint.size());
+//            System.out.println();
             for(Point p:AnswerPoint) {
-                System.out.println("row : " +p.GetRow() +"col : "+p.GetCol());
+                System.out.println("row : " +p.getRow() +"col : "+p.getCol());
             }
             return;
         }
         // 해당 정답의 글자수
         int answerlen = answers[_answerindex].getAnswerLength();
         for (int i = 0; i < answerlen; i++) {
-            int rowindex = AnswerPoint.get(i).GetRow();
-            int colindex = AnswerPoint.get(i).GetCol();
+            int rowindex = AnswerPoint.get(i).getRow();
+            int colindex = AnswerPoint.get(i).getCol();
             board[rowindex][colindex].isAnswer = true;
             board[rowindex][colindex].cellchar = answers[_answerindex].getAnswerChar(i);
         }
@@ -205,7 +203,6 @@ public class BoardAlgorithm implements Serializable{
                             break;
                         }
                         AnswerPoint.add(new Point(_row - i, _col + i));
-
                     }
                     break;
                 //right
@@ -215,19 +212,19 @@ public class BoardAlgorithm implements Serializable{
                             isanswerdir = false;
                             AnswerPoint.clear();
                             break;
-                        } else if(board[_row][_col+i].isAnswer == true &&limitcount>0 &&board[_row][_col+i].cellchar == answers[_answerindex].getAnswerChar(i))
-                        {
+                        } else if(  board[_row][_col+i].isAnswer == true &&
+                                    limitcount > 0  &&
+                                    board[_row][_col+i].cellchar == answers[_answerindex].getAnswerChar(i)
+                        ) {
                             AnswerPoint.add(new Point(_row, _col + i));
                             limitcount--;
                             continue;
-                        }
-                        else if ( board[_row][_col + i].isAnswer == true) {
+                        } else if ( board[_row][_col + i].isAnswer == true) {
                             isanswerdir = false;
                             AnswerPoint.clear();
                             break;
                         }
                         AnswerPoint.add(new Point(_row, _col + i));
-
                     }
                     break;
                 //downright
@@ -237,19 +234,19 @@ public class BoardAlgorithm implements Serializable{
                             isanswerdir = false;
                             AnswerPoint.clear();
                             break;
-                        } else if(board[_row + i][_col+i].isAnswer == true &&limitcount>0 &&board[_row + i][_col+i].cellchar == answers[_answerindex].getAnswerChar(i))
-                        {
+                        } else if(  board[_row + i][_col+i].isAnswer == true &&
+                                    limitcount>0 &&
+                                    board[_row + i][_col+i].cellchar == answers[_answerindex].getAnswerChar(i)
+                        ) {
                             limitcount--;
                             AnswerPoint.add(new Point(_row + i, _col + i));
                             continue;
-                        }
-                        else if ( board[_row + i][_col + i].isAnswer == true) {
+                        } else if ( board[_row + i][_col + i].isAnswer == true) {
                             isanswerdir = false;
                             AnswerPoint.clear();
                             break;
                         }
                         AnswerPoint.add(new Point(_row + i, _col + i));
-
                     }
                     break;
                 //down
@@ -259,21 +256,20 @@ public class BoardAlgorithm implements Serializable{
                             isanswerdir = false;
                             AnswerPoint.clear();
                             break;
-                        } else if(board[_row + i][_col].isAnswer == true &&limitcount>0 &&board[_row + i][_col].cellchar == answers[_answerindex].getAnswerChar(i))
-                        {
+                        } else if(  board[_row + i][_col].isAnswer == true &&
+                                    limitcount>0 &&
+                                    board[_row + i][_col].cellchar == answers[_answerindex].getAnswerChar(i)
+                        ) {
                             AnswerPoint.add(new Point(_row + i, _col));
                             limitcount--;
                             continue;
-                        }
-                        else if (_row + i >= row || board[_row + i][_col].isAnswer == true) {
+                        } else if (_row + i >= row || board[_row + i][_col].isAnswer == true) {
                             isanswerdir = false;
                             AnswerPoint.clear();
                             break;
                         }
                         AnswerPoint.add(new Point(_row + i, _col));
-
                     }
-
                     break;
                 //downleft
                 case 5:
@@ -282,19 +278,19 @@ public class BoardAlgorithm implements Serializable{
                             isanswerdir = false;
                             AnswerPoint.clear();
                             break;
-                        } else if(board[_row + i][_col -i].isAnswer == true &&limitcount>0 &&board[_row + i][_col -i].cellchar == answers[_answerindex].getAnswerChar(i))
-                        {
+                        } else if(  board[_row + i][_col -i].isAnswer == true &&
+                                    limitcount>0 &&
+                                    board[_row + i][_col -i].cellchar == answers[_answerindex].getAnswerChar(i)
+                        ) {
                             AnswerPoint.add(new Point(_row + i, _col - i));
                             limitcount--;
                             continue;
-                        }
-                        else if (board[_row + i][_col - i].isAnswer == true) {
+                        } else if (board[_row + i][_col - i].isAnswer == true) {
                             isanswerdir = false;
                             AnswerPoint.clear();
                             break;
                         }
                         AnswerPoint.add(new Point(_row + i, _col - i));
-
                     }
                     break;
                 //left
@@ -304,8 +300,9 @@ public class BoardAlgorithm implements Serializable{
                             isanswerdir = false;
                             AnswerPoint.clear();
                             break;
-                        } else if(board[_row][_col -i].isAnswer == true &&limitcount>0 &&board[_row][_col -i].cellchar == answers[_answerindex].getAnswerChar(i))
-                        {
+                        } else if(  board[_row][_col -i].isAnswer == true &&limitcount>0 &&
+                                    board[_row][_col -i].cellchar == answers[_answerindex].getAnswerChar(i)
+                        ) {
                             AnswerPoint.add(new Point(_row, _col - i));
                             limitcount--;
                             continue;
@@ -315,7 +312,6 @@ public class BoardAlgorithm implements Serializable{
                             break;
                         }
                         AnswerPoint.add(new Point(_row, _col - i));
-
                     }
                     break;
                 //upleft
@@ -325,37 +321,37 @@ public class BoardAlgorithm implements Serializable{
                             isanswerdir = false;
                             AnswerPoint.clear();
                             break;
-                        } else if(board[_row - i][_col -i].isAnswer == true &&limitcount>0 &&board[_row - i][_col -i].cellchar == answers[_answerindex].getAnswerChar(i))
-                        {
+                        } else if(  board[_row - i][_col -i].isAnswer == true &&
+                                    limitcount > 0 &&
+                                    board[_row - i][_col -i].cellchar == answers[_answerindex].getAnswerChar(i)
+                        ) {
                             AnswerPoint.add(new Point(_row - i, _col - i));
                             limitcount--;
                             continue;
-                        }
-                        else if ( board[_row - i][_col - i].isAnswer == true) {
+                        } else if ( board[_row - i][_col - i].isAnswer == true) {
                             isanswerdir = false;
                             AnswerPoint.clear();
                             break;
                         }
                         AnswerPoint.add(new Point(_row - i, _col - i));
-
                     }
                     break;
                 default:
-
             }
+
             // 가능한 방향을 찾았으면 while문 탈출
             if (isanswerdir == true) {
                 return true;
             }
             randomdirindex++;
         }
+
         while ((randomdirindex) % 8 != originrandomdir);
 
         //만약 하나라도 방향이 맞았다면 true, 8방향 전부 불가능하다면 false 리턴
         AnswerPoint.clear();
         return false;
     }
-
 
     // 보드판에 정답 배치하는 알고리즘
     public void PlaceAnswer(int _answerindex, int _row, int _col, boolean visit[], ArrayList _dirarray) {
@@ -375,30 +371,29 @@ public class BoardAlgorithm implements Serializable{
         }
         // 랜덤한 점에서 시작
         Point point = new Point(0,0);
-        Point RandomPoint = point.GetRandomPoint(row,col);
+        Point RandomPoint = point.getRandomPoint(row,col);
 
         // 어떤 랜덤 포인트를 정해놓고 모듈러 연산을 통해 한바퀴 돌면서 단어의 시작점 찾기
-        for (int i = RandomPoint.GetRow()+1; i%row!=RandomPoint.GetRow(); i++) {
-            for (int j = RandomPoint.GetCol()+1; j%col!=RandomPoint.GetCol(); j++) {
+        for (int i = RandomPoint.getRow()+1; i%row!=RandomPoint.getRow(); i++) {
+            for (int j = RandomPoint.getCol()+1; j%col!=RandomPoint.getCol(); j++) {
                 i%=row;
                 j%=col;
                 //  System.out.println(i+" "+j);
                 // 방문 안한 정답중에 놓을 수 있는 셀이면
                 if (visit[_answerindex]==false&&isPuton(_answerindex, i, j, visit,_dirarray)) {
-                    // 정답 넣기
-                    Puton(_answerindex,visit);
-                    // 해당 정답 방문처리
-                    visit[_answerindex] = true;
+
+                    Puton(_answerindex,visit); // 정답 넣기 //TODO
+                    visit[_answerindex] = true; // 해당 정답 방문처리
+
                     // 넣은 정답의 좌표를 해당 정답클래스에 기록
                     for(int alphaindex=0; alphaindex<answers[_answerindex].getAnswerLength(); alphaindex++ ) {
-                        int alpharow = AnswerPoint.get(alphaindex).GetRow();
-                        int alphacol = AnswerPoint.get(alphaindex).GetCol();
-                        answers[_answerindex].SetAlphabetPoint(alphaindex,alpharow,alphacol);
+                        int alpharow = AnswerPoint.get(alphaindex).getRow();
+                        int alphacol = AnswerPoint.get(alphaindex).getCol();
+                        answers[_answerindex].setAlphabetPoint(alphaindex,alpharow,alphacol);
                     }
 
                     AnswerPoint.clear();
-                    // 재귀호출
-                    PlaceAnswer(_answerindex + 1, i, j, visit,_dirarray);
+                    PlaceAnswer(_answerindex + 1, i, j, visit,_dirarray); // 재귀호출
 
                 } else if(visit[_answerindex]==true) {
                     AnswerPoint.clear();
