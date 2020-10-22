@@ -21,20 +21,17 @@ import java.util.concurrent.ExecutionException;
 public class Main extends DialogflowApp {
 
     public static void main(String[] args) {
-
        DBConnector dbConnectors = new DBConnector("intern2001@o2o.kr");
         try{
             StagePropertyInfo info = new StagePropertyInfo();
             UserInfo user = new UserInfo("1","0","3","5000",info,"intern2001@o2o.kr", "true", "true");
             System.out.println("accumexp : " + user.getMyExp() + "  " +user.getMyCurrentExp() + " / " + user.getMyCurrentFullExp());
-
         }catch(Exception e) {
             e.printStackTrace();
         }
     }
 
     String URL = "https://actions.o2o.kr/devsvr9/test/index.html";
-
     StagePropertyInfo stageinfo;
     TTS tts;
     DBConnector dbConnector;
@@ -45,7 +42,6 @@ public class Main extends DialogflowApp {
         } catch (FileNotFoundException e) {
             e.getStackTrace();
         }
-
     }
 
    static String Createserial(Object obj) {
@@ -65,7 +61,6 @@ public class Main extends DialogflowApp {
 
    static Object Desrial(String outst) {
         byte[] inserializedMember = Base64.getDecoder().decode(outst);
-        ;
         try {
             ByteArrayInputStream bais = new ByteArrayInputStream(inserializedMember);
             ObjectInputStream out = new ObjectInputStream(bais);
@@ -78,8 +73,6 @@ public class Main extends DialogflowApp {
         return null;
     }
 
-
-
     private GoogleIdToken.Payload getUserProfile(String idToken) {
         GoogleIdToken.Payload profile = null;
         try {
@@ -90,15 +83,14 @@ public class Main extends DialogflowApp {
         }
         return profile;
     }
-    private GoogleIdToken.Payload decodeIdToken(String idTokenString)
-            throws GeneralSecurityException, IOException {
+    private GoogleIdToken.Payload decodeIdToken(String idTokenString) throws GeneralSecurityException, IOException {
         HttpTransport transport = GoogleNetHttpTransport.newTrustedTransport();
         JacksonFactory jsonFactory = JacksonFactory.getDefaultInstance();
-        GoogleIdTokenVerifier verifier =
-                new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-                        // Specify the CLIENT_ID of the app that accesses the backend:
-//                        .setAudience(Collections.singletonList(clientId))
-                        .build();
+        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier
+                                            .Builder(transport, jsonFactory)
+                                            // Specify the CLIENT_ID of the app that accesses the backend:
+//                                            .setAudience(Collections.singletonList(clientId))
+                                            .build();
         GoogleIdToken idToken = verifier.verify(idTokenString);
         return idToken.getPayload();
     }
@@ -113,14 +105,8 @@ public class Main extends DialogflowApp {
         data.clear();
         setUp();
         data.put("history", "welcome");
-        data.put("special case", false);
         htmldata.put("command", "welcome");
 
-//        UserSettingInfo userSettingInfo = new UserSettingInfo();
-//        String settingserial = Createserial(userSettingInfo);
-//        data.put("setting", settingserial);
-
-        //db 연결
         if (!request.hasCapability("actions.capability.INTERACTIVE_CANVAS")) {
             return rb.add(new SimpleResponse().setSsml("Inveractive Canvas가 지원되지 않는 기기예요."))
                     .endConversation().build();
@@ -188,6 +174,7 @@ public class Main extends DialogflowApp {
     public ActionResponse difficultyFromResult(ActionRequest request) throws ExecutionException, InterruptedException {
         return difficulty(request);
     }
+
     @ForIntent("ingameFromDifficulty")
     public ActionResponse ingameFromDifficulty(ActionRequest request) throws ExecutionException, InterruptedException {
         return ingame(request);
@@ -198,11 +185,10 @@ public class Main extends DialogflowApp {
         ResponseBuilder rb = getResponseBuilder(request);
         Map<String, Object> data = rb.getConversationData();
         Map<String, Object> htmldata = new HashMap<>();
-        data.put("special case", false); // 세팅,상점, 랭킹인 경우 - 스페셜 케이스 -> 뒤로 돌아갈 수 있음
+
         data.put("history", "main");
         htmldata.put("command", "main");
 
-        // User정보 가져오기
         String userserial = (String)data.get("user");
         UserInfo user = (UserInfo) Desrial(userserial);
 
@@ -241,27 +227,18 @@ public class Main extends DialogflowApp {
         String userserial = (String)data.get("user"); // User정보 가져오기
         UserInfo user = (UserInfo) Desrial(userserial); // UserInfo user = new UserInfo(1,0,3,5000,stageinfo);
 
-        //메인에서 왔는지, 스테이지에서왔는지
-//        int stage;
-//        if (data.get("history").equals("main"))  stage = user.getLevel(); //TODO
-//        else {
-//            stage = ((Double) request.getParameter("number")).intValue();
-//            System.out.println("선택한 level : "+stage + " user level : " + user.getLevel());
-//            if(stage>user.getLevel()) return stage(request);
-//        }
-
         int level = "stageSelect".equals(data.get("history"))
                 ? ((Double) request.getParameter("number")).intValue() //선택한 레벨
-                : user.getLevel(); //TODO 유저레벨이 아닌 마지막 플레이한 레벨
+                : user.getLevel(); //메인이나 RESULT에서 CONTINUE 선택시 TODO 유저레벨이 아닌 마지막 플레이한 레벨 last_play_level 칼럼 추가
         System.out.println("이전화면 >>>>> " + data.get("history") );
         System.out.println("레벨 >>>>> " + level );
 
         data.put("history", "difficultySelect");
-        data.put("special case", false);
         data.put("stage", level);
 
         htmldata.put("command", "difficultySelect");
         htmldata.put("stage", level);
+
         Stage SelectStage = stageinfo.Stages[level];
         htmldata.put("winMoney1",Float.toString(SelectStage.getBetCoin().get("easy")*SelectStage.getCoinRatio()));
         htmldata.put("winMoney2", Float.toString(SelectStage.getBetCoin().get("medium")*SelectStage.getCoinRatio()));
@@ -283,44 +260,38 @@ public class Main extends DialogflowApp {
         Map<String, Object> data = rb.getConversationData();
         Map<String, Object> htmldata = new HashMap<>();
 
-        /**
-         * difficulty 메소드에서 분기되어야함, 레벨화면을 거쳤는지에 따라 ..
-
-        if (data.get("history").equals("result") || data.get("history").equals("result")) {
-            difficulty = CommonUtil.makeSafeString(data.get("difficulty"));
-        } else {
-            difficulty = CommonUtil.makeSafeString(request.getParameter("difficulty"));
-        }*/
+        String userserial = (String)data.get("user");
+        UserInfo user = (UserInfo) Desrial(userserial);
 
         String difficulty = CommonUtil.makeSafeString(request.getParameter("difficulty"));
         int stage = (int)((double)data.get("stage"));
+        int bettingCoins = stageinfo.Stages[stage].getBetCoin().get(difficulty);
+        System.out.println("bettingCoins >>> " + bettingCoins + ", /n myCoin >>> " + user.getMyCoin());
+        if(user.getMyCoin()< bettingCoins) {
+            return difficulty(request); // TODO TTS에 변경을 주어야할지 확인
+        }
 
         data.put("history", "ingame");
         data.put("stage", stage);
         data.put("difficulty", difficulty);
 
-        // User정보 가져오기
-        String userserial = (String)data.get("user");
-        UserInfo user = (UserInfo) Desrial(userserial);
+        htmldata.put("command", "ingame");
+        htmldata.put("stage", stage);
+        htmldata.put("difficulty", difficulty);
+        htmldata.put("timeLimit", stageinfo.Stages[stage].getTime().get(difficulty)); //gameBoard.getTimeLimit());
+        int answerCnt = stageinfo.Stages[stage].getAnswerCount();
+        htmldata.put("totalWord", answerCnt ); //gameBoard.getTotalWord());
 
         user.GameStartChange(stage, difficulty); // 유저 게임 시작 시 코인 감소
-        System.out.println("ㄷㄷ user.getMyCoin() >>> "+user.getMyCoin());
-        System.out.println("ㄷㄷ user.getEmail() >>> "+user.getEmail());
         dbConnector.updateUserCoin(user.getMyCoin(),user.getEmail()); //db update
         // 변경된 유저 정보 저장
         userserial = Createserial(user);
-        data.put("user",userserial);
-
-//        int dif = 0;
-//        if(difficulty.equals("easy")) dif = 1;
-//        else if(difficulty.equals("medium")) dif = 2;
-//        else if(difficulty.equals("hard")) dif = 3;
+        data.put("user", userserial);
 
         int dif = stage >=6 ? 3 : stage >= 4 ? 2 : 1; /* DB에 저장된 레벨별 단어난이도?? */
 
-        //나중에 구성자 바꾸어야됌
         DBConnector dbConnector = new DBConnector(user.getEmail());
-        List<String> wordlist = dbConnector.getWord(dif);
+        List<String> wordlist = dbConnector.getWord(dif); //db에 저장된 문제단어를 가져온다.
         Collections.shuffle(wordlist);
 
         List<String> hintlist = new ArrayList<>();
@@ -332,20 +303,19 @@ public class Main extends DialogflowApp {
             hintlist.add(hint);
         }
 
-        GameBoard gameBoard = new GameBoard(difficulty, stage, stageinfo, wordlist, hintlist, user.getLevel());
-
+        /**
+         * 게임생성시작
+         */
+        GameBoard gameBoard = new GameBoard(difficulty, stage, stageinfo, wordlist, hintlist );
         String boardserial = Createserial(gameBoard); // 게임보드 직렬화 후 전송
         data.put("gameboard", boardserial);
-        char[][] board = gameBoard.getBoard();
+        htmldata.put("gameboard", gameBoard);
 
-        htmldata.put("command", "ingame");
+        char[][] board = gameBoard.getBoard();
         htmldata.put("board", board);
 
-        htmldata.put("timeLimit", gameBoard.getTimeLimit());
-        htmldata.put("totalWord", gameBoard.getTotalWord());
-        htmldata.put("gameboard", gameBoard);
-        htmldata.put("stage", stage);
-        htmldata.put("difficulty", dif);
+
+
 
         return rb.add(new SimpleResponse().setTextToSpeech(tts.getTtsmap().get("ingame")))
                 .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
@@ -360,30 +330,34 @@ public class Main extends DialogflowApp {
 
         String word = CommonUtil.makeSafeString(request.getParameter("word"));
 //        String hint = CommonUtil.makeSafeString(request.getParameter("hint"));
-        // User정보 가져오기
+
         String userserial = (String)data.get("user");
         UserInfo user = (UserInfo) Desrial(userserial);
-        // GameBoard정보 가져오기
+
         String boardserial = (String)data.get("gameboard");
         GameBoard gameBoard = (GameBoard) Desrial(boardserial);
 
         String response = "";
         if (word.isEmpty()) {
             htmldata.put("command", "openhint");
+            response = "open hint";
 
             user.ConsumeHintCount(); // 힌트 개수 차감
             dbConnector.updateUserHint(user.getMyHint(),user.getEmail());
+
             htmldata.put("hint", gameBoard.getHintMessage());
-            response = "open hint";
 
         } else {
+            // 정답
             if (gameBoard.tryAnswer(word)) {
                 htmldata.put("command", "correct");
-                htmldata.put("matchpoint", gameBoard.GetAnswerPoint(word));
+                htmldata.put("matchpoint", gameBoard.getAnswerPoint(word));
                 response = "correct";
-                Result result = gameBoard.getResult();
-                if (result.isWin()) htmldata.put("finish", true);
+
+                if (gameBoard.getResult().isWin()) // 다 맞추었는지 확인
+                    htmldata.put("finish", true);
                 else htmldata.put("finish", false);
+                
             } else {
                 htmldata.put("command", "wrong");
                 response = "wrong";
