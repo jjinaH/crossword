@@ -1289,10 +1289,9 @@ input[type="checkbox"] {
     display: flex;
     flex-direction: column;
     width: 65.6vw;
-    height: 596px;
     justify-content: flex-start;
     align-items: center;
-    top: 18vh;
+    top: 22vh;
     left: 17.2vw;
     bottom: 40px;
 }
