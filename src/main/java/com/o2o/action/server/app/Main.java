@@ -347,12 +347,25 @@ public class Main extends DialogflowApp {
         String response = "";
         if (word.isEmpty()) {
             htmldata.put("command", "openhint");
-            response = "open hint";
+            String hint = "";
 
-            user.ConsumeHintCount(); // 힌트 개수 차감
-            dbConnector.updateUserHint(user.getMyHint(),user.getEmail());
-
-            htmldata.put("hint", gameBoard.getHintMessage());
+            if(user.getMyHint()>0) { //user가 사용할 힌트가 남아있는지 체크
+                response = "open hint";
+                hint = gameBoard.getHint();
+                if (!hint.equals("noHint")) {
+                    user.ConsumeHintCount(); // 힌트 개수 차감
+                    dbConnector.updateUserHint(user.getMyHint(), user.getEmail());
+                }else{
+                    response = "I gave you all the hints.";
+                    hint = "I gave you all the hints.";
+                    htmldata.put("nohint", true);
+                }
+            }else{
+                response = "There are no hints available.";
+                hint = "There are no hints available.";
+                htmldata.put("nohint", true);
+            }
+            htmldata.put("hint", hint);
 
         } else {
             // 정답
@@ -376,6 +389,7 @@ public class Main extends DialogflowApp {
         // 유저 정보 저장
         userserial = Createserial(user);
         data.put("user",userserial);
+
         return rb.add(new SimpleResponse().setTextToSpeech(response))
                 .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
                 .build();
