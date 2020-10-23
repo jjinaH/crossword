@@ -84,7 +84,8 @@ public class GameBoard implements Serializable {
         }
         Arrays.sort(answers);
     }
-    public String getHintMessage() {
+
+    public String getHint() {
         if(restAnswerList.size()==0) return "맞춰야 할 단어가 더이상 없습니다.";
 //        for(int i=0; i< restAnswerList.size(); i++) { } //TODO ?? 샂제 ???
 //        return restAnswerList.get(0).useHint();
@@ -97,7 +98,7 @@ public class GameBoard implements Serializable {
         //첫번째 정답의 힌트스택이 비었을 경우
         System.out.println(" hint stack poped >>> " + hint );
         if(restAnswerList.size() > 1 && hint.equals("noHint")) {
-            for(int i=1; i<=restAnswerList.size(); i++) {
+            for(int i=1; i<restAnswerList.size(); i++) {
                 String tempStr = restAnswerList.get(i).useHint();
                 if(!tempStr.equals("noHint")) {
                     hint = tempStr;
@@ -128,11 +129,7 @@ public class GameBoard implements Serializable {
         }
         return board;
     }
-    // 해당 정답의 힌트 얻기 TODO 삭제 ???
-//    private String getHint(AnswerWord _answerWord) {
-//        //만약 힌트가 없으면 "NoHint" 출력
-//        return _answerWord.useHint();
-//    }
+
 
 
 
