@@ -2,8 +2,7 @@ package com.o2o.action.server.app;
 
 import java.io.Serializable;
 
-//유저정보 클래스 - 실제로는 DBConnector에서 받아올것임
-public class UserInfo implements Serializable {
+public class UserInfo implements Serializable { //유저정보 클래스 - 실제로는 DBConnector에서 받아올것임
     private String email; // 유저 이메일
     private int mylevel; // 유저레벨
     private int myExp; // 유저 누적 경험치
@@ -21,13 +20,15 @@ public class UserInfo implements Serializable {
     private String bgmOn;
     private String foleyOn;
     private int playCnt;
+    private String lastPlayLevel;
 
     // 유저 정보 생성 - DB에서 초기화할것임.
     public UserInfo(String _mylevel, String _myExp, String _myHint, String _myCoin, StagePropertyInfo _stageInfo, String _email
-                    , String _bgmOn, String _foleyOn ) {
+                    , String _bgmOn, String _foleyOn, String _lastPlayLevel ) {
 
         bgmOn = _bgmOn;
         foleyOn = _foleyOn;
+        lastPlayLevel = _lastPlayLevel;
 
         mylevel = Integer.parseInt(_mylevel) ;
         myExp = Integer.parseInt(_myExp);
@@ -109,10 +110,10 @@ public class UserInfo implements Serializable {
         float coinratio = stageInfo.Stages[_stage].getCoinRatio();
         // levelupexp는 해당 유저의 레벨에 따라 근거하므로 mylevel이 스테이지의 인덱스가 됨.
         int levelupexp = stageInfo.Stages[mylevel].getLevelUpExp();
-        // 코인 증가
-        myCoin+=wincoin*coinratio;
-        // 누적경험치 증가
-        myExp+=winexp;
+
+        myCoin+=wincoin*coinratio; // 코인 증가
+        myExp+=winexp; // 누적경험치 증가
+
         // 레벨이 1일때는 누적 경험치가 내 현재 경험치임
         if(mylevel==1) {
             // 현재 풀 경험치는 현재 레벨의 레벨업 경험치에서 이전 레벨의 레벨업 경험치를 뺀거임
@@ -129,8 +130,7 @@ public class UserInfo implements Serializable {
 
         // 레벨업 확인
         if(myExp>= levelupexp) {
-            // 유저 레벨업
-            UserLevelUp();
+            UserLevelUp(); // 유저 레벨업
         }
     }
     // 게임 시작시 변경 - 배팅코인만큼 감소
@@ -139,15 +139,11 @@ public class UserInfo implements Serializable {
         myCoin -= stageInfo.Stages[_stage].getBetCoin().get(_difficulty);
     }
 
-
     // 상점에서 힌트구매 - 코인 감소, 힌트 증가
     public void HintPurchaseChange() {
-        // 코인 감소
-        myCoin-=storeInfo.getHintpurchase_losecoin();
-        // 힌트 증가
-        myHint+=storeInfo.getHintpurchase_gethint();
+        myCoin-=storeInfo.getHintpurchase_losecoin(); // 코인 감소
+        myHint+=storeInfo.getHintpurchase_gethint(); // 힌트 증가
     }
-
     // 상점에서 광고 보고 코인 충전 - 코인 증가
     public void CoinChargeChange() {
         myCoin+=storeInfo.getHintcharge_getcoin();
@@ -163,7 +159,6 @@ public class UserInfo implements Serializable {
     public String getBgmOn() {
         return bgmOn;
     }
-
     public void setBgmOn(String bgmOn) {
         this.bgmOn = bgmOn;
     }
@@ -171,7 +166,6 @@ public class UserInfo implements Serializable {
     public String getFoleyOn() {
         return foleyOn;
     }
-
     public void setFoleyOn(String foleyOn) {
         this.foleyOn = foleyOn;
     }
@@ -179,8 +173,9 @@ public class UserInfo implements Serializable {
     public int getPlayCnt() {
         return playCnt;
     }
-
     public void setPlayCnt(int playCnt) {
         this.playCnt = playCnt;
     }
+    public int getLastPlayLevel() { return playCnt; }
+    public void setLastPlayLevel(int playCnt) { this.playCnt = playCnt; }
 }

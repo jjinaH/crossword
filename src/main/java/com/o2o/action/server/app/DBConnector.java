@@ -15,7 +15,7 @@ public class DBConnector implements Serializable {
     String commandGetMyRank = "/getMyRank/";
     String commandReset = "/resetUser/";
     String commandUpdate = "/update";
-    String defaultSendUrl = "https://actions.o2o.kr/devsvr4";
+    String defaultSendUrl = "https://actions.o2o.kr/devsvr9";
     QueryController queryController;
     JsonParser jsonParser;
     JsonArray user;
@@ -51,6 +51,7 @@ public class DBConnector implements Serializable {
     public String getFoleyOn() {
         return user.get(0).getAsJsonObject().get("foleyOn").toString();
     }
+    public String getLastPlayLevel() { return user.get(0).getAsJsonObject().get("lastPlayLevel").toString(); }
     //유저 각각 요소 가져오는거
     public String getUserLevel() {
         return user.get(0).getAsJsonObject().get("userLevel").toString();
