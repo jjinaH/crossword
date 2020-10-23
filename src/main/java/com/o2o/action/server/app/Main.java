@@ -195,6 +195,7 @@ public class Main extends DialogflowApp {
 
         data.put("history", "main");
         htmldata.put("command", "main");
+        data.put("coin", true);
 
         String userserial = (String)data.get("user");
         UserInfo user = (UserInfo) Desrial(userserial);
@@ -257,6 +258,14 @@ public class Main extends DialogflowApp {
         htmldata.put("timeLimit2", stageinfo.Stages[level].getTime().get("medium").toString());
         htmldata.put("timeLimit3", stageinfo.Stages[level].getTime().get("hard").toString());
 
+        if(data.get("coin").equals(false)) {
+            String response = "Sorry you're out of coins.";
+
+            return rb.add(new SimpleResponse().setTextToSpeech(response))
+                    .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
+                    .build();
+        }
+
         return rb.add(new SimpleResponse().setTextToSpeech(tts.getTtsmap().get("difficultyselect")))
                 .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
                 .build();
@@ -275,6 +284,7 @@ public class Main extends DialogflowApp {
         int bettingCoins = stageinfo.Stages[stage].getBetCoin().get(difficulty);
         System.out.println("bettingCoins >>> " + bettingCoins + ", /n myCoin >>> " + user.getMyCoin());
         if(user.getMyCoin()< bettingCoins) {
+            data.put("coin", false);
             return difficulty(request); // TODO TTS에 변경을 주어야할지 확인
         }
 
@@ -317,6 +327,7 @@ public class Main extends DialogflowApp {
         String boardserial = Createserial(gameBoard); // 게임보드 직렬화 후 전송
         data.put("gameboard", boardserial);
         htmldata.put("gameboard", gameBoard);
+        data.put("coin", true);
 
         char[][] board = gameBoard.getBoard();
         htmldata.put("board", board);
