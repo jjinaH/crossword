@@ -64,7 +64,7 @@ const Timer = (function () {
             throw "Timer is already running!";
         }
         intervalId = setInterval(update, 1000);
-        gameTimerTextBox.style.animationDuration = timerText + 3 + "s";
+        gameTimerTextBox.style.animationDuration = timerText + "s";
     }
 
     function stopTimer() {
@@ -1002,13 +1002,13 @@ export class Action {
                                 const content = document.getElementsByClassName("hintItem");
                                 usedHintList.push(hint);
 
-                                if (usedHint < 5) {
+                                if (usedHint < 5) { //쓴 힌트가 5개보다 작으면
                                     content[usedHint].querySelector("#hintItemIcon").style.opacity = "1";
                                     content[usedHint].setAttribute("id", "hintItemFocus");
                                     for (let i = topHint; i <= usedHint; i++) {
                                         content[i].querySelector("#hintItemText").textContent = usedHintList[i];
                                     }
-                                } else {
+                                } else { //5개 이상이면
                                     topHint = usedHint - 4;
                                     let k = 0;
                                     for (let i = topHint; i < topHint + 5; i++) {
@@ -1026,12 +1026,12 @@ export class Action {
                         }, 5000);
                     }
 
-                if (usedHint > 5) {
+                if (usedHint > 4) {
                     document.querySelector("#hintArrowDownButton").style.visibility = "visible";
                     document.querySelector("#hintArrowUpButton").style.visibility = "visible";
                 }
 
-                if (timeOver) {
+                if (Timer.timeOver()) {
                     console.log("시간 종료 + open hint");
                     window.canvas.sendTextQuery("get fail result");
                 }
