@@ -232,6 +232,7 @@ public class Main extends DialogflowApp {
         ResponseBuilder rb = getResponseBuilder(request);
         Map<String, Object> data = rb.getConversationData();
         Map<String, Object> htmldata = new HashMap<>();
+        String response = tts.getTtsmap().get("difficultyselect");
 
         String userserial = (String)data.get("user"); // User정보 가져오기
         UserInfo user = (UserInfo) Desrial(userserial); // UserInfo user = new UserInfo(1,0,3,5000,stageinfo);
@@ -249,28 +250,42 @@ public class Main extends DialogflowApp {
         htmldata.put("command", "difficultySelect");
         htmldata.put("stage", level);
 
-        Stage SelectStage = stageinfo.Stages[level];
-        htmldata.put("winMoney1",Float.toString(SelectStage.getBetCoin().get("easy")*SelectStage.getCoinRatio()));
-        htmldata.put("winMoney2", Float.toString(SelectStage.getBetCoin().get("medium")*SelectStage.getCoinRatio()));
-        htmldata.put("winMoney3", Float.toString(SelectStage.getBetCoin().get("hard")*SelectStage.getCoinRatio()));
-        htmldata.put("betMoney1", stageinfo.Stages[level].getBetCoin().get("easy").toString());
-        htmldata.put("betMoney2", stageinfo.Stages[level].getBetCoin().get("medium").toString());
-        htmldata.put("betMoney3", stageinfo.Stages[level].getBetCoin().get("hard").toString());
-        htmldata.put("timeLimit1", stageinfo.Stages[level].getTime().get("easy").toString());
-        htmldata.put("timeLimit2", stageinfo.Stages[level].getTime().get("medium").toString());
-        htmldata.put("timeLimit3", stageinfo.Stages[level].getTime().get("hard").toString());
+        Stage SelectStage = stageinfo.Stages[1];
+//        htmldata.put("winMoney1",Float.toString(SelectStage.getBetCoin().get("easy")*SelectStage.getCoinRatio()));
+//        htmldata.put("winMoney2", Float.toString(SelectStage.getBetCoin().get("medium")*SelectStage.getCoinRatio()));
+//        htmldata.put("winMoney3", Float.toString(SelectStage.getBetCoin().get("hard")*SelectStage.getCoinRatio()));
+        htmldata.put("betMoney1", stageinfo.Stages[1].getBetCoin().get("easy").toString());
+        htmldata.put("betMoney2", stageinfo.Stages[1].getBetCoin().get("medium").toString());
+        htmldata.put("betMoney3", stageinfo.Stages[1].getBetCoin().get("hard").toString());
+        int time = getTimeLimit(level);
+        htmldata.put("timeLimit1", time);
+        htmldata.put("timeLimit2", time-5);
+        htmldata.put("timeLimit3", time-10);
 
         if(data.get("coin").equals(false)) {
-            String response = "Sorry you're out of coins.";
-
-            return rb.add(new SimpleResponse().setTextToSpeech(response))
-                    .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
-                    .build();
+            response = "Sorry you're out of coins.";
+//            return rb.add(new SimpleResponse().setTextToSpeech(response))
+//                    .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
+//                    .build();
         }
-
-        return rb.add(new SimpleResponse().setTextToSpeech(tts.getTtsmap().get("difficultyselect")))
+        return rb.add(new SimpleResponse().setTextToSpeech(response))
                 .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
                 .build();
+    }
+    // TODO properties 변경전 임시 함수 ㅜㅜㅜ
+    private int getTimeLimit(int level) {
+        int time = 90;
+        if(level==1) time = 90;
+        if(level==2) time = 85;
+        if(level==3) time = 80;
+        if(level==4) time = 120;
+        if(level==5) time = 115;
+        if(level==6) time = 110;
+        if(level==7) time = 105;
+        if(level==8) time = 150;
+        if(level==9) time = 145;
+        if(level==10) time = 140;
+        return time;
     }
 
     private ActionResponse ingame(ActionRequest request) throws ExecutionException, InterruptedException {
@@ -287,7 +302,7 @@ public class Main extends DialogflowApp {
         System.out.println("bettingCoins >>> " + bettingCoins + ", /n myCoin >>> " + user.getMyCoin());
         if(user.getMyCoin()< bettingCoins) {
             data.put("coin", false);
-            return difficulty(request); // TODO TTS에 변경을 주어야할지 확인
+            return difficulty(request);
         }
 
         data.put("history", "ingame");
