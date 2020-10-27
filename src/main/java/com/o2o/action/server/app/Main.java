@@ -9,11 +9,11 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.actions_fulfillment.v2.model.*;
-import com.o2o.action.server.model.User;
+import com.o2o.action.server.repository.UserRepository;
 import com.o2o.action.server.util.CommonUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.*;
-import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -25,19 +25,22 @@ public class Main extends DialogflowApp {
        DBConnector dbConnectors = new DBConnector("intern2001@o2o.kr");
         try{
             StagePropertyInfo info = new StagePropertyInfo();
-            UserInfo user = new UserInfo("1","0","3","5000",info,"intern2001@o2o.kr", "true", "true");
+            UserInfo user = new UserInfo("1","0","3","5000",info,"intern2001@o2o.kr", "true", "true", "1");
             System.out.println("accumexp : " + user.getMyExp() + "  " +user.getMyCurrentExp() + " / " + user.getMyCurrentFullExp());
 
         }catch(Exception e) {
             e.printStackTrace();
         }
     }
-
-    String URL = "https://actions.o2o.kr/devsvr4/test/index.html";
-
+    @Autowired
+    private UserRepository userRepo;
+//    @Autowired
+    private TTS tts;
+    String URL = "https://actions.o2o.kr/devsvr9/test/index.html";
     StagePropertyInfo stageinfo;
-    TTS tts;
     DBConnector dbConnector;
+//    TTS tts;
+
     private void setUp() {
         tts = new TTS();
         try {
@@ -45,7 +48,6 @@ public class Main extends DialogflowApp {
         } catch (FileNotFoundException e) {
             e.getStackTrace();
         }
-
     }
 
    static String Createserial(Object obj) {
@@ -65,7 +67,7 @@ public class Main extends DialogflowApp {
 
    static Object Desrial(String outst) {
         byte[] inserializedMember = Base64.getDecoder().decode(outst);
-        ;
+
         try {
             ByteArrayInputStream bais = new ByteArrayInputStream(inserializedMember);
             ObjectInputStream out = new ObjectInputStream(bais);
@@ -77,8 +79,6 @@ public class Main extends DialogflowApp {
         }
         return null;
     }
-
-
 
     private GoogleIdToken.Payload getUserProfile(String idToken) {
         GoogleIdToken.Payload profile = null;
@@ -131,9 +131,10 @@ public class Main extends DialogflowApp {
 
                 String isBgmOn = dbConnector.getBgmOn();
                 String isFoleyOn = dbConnector.getFoleyOn();
+                String lastPlayLevel = dbConnector.getLastPlayLevel();
                 System.out.println("accumexp : " + exp);
 
-                UserInfo user = new UserInfo(level, exp, hint, coin, stageinfo, email ,isBgmOn, isFoleyOn);
+                UserInfo user = new UserInfo(level, exp, hint, coin, stageinfo, email ,isBgmOn, isFoleyOn, lastPlayLevel);
                 String serial = Createserial(user);
                 data.put("user", serial);
                 htmldata.put("inputemail", email);
@@ -237,7 +238,8 @@ public class Main extends DialogflowApp {
 
         int level = "stageSelect".equals(data.get("history"))
                 ? ((Double) request.getParameter("number")).intValue() //선택한 레벨
-                : user.getLevel(); //TODO 유저레벨이 아닌 마지막 플레이한 레벨
+//                : user.getLevel(); //TODO 유저레벨이 아닌 마지막 플레이한 레벨
+                : user.getLastPlayLevel();
         System.out.println("이전화면 >>>>> " + data.get("history") );
         System.out.println("레벨 >>>>> " + level );
 
@@ -301,11 +303,15 @@ public class Main extends DialogflowApp {
 
         user.GameStartChange(stage, difficulty); // 유저 게임 시작 시 코인 감소
         dbConnector.updateUserCoin(user.getMyCoin(),user.getEmail()); //db update
+        user.setLastPlayLevel(stage);
+        // dbUpdate
+//        userRepo.save(user); //TODO 고도화시 반영 ㅜㅜ
+
         // 변경된 유저 정보 저장
         userserial = Createserial(user);
         data.put("user", userserial);
 
-        int dif = stage >=6 ? 3 : stage >= 4 ? 2 : 1; /* DB에 저장된 레벨별 단어난이도?? */
+        int dif = stage >=6 ? 3 : stage >= 4 ? 2 : 1; /* DB에 저장된 레벨별 단어난이도?? TODO new properties 적용 후 삭제  */
 
         DBConnector dbConnector = new DBConnector(user.getEmail());
         List<String> wordlist = dbConnector.getWord(dif); //db에 저장된 문제단어를 가져온다.
@@ -331,9 +337,6 @@ public class Main extends DialogflowApp {
 
         char[][] board = gameBoard.getBoard();
         htmldata.put("board", board);
-
-
-
 
         return rb.add(new SimpleResponse().setTextToSpeech(tts.getTtsmap().get("ingame")))
                 .add(new HtmlResponse().setUrl(URL).setUpdatedState(htmldata))
@@ -364,7 +367,7 @@ public class Main extends DialogflowApp {
                 response = "open hint";
                 hint = gameBoard.getHint();
                 if (!hint.equals("noHint")) {
-                    user.ConsumeHintCount(); // 힌트 개수 차감
+                    user.ConsumeHintCount(); // 힌트 개수 차감 //TODO
                     dbConnector.updateUserHint(user.getMyHint(), user.getEmail());
                 }else{
                     response = "I gave you all the hints.";

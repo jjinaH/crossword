@@ -42,6 +42,8 @@ public class User implements Serializable {
     private boolean foleyOn;
     @Column(name = "play_cnt")
     private int playCnt;
+    @Column(name = "last_play_level")
+    private int lastPlayLevel;
 
     public User(){ }
     public User(String userEmail){
@@ -54,6 +56,7 @@ public class User implements Serializable {
         visitTimestamp = OffsetDateTime.now();
         bgmOn=true;
         foleyOn=true;
+        lastPlayLevel = 1;
     }
 
     public interface getUserInfo{
@@ -65,6 +68,7 @@ public class User implements Serializable {
         void setVisitTimestamp();
         boolean getBgmOn();
         boolean getFoleyOn();
+        int getLastPlayLevel();
     }
 
     public String getUserEmail() {
@@ -131,6 +135,11 @@ public class User implements Serializable {
     }
     public void setPlayCnt(int playCnt) {
         this.playCnt = playCnt;
+    }
+
+    public int getLastPlayLevel() { return lastPlayLevel; }
+    public void setLastPlayLevel(int lastPlayLevel) {
+        this.lastPlayLevel = lastPlayLevel;
     }
 }
 
