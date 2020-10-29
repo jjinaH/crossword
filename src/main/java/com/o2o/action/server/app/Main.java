@@ -9,17 +9,15 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.actions_fulfillment.v2.model.*;
+import com.o2o.action.server.repository.UserRepository;
 import com.o2o.action.server.util.CommonUtil;
-import com.o2o.action.server.util.GameContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 import java.io.*;
 import java.security.GeneralSecurityException;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
-@Controller
 public class Main extends DialogflowApp {
 
     public static void main(String[] args) {
@@ -35,7 +33,7 @@ public class Main extends DialogflowApp {
         }
     }
     @Autowired
-    private GameContext gameContext;
+    private UserRepository userRepo;
 //    @Autowired
     private TTS tts;
     String URL = "https://actions.o2o.kr/devsvr4/test/index.html";
@@ -115,10 +113,6 @@ public class Main extends DialogflowApp {
         setUp();
         data.put("history", "welcome");
         htmldata.put("command", "welcome");
-
-        //Test 용
-        if (gameContext == null) System.out.println(">>>> gameContext bean 등록 XXX");
-        gameContext.test();
 
         if (!request.hasCapability("actions.capability.INTERACTIVE_CANVAS")) {
             return rb.add(new SimpleResponse().setSsml("Inveractive Canvas가 지원되지 않는 기기예요."))
@@ -246,7 +240,7 @@ public class Main extends DialogflowApp {
         int level = "stageSelect".equals(data.get("history"))
                 ? ((Double) request.getParameter("number")).intValue() //선택한 레벨
                 : user.getLevel(); //TODO 유저레벨이 아닌 마지막 플레이한 레벨
-//                : user.getLastPlayLevel(); //TODO main 에서 difficulty 로 넘어오면 0 으로 출력 (db랑 연동 필요한듯)
+//                : user.getLastPlayLevel();
         System.out.println("이전화면 >>>>> " + data.get("history") );
         System.out.println("레벨 >>>>> " + level );
 
@@ -260,16 +254,13 @@ public class Main extends DialogflowApp {
 //        htmldata.put("winMoney1",Float.toString(SelectStage.getBetCoin().get("easy")*SelectStage.getCoinRatio()));
 //        htmldata.put("winMoney2", Float.toString(SelectStage.getBetCoin().get("medium")*SelectStage.getCoinRatio()));
 //        htmldata.put("winMoney3", Float.toString(SelectStage.getBetCoin().get("hard")*SelectStage.getCoinRatio()));
-//        htmldata.put("betMoney1", stageinfo.Stages[1].getBetCoin().get("easy").toString());
-//        htmldata.put("betMoney2", stageinfo.Stages[1].getBetCoin().get("medium").toString());
-//        htmldata.put("betMoney3", stageinfo.Stages[1].getBetCoin().get("hard").toString());
-        htmldata.put("betMoney1", gameContext.getBettingCoins("easy"));
-        htmldata.put("betMoney2", gameContext.getBettingCoins("medium"));
-        htmldata.put("betMoney3", gameContext.getBettingCoins("hard"));
-//        int time = getTimeLimit(level);
-        htmldata.put("timeLimit1", gameContext.getTimeLimit(level, "easy"));
-        htmldata.put("timeLimit2", gameContext.getTimeLimit(level, "medium"));
-        htmldata.put("timeLimit3", gameContext.getTimeLimit(level, "hard"));
+        htmldata.put("betMoney1", stageinfo.Stages[1].getBetCoin().get("easy").toString());
+        htmldata.put("betMoney2", stageinfo.Stages[1].getBetCoin().get("medium").toString());
+        htmldata.put("betMoney3", stageinfo.Stages[1].getBetCoin().get("hard").toString());
+        int time = getTimeLimit(level);
+        htmldata.put("timeLimit1", time);
+        htmldata.put("timeLimit2", time-5);
+        htmldata.put("timeLimit3", time-10);
 
         if(data.get("coin").equals(false)) {
             response = "Sorry you're out of coins.";
@@ -282,20 +273,20 @@ public class Main extends DialogflowApp {
                 .build();
     }
     // TODO properties 변경전 임시 함수 ㅜㅜㅜ
-//    private int getTimeLimit(int level) {
-//        int time = 90;
-//        if(level==1) time = 90;
-//        if(level==2) time = 85;
-//        if(level==3) time = 80;
-//        if(level==4) time = 120;
-//        if(level==5) time = 115;
-//        if(level==6) time = 110;
-//        if(level==7) time = 105;
-//        if(level==8) time = 150;
-//        if(level==9) time = 145;
-//        if(level==10) time = 140;
-//        return time;
-//    }
+    private int getTimeLimit(int level) {
+        int time = 90;
+        if(level==1) time = 90;
+        if(level==2) time = 85;
+        if(level==3) time = 80;
+        if(level==4) time = 120;
+        if(level==5) time = 115;
+        if(level==6) time = 110;
+        if(level==7) time = 105;
+        if(level==8) time = 150;
+        if(level==9) time = 145;
+        if(level==10) time = 140;
+        return time;
+    }
 
     private ActionResponse ingame(ActionRequest request) throws ExecutionException, InterruptedException {
         ResponseBuilder rb = getResponseBuilder(request);
@@ -307,8 +298,7 @@ public class Main extends DialogflowApp {
 
         String difficulty = CommonUtil.makeSafeString(request.getParameter("difficulty"));
         int stage = (int)((double)data.get("stage"));
-//        int bettingCoins = stageinfo.Stages[stage].getBetCoin().get(difficulty);
-        int bettingCoins = gameContext.getBettingCoins(difficulty);
+        int bettingCoins = stageinfo.Stages[1].getBetCoin().get(difficulty);
         System.out.println("bettingCoins >>> " + bettingCoins + ", /n myCoin >>> " + user.getMyCoin());
         if(user.getMyCoin()< bettingCoins) {
             data.put("coin", false);
@@ -322,14 +312,12 @@ public class Main extends DialogflowApp {
         htmldata.put("command", "ingame");
         htmldata.put("stage", stage);
         htmldata.put("difficulty", difficulty);
-//        htmldata.put("timeLimit", stageinfo.Stages[stage].getTime().get(difficulty)); //gameBoard.getTimeLimit());
-        int timeLimit = gameContext.getTimeLimit(stage, difficulty);
-        htmldata.put("timeLimit", timeLimit);
-//        int answerCnt = stageinfo.Stages[stage].getAnswerCount();
-        int answerCnt = gameContext.getAnswerCnt(stage);
-        htmldata.put("totalWord", answerCnt); //gameBoard.getTotalWord());
+        System.out.println("stage >>> " + stage + ", difficulty >>> " + difficulty);
+        htmldata.put("timeLimit", stageinfo.Stages[stage].getTime().get(difficulty)); //gameBoard.getTimeLimit());
+        int answerCnt = stageinfo.Stages[stage].getAnswerCount();
+        htmldata.put("totalWord", answerCnt ); //gameBoard.getTotalWord());
 
-        user.GameStartChange(difficulty); // 유저 게임 시작 시 코인 감소
+        user.GameStartChange(stage, difficulty); // 유저 게임 시작 시 코인 감소
         dbConnector.updateUserCoin(user.getMyCoin(),user.getEmail()); //db update
         user.setLastPlayLevel(stage);
         // dbUpdate
@@ -339,9 +327,7 @@ public class Main extends DialogflowApp {
         userserial = Createserial(user);
         data.put("user", userserial);
 
-//        int dif = stage >=6 ? 3 : stage >= 4 ? 2 : 1; /* DB에 저장된 레벨별 단어난이도?? TODO new properties 적용 후 삭제  */
-        //stage 가 6 이상이면 3, 4이상이면 2, 아니면 1
-        int dif = gameContext.getDifficulty(stage);
+        int dif = stage >=6 ? 3 : stage >= 4 ? 2 : 1; /* DB에 저장된 레벨별 단어난이도?? TODO new properties 적용 후 삭제  */
 
         DBConnector dbConnector = new DBConnector(user.getEmail());
         List<String> wordlist = dbConnector.getWord(dif); //db에 저장된 문제단어를 가져온다.

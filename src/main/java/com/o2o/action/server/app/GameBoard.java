@@ -1,8 +1,8 @@
 package com.o2o.action.server.app;
 
-import com.o2o.action.server.util.GameContext;
-import org.springframework.beans.factory.annotation.Autowired;
-
+//import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+import javax.print.DocFlavor;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.*;
 
@@ -23,20 +23,13 @@ public class GameBoard implements Serializable {
     private List<String> wordlist; // 정답 배열
     private List<String> hintlist; // 힌트 배열
 
-    @Autowired
-    private GameContext gameContext;
-
     public GameBoard(String _difficulty, int _stage, StagePropertyInfo _stageinfo, List<String> _wordlist, List<String>_hintlist) {
         stageinfo = _stageinfo;
         stage = _stage;
         difficulty = _difficulty;
-
-//        int dif = stage >=8 ? 3 : stage >= 4 ? 2 : 1; //TODO new properties 적용 후 삭제
-//        row = stageinfo.Stages[dif].getSize_Row();
-        row = gameContext.getSize(stage);
-        col = row; //stageinfo.Stages[dif].getSize_Col();
-//        answercount = stageinfo.Stages[dif].getAnswerCount();
-        answercount = gameContext.getAnswerCnt(stage);
+        row = stageinfo.Stages[stage].getSize_Row();
+        col = stageinfo.Stages[stage].getSize_Col();
+        answercount = stageinfo.Stages[stage].getAnswerCount();
         wordlist = _wordlist;
         hintlist = _hintlist;
 
@@ -136,6 +129,7 @@ public class GameBoard implements Serializable {
         }
         return board;
     }
+
 
 
 
