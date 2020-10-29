@@ -27,9 +27,10 @@ public class GameBoard implements Serializable {
         stageinfo = _stageinfo;
         stage = _stage;
         difficulty = _difficulty;
-        row = stageinfo.Stages[stage].getSize_Row();
-        col = stageinfo.Stages[stage].getSize_Col();
-        answercount = stageinfo.Stages[stage].getAnswerCount();
+        int dif = stage >=8 ? 3 : stage >= 4 ? 2 : 1; //TODO new properties
+        row = stageinfo.Stages[dif].getSize_Row();
+        col = row;
+        answercount = stageinfo.Stages[dif].getAnswerCount();
         wordlist = _wordlist;
         hintlist = _hintlist;
 
