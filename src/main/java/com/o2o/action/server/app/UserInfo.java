@@ -1,5 +1,9 @@
 package com.o2o.action.server.app;
 
+import com.o2o.action.server.util.GameContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 
 public class UserInfo implements Serializable { //유저정보 클래스 - 실제로는 DBConnector에서 받아올것임
@@ -12,6 +16,8 @@ public class UserInfo implements Serializable { //유저정보 클래스 - 실�
     private int myCoin; // 유저 코인
     private StagePropertyInfo stageInfo; // 스테이지 프로퍼티 정보
     private StorePropertyInfo storeInfo; // 상점 프로퍼티 정보
+    @Autowired
+    private GameContext gameContext;
     /**
      * 20.10.15 추가된 필드
      * 유저별 저장한 배경음악, 효과음 세팅값
@@ -42,15 +48,18 @@ public class UserInfo implements Serializable { //유저정보 클래스 - 실�
         // 레벨이 1일때는 누적 경험치가 내 현재 경험치임
         if(mylevel==1) {
             // 현재 풀 경험치는 현재 레벨의 레벨업 경험치에서 이전 레벨의 레벨업 경험치를 뺀거임
-            myCurrentFullExp = stageInfo.Stages[mylevel].getLevelUpExp();
+//            myCurrentFullExp = stageInfo.Stages[mylevel].getLevelUpExp();
+            myCurrentFullExp = gameContext.getLevelUpExp(mylevel);
             myCurrentExp = myExp;
 
         }else { // 레벨이 1이상일때는 누적경험치 에서 이전 레벨업 경험치를 빼줘야함
 
             // 현재 풀 경험치는 현재 레벨의 레벨업 경험치에서 이전 레벨의 레벨업 경험치를 뺀거임
-            myCurrentFullExp = stageInfo.Stages[mylevel].getLevelUpExp() - stageInfo.Stages[mylevel-1].getLevelUpExp();
+//            myCurrentFullExp = stageInfo.Stages[mylevel].getLevelUpExp() - stageInfo.Stages[mylevel-1].getLevelUpExp();
+            myCurrentFullExp = gameContext.getLevelUpExp(mylevel) - gameContext.getLevelUpExp(mylevel-1);
             // 현재 경험치는 현재 누적 경험치 - 이전 레벨의 레벨업 경험치임.
-            myCurrentExp = myExp - stageInfo.Stages[mylevel-1].getLevelUpExp();
+//            myCurrentExp = myExp - stageInfo.Stages[mylevel-1].getLevelUpExp();
+            myCurrentExp = myExp - gameContext.getLevelUpExp(mylevel-1);
         }
 
     }
@@ -87,13 +96,16 @@ public class UserInfo implements Serializable { //유저정보 클래스 - 실�
     // 유저 레벨업 - 레벨과 코인 증가
     private void UserLevelUp() {
         // levelupcoin은 해당 유저의 레벨에 따라 근거하므로 mylevel이 스테이지의 인덱스가 됨.
-        int levelupcoin = stageInfo.Stages[mylevel].getLevelUpCoin();
+//        int levelupcoin = stageInfo.Stages[mylevel].getLevelUpCoin();
+        int levelupcoin = gameContext.getLevelUpCoin(mylevel);
         mylevel++;
         myCoin += levelupcoin;
         // 현재 풀 경험치는 현재 레벨의 레벨업 경험치에서 이전 레벨의 레벨업 경험치를 뺀거임
-        myCurrentFullExp = stageInfo.Stages[mylevel].getLevelUpExp() - stageInfo.Stages[mylevel-1].getLevelUpExp();
+//        myCurrentFullExp = stageInfo.Stages[mylevel].getLevelUpExp() - stageInfo.Stages[mylevel-1].getLevelUpExp();
+        myCurrentFullExp = gameContext.getLevelUpExp(mylevel) - gameContext.getLevelUpExp(mylevel-1);
         // 현재 경험치는 현재 누적 경험치 - 이전 레벨의 레벨업 경험치임.
-        myCurrentExp = myExp - stageInfo.Stages[mylevel-1].getLevelUpExp();
+//        myCurrentExp = myExp - stageInfo.Stages[mylevel-1].getLevelUpExp();
+        myCurrentExp = myExp - gameContext.getLevelUpExp(mylevel-1);
 
     }
 
@@ -105,11 +117,15 @@ public class UserInfo implements Serializable { //유저정보 클래스 - 실�
     // 스테이지 클리어 - 경험치, 코인 증가
     public void UserStageClearChange(int _stage, String _difficulty) {
 
-        int winexp = stageInfo.Stages[_stage].getExp().get(_difficulty);
-        int wincoin = stageInfo.Stages[_stage].getBetCoin().get(_difficulty);
-        float coinratio = stageInfo.Stages[_stage].getCoinRatio();
+//        int winexp = stageInfo.Stages[_stage].getExp().get(_difficulty);
+        int winexp = gameContext.getWinExp(_stage, _difficulty);
+//        int wincoin = stageInfo.Stages[_stage].getBetCoin().get(_difficulty);
+        int wincoin = gameContext.getBettingCoins(_difficulty);
+//        float coinratio = stageInfo.Stages[_stage].getCoinRatio();
+        float coinratio = (float) 0.9;
         // levelupexp는 해당 유저의 레벨에 따라 근거하므로 mylevel이 스테이지의 인덱스가 됨.
-        int levelupexp = stageInfo.Stages[mylevel].getLevelUpExp();
+//        int levelupexp = stageInfo.Stages[mylevel].getLevelUpExp();
+        int levelupexp = gameContext.getLevelUpExp(mylevel);
 
         myCoin+=wincoin*coinratio; // 코인 증가
         myExp+=winexp; // 누적경험치 증가
@@ -123,9 +139,9 @@ public class UserInfo implements Serializable { //유저정보 클래스 - 실�
         } else { // 레벨이 1이상일때는 누적경험치 에서 이전 레벨업 경험치를 빼줘야함
 
             // 현재 풀 경험치는 현재 레벨의 레벨업 경험치에서 이전 레벨의 레벨업 경험치를 뺀거임
-            myCurrentFullExp = levelupexp - stageInfo.Stages[mylevel-1].getLevelUpExp();
+            myCurrentFullExp = levelupexp - gameContext.getLevelUpExp(mylevel-1);
             // 현재 경험치는 현재 누적 경험치 - 이전 레벨의 레벨업 경험치임.
-            myCurrentExp = myExp - stageInfo.Stages[mylevel-1].getLevelUpExp();
+            myCurrentExp = myExp - gameContext.getLevelUpExp(mylevel-1);
         }
 
         // 레벨업 확인
@@ -134,9 +150,13 @@ public class UserInfo implements Serializable { //유저정보 클래스 - 실�
         }
     }
     // 게임 시작시 변경 - 배팅코인만큼 감소
-    public void GameStartChange(int _stage, String _difficulty) {
+//    public void GameStartChange(int _stage, String _difficulty) {
+//        // 코인 감소
+//        myCoin -= stageInfo.Stages[_stage].getBetCoin().get(_difficulty);
+//    }
+    public void GameStartChange(String _difficulty) {
         // 코인 감소
-        myCoin -= stageInfo.Stages[_stage].getBetCoin().get(_difficulty);
+        myCoin -= gameContext.getBettingCoins(_difficulty);
     }
 
     // 상점에서 힌트구매 - 코인 감소, 힌트 증가

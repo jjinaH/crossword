@@ -5,12 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
-//@Component
 @Configuration
-//@PropertySources({
-    @PropertySource("classpath:/static/properties/game.properties")
-//    @PropertySource("classpath:db.properties")
-//})
+@PropertySource("classpath:/static/properties/game.properties")
 public class GameContext { //AppConfig {
     @Autowired
     private Environment environment;
@@ -48,5 +44,23 @@ public class GameContext { //AppConfig {
     public int getLevelUpExp(int currLevel) {
         return Integer.parseInt(environment.getProperty("level" + currLevel + ".levelupexp"));
     }
+
+    public int getLevelUpCoin(int currLevel) {
+        return Integer.parseInt(environment.getProperty("level" + currLevel + ".coin"));
+    }
+
+    public int getDifficulty (int level) {
+        return Integer.parseInt(environment.getProperty("level" + level + ".difficulty"));
+    }
+
+    //Test 용
+    public int getTimeLimitTest() {
+        return Integer.parseInt(environment.getProperty("level1.duration"));
+    }
+
+    public void test() {
+        System.out.println("gameContext bean 등록 완료!");
+    }
+
 
 }

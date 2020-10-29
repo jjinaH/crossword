@@ -4,6 +4,7 @@ import com.o2o.action.server.app.Main;
 import com.o2o.action.server.util.CommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,14 +15,16 @@ import java.util.concurrent.ExecutionException;
 @RestController
 public class testController implements Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(testController.class);
-    private final Main main;
+
+    @Autowired
+    private Main main;
 
     //@Autowired
     //private CategoryRepository categoryRepository;
 
-    public testController() {
-        main = new Main();
-    }
+//    public testController() {
+//        main = new Main();
+//    }
 
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     public @ResponseBody
