@@ -280,6 +280,31 @@ export class Action {
             } else{
                 common.accountText.textContent = userEmail;
             }
+
+            let circleoption = {
+                startAngle: -Math.PI / 2,
+                //시작지점 (기본값 Math.PI)
+                value: exp / fullExp,
+                //그래프에 표시될 값
+                animation: true,
+                //그래프가 그려지는 애니메이션 동작 여부
+                fill: {gradient: ['#7cbf5a', '#f9d118']},
+                //채워지는 색
+                emptyFill: "rgba(0, 0, 0, 0.0)",
+                //빈칸 색
+                lineCap: 'round',
+                //그래프 끝
+            };
+
+            if(window.innerWidth <= 720) {
+                //화면 가로길이가 720 이하(모바일)일 경우 그래프 크기 55, 두께 5
+                circleoption = {size: 55, thickness: 5, ...circleoption};
+            }  else {
+                //화면 가로길이가 720 보다 클 (Nest Hub Max) 경우 그래프 크기 110, 두께 8
+                circleoption = {size: 110, thickness: 8, ...circleoption};
+            }
+
+            $('#progress').circleProgress(circleoption);
         }
 
         const correctAudio = document.createElement("audio");
@@ -438,30 +463,6 @@ export class Action {
                 common.rankingButton.onclick = ranking;
                 common.settingButton.onclick = setting;
 
-                let circleoption = {
-                    startAngle: -Math.PI / 2,
-                    //시작지점 (기본값 Math.PI)
-                    value: exp / fullExp,
-                    //그래프에 표시될 값
-                    animation: true,
-                    //그래프가 그려지는 애니메이션 동작 여부
-                    fill: {gradient: ['#7cbf5a', '#f9d118']},
-                    //채워지는 색
-                    emptyFill: "rgba(0, 0, 0, 0.0)",
-                    //빈칸 색
-                    lineCap: 'round',
-                    //그래프 끝
-                };
-
-                if(window.innerWidth <= 720) {
-                    //화면 가로길이가 720 이하(모바일)일 경우 그래프 크기 55, 두께 5
-                    circleoption = {size: 55, thickness: 5, ...circleoption};
-                }  else {
-                    //화면 가로길이가 720 보다 클 (Nest Hub Max) 경우 그래프 크기 110, 두께 8
-                    circleoption = {size: 110, thickness: 8, ...circleoption};
-                }
-
-                $('#progress').circleProgress(circleoption);
 
                 /**
                  * 중앙에 이어하기, 단계 선택 버튼
