@@ -910,13 +910,7 @@ body {
 }
 
 #rankLeftBox {
-    width: 34vw;
-}
-
-
-#rankRightBox {
-    /*border-style: dashed;*/
-    /*border-color: deeppink;*/
+    width: 32vw;
 }
 
 #top5InfoBox {
@@ -953,7 +947,7 @@ body {
 .rankCircle {
     width: 4rem;
     height: 4rem;
-    margin: 0 1rem 1.5rem 0;
+    margin: 0 1rem 1.2rem 1rem;
 }
 
 .top5Num {
@@ -971,7 +965,7 @@ body {
     height: 3rem;
     border-radius: 2rem;
     position: relative;
-    margin-bottom: .7rem;
+    margin: 0 0 .7rem 1rem;
 }
 
 .rankBlueOpacity {
@@ -1000,7 +994,7 @@ body {
     overflow: scroll;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
-    /*padding-left: 3%;*/
+    /*margin-left: 2%;*/
 }
 
 .scroll::-webkit-scrollbar {
