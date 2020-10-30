@@ -249,6 +249,8 @@ export class Action {
         let userEmail = "";
         let bgmOn, foleyOn;
 
+
+
         const setUserInfo = (data, cmmn) => {
             /**
              * 메인 화면에서 보여줄 사용자의
@@ -281,6 +283,9 @@ export class Action {
                 common.accountText.textContent = userEmail;
             }
 
+            let circleSize = $("#backCircle").css("width");
+            circleSize = parseInt(circleSize.slice(0, circleSize.length-2));
+
             let circleoption = {
                 startAngle: -Math.PI / 2,
                 //시작지점 (기본값 Math.PI)
@@ -294,15 +299,9 @@ export class Action {
                 //빈칸 색
                 lineCap: 'round',
                 //그래프 끝
+                size: circleSize + circleSize / 2.5,
+                thickness: circleSize / 8
             };
-
-            if(window.innerWidth <= 720) {
-                //화면 가로길이가 720 이하(모바일)일 경우 그래프 크기 55, 두께 5
-                circleoption = {size: 55, thickness: 5, ...circleoption};
-            }  else {
-                //화면 가로길이가 720 보다 클 (Nest Hub Max) 경우 그래프 크기 110, 두께 8
-                circleoption = {size: 110, thickness: 8, ...circleoption};
-            }
 
             $('#progress').circleProgress(circleoption);
         }
